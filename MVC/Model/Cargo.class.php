@@ -1,13 +1,20 @@
 <?php
 include_once 'Conexao.php';
 
-class Cargo{
+class Papel{
 
-
+    private $id
     private $papel;
 
     /// Getters e Setters
 
+    public function getId(){
+        return $this->id;
+    }
+
+    public function setId($id){
+        $this->id = $id;
+    }
 
     public function getPapel(){
         return $this->papel;
@@ -44,7 +51,7 @@ class Cargo{
 
         try{
 
-            $stmt = $pdo->prepare('DELETE FROM papel WHERE id = :id')
+            $stmt = $pdo->prepare('DELETE FROM papel WHERE id = :id');
             $stmt->execute([':id => $id']);
 
         } catch(Exception $e) {
@@ -85,19 +92,13 @@ class Cargo{
 
                 $papel = new Papel();
                 
-                $papel->setNome($linha['nome']);
-                $papel->setSenha($linha['senha']);
-                $papel->setEmail($linha['email']);
-                $papel->setDatanasc($linha['datanasc']);
-                $papel->setCelular($linha['celular']);
-                $papel->setDatacad($linha['datacad']);
-                $papel->setFoto($linha['foto']);
+                $papel->setId($linha['id']);
                 $papel->setPapel($linha['papel']);
 
                 $lista[] = $papel;
     
             }
-        } catch(Exception e) {
+        } catch(Exception $e) {
             //Log
             return false;
         }   
@@ -123,7 +124,7 @@ class Cargo{
                 $lista[] = $papel;
     
             }
-        } catch(Exception e) {
+        } catch(Exception $e) {
             //Log
             return false;
         }   
@@ -159,5 +160,3 @@ class Cargo{
     ///Fim
 
 }
-
->
