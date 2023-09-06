@@ -66,6 +66,7 @@ if (isset($_POST['email']) || isset($_POST['senha'])){
             <input type="password" class="form-control" id="exampleInputPassword1" name="senha">
         </label>
         </div>
+      <button type="submit" class="btn btn-primary">Log-In</button>
       </form>
     
     <script>
