@@ -1,0 +1,40 @@
+body{
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+}
+
+h1{
+    margin: auto;
+    color: aliceblue;
+    border-style: hidden;
+    border-radius: 5px;
+    background-color: dodgerblue;
+}
+
+.mb-1{
+    background-color: rgb(61, 170, 234);
+    color: white;
+}
+
+.md-3 {
+    margin: auto;
+    text-align: center;
+}
+
+form{
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    padding: 20px;
+    width: 50%;
+    gap: 10px;
+}
+
+button{
+    width: 25%;
+}
+
+.form-check-label{
+    text-align: left;
+}
