@@ -53,7 +53,7 @@ if (isset($_POST['email']) || isset($_POST['senha'])){
     Login de Usuário
   </h1>
   </div>
-    <form action="../Controller/Usuario.php?acao=cadastrar" method = "POST">
+    <form action="" method = "POST">
         <div>
           <label for="exampleInputEmail1" class="form-label">
             Endereço de e-mail
