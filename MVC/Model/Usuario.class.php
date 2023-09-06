@@ -104,7 +104,7 @@ class Usuario{
 
         try{
 
-            $stmt = $pdo->prepare('DELETE FROM usuario, papel_usuario WHERE id_usuario = :id')
+            $stmt = $pdo->prepare('DELETE FROM usuario, papel_usuario WHERE id_usuario = :id');
             $stmt->execute([':id => $id']);
 
         } catch(Exception $e) {
@@ -158,7 +158,7 @@ class Usuario{
                 $lista[] = $usuario;
     
             }
-        } catch(Exception e) {
+        } catch(Exception $e) {
             //Log
             return false;
         }   
@@ -190,7 +190,7 @@ class Usuario{
                 $lista[] = $usuario;
     
             }
-        } catch(Exception e) {
+        } catch(Exception $e) {
             //Log
             return false;
         }   
@@ -230,5 +230,3 @@ class Usuario{
     ///Fim
 
 }
-
->
