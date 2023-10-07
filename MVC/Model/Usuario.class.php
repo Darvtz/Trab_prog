@@ -3,6 +3,7 @@ include_once 'conexao.php';
 
 class Usuario{
 
+    private $cpf
     private $nome;
     private $senha;
     private $email;
@@ -12,6 +13,14 @@ class Usuario{
     private $datacad;
 
     /// Getters e Setters
+
+    public function getCpf(){
+        return $this->cpf;
+    }
+
+    public function setCpf($cpf){
+        $this->cpf = $cpg
+    }
 
     public function getNome(){
         return $this->nome;
@@ -77,8 +86,8 @@ class Usuario{
 
         try{
         
-            $stmt = $pdo->prepare('INSERT INTO usuario (nome, senha, email, datanasc, celular, datacad, foto) VALUES(:nome, :senha, :email, :datanasc, :celular, :datacad, :foto)');
-            $stmt->execute([':nome' => $this->nome], [':senha' => $this->senha], [':email' => $this->email], [':datanasc' => $this->datanasc], [':celular' => $this->celular], [':datacad' => $this->datacad], [':foto' => $this->foto]);
+            $stmt = $pdo->prepare('INSERT INTO usuario (cpf, nome, senha, email, datanasc, celular, datacad, foto) VALUES(:cpf, :nome, :senha, :email, :datanasc, :celular, :datacad, :foto)');
+            $stmt->execute([':cpf' => $this->cpf], [':nome' => $this->nome], [':senha' => $this->senha], [':email' => $this->email], [':datanasc' => $this->datanasc], [':celular' => $this->celular], [':datacad' => $this->datacad], [':foto' => $this->foto]);
             
 
             $id = $pdo->lastInsertID();

@@ -8,9 +8,10 @@ class Animal{
     private $nome;
     private $especie;
     private $raca;
-    private $genero
+    private $genero;
     private $cor;
     private $ultimoEndereco;
+    private $descricao;
 
     public function getNome(){
         return $this->nome;
@@ -49,11 +50,19 @@ class Animal{
     }
 
     public function getUltimoEndereco(){
-        return $this->getUltimoEndereco;
+        return $this->ultimoEndereco;
     }
 
     public function setUltimoEndereco($ultimoEndereco){
-        $this->getUltimoEndereco = $ultimoEndereco;
+        $this->ultimoEndereco = $ultimoEndereco;
+    }
+
+    public function getDescricao(){
+        return $this->descricao;
+    }
+
+    public function setDescricao($descricao){
+        $this->descricao = $descricao
     }
 
     public function save($id)
@@ -62,8 +71,8 @@ class Animal{
 
         try{
         
-            $stmt = $pdo->prepare('INSERT INTO animal (id, nome, especie, raca, genero, cor, ultimoEndereco) VALUES(:id, :nome, )');
-            $stmt->execute([':id' => $this->id], [':nome' => $this->nome], [':senha' => $this->senha], [':especie' => $this->especie], [':raca' => $this->raca], [':genero' => $this->genero], [':cor' => $this->cor], [':ultimoEndereco' => $this->ultimoEndereco]);
+            $stmt = $pdo->prepare('INSERT INTO animal (id, nome, especie, raca, genero, cor, ultimoEndereco, descricao) VALUES(:id, :nome, especie, raca, genero, cor, ultimoEndereco, descricao)');
+            $stmt->execute([':id' => $this->id], [':nome' => $this->nome], [':senha' => $this->senha], [':especie' => $this->especie], [':raca' => $this->raca], [':genero' => $this->genero], [':cor' => $this->cor], [':ultimoEndereco' => $this->ultimoEndereco], [':descricao' => $this->descricao]);
             
 
             $id = $pdo->lastInsertID();         
@@ -83,7 +92,7 @@ class Animal{
 
         try{
 
-            $stmt = $pdo->prepare('DELETE FROM animal WHERE id_animal = :id')
+            $stmt = $pdo->prepare('DELETE FROM animal WHERE id_animal = :id');
             $stmt->execute([':id' => $this->id]);
 
         } catch(Exception $e) {

@@ -8,6 +8,7 @@ include_once '../Model/Cargo.class.php';
 if($acao='cadastrar'){
     $usuario=new Usuario();
     $cargo=new Cargo();
+    $usuario->setCpf($_POST['cpf']);
     $usuario->setNome($_POST['nome']);
     $usuario->setEmail($_POST['email']);
     $usuario->serSenha($_POST['senha']);
@@ -18,7 +19,7 @@ if($acao='cadastrar'){
     $usuario->save();
     $cargo->save();
 }else if($acao='deletar'){
-    $usuario=new $Usuario();
+    $usuario=new Usuario();
     $usuario->setId($_REQUEST['id']);
     $usuario->deletar();
 }

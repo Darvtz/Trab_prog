@@ -17,23 +17,29 @@
     Cadastro de Usuário
   </h1>
   </div>
-    <form action="../Controller/Usuario.php?acao=cadastrar" methot = "POST">
+    <form action="../Controller/Usuario.php?acao=cadastrar" method = "POST">
         <div class="mb-3">
-            <label for="exampleInputName1" class="dorm-label">
+            <label for="exampleInputCpf" class="dorm-label">
+                CPF
+                <input type="number" class="form-control" id="exampleImputCpf" name = "cpf">
+            </label>
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputName" class="dorm-label">
                 Nome completo
-                <input type="name" class="form-control" id="exampleImputName1" name = "nome">
+                <input type="name" class="form-control" id="exampleImputName" name = "nome">
             </label>
         </div>
         <div>
-          <label for="exampleInputEmail1" class="form-label">
+          <label for="exampleInputEmail" class="form-label">
             Endereço de e-mail
-            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="email">
+            <input type="email" class="form-control" id="exampleInputEmail" aria-describedby="emailHelp" name="email">
         </label>
         </div>
         <div class="mb-3">
-          <label for="exampleInputPassword1" class="form-label">
+          <label for="exampleInputPassword" class="form-label">
             Senha
-            <input type="password" class="form-control" id="exampleInputPassword1" name="senha">
+            <input type="password" class="form-control" id="exampleInputPassword" name="senha">
         </label>
         </div>
         <div class="mb-3">
