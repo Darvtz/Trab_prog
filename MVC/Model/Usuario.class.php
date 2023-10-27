@@ -3,7 +3,7 @@ include_once 'conexao.php';
 
 class Usuario{
 
-    private $cpf
+    private $cpf;
     private $nome;
     private $senha;
     private $email;
@@ -19,7 +19,7 @@ class Usuario{
     }
 
     public function setCpf($cpf){
-        $this->cpf = $cpg
+        $this->cpf = $cpf;
     }
 
     public function getNome(){
@@ -80,13 +80,13 @@ class Usuario{
     
     /// Salvar, se conecta e faz um PS para a tabela, faz um catch com erros
 
-    public function save($papel)
+    public function save()
     {
-        $pdo = conexao();
+        $pdo = new Conexao;
 
         try{
         
-            $stmt = $pdo->prepare('INSERT INTO usuario (cpf, nome, senha, email, datanasc, celular, datacad, foto) VALUES(:cpf, :nome, :senha, :email, :datanasc, :celular, :datacad, :foto)');
+            $stmt = $pdo->prepare('INSERT INTO usuario (cpf, nome, senha, email, datanasc, celular, datacad, foto) VALUES(:cpf, :nome, :senha, :email, :datanasc, :celular, :datacad)');
             $stmt->execute([':cpf' => $this->cpf], [':nome' => $this->nome], [':senha' => $this->senha], [':email' => $this->email], [':datanasc' => $this->datanasc], [':celular' => $this->celular], [':datacad' => $this->datacad], [':foto' => $this->foto]);
             
 

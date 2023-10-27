@@ -3,7 +3,7 @@ include_once 'Conexao.php';
 
 class Papel{
 
-    private $id
+    private $id;
     private $papel;
 
     /// Getters e Setters

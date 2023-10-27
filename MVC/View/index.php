@@ -1,14 +1,14 @@
 <?php
 
-include('Conexao.class.php');
+include '../Model/Conexao.class.php';
 
 if (isset($_POST['email']) || isset($_POST['senha'])){
 
-  $email = $pdo->real_escape_string($_POST['email']);
-  $senha = $pdo->real_escape_string($_POST['senha']);
+  $email = $mysqli->real_escape_string($_POST['email']);
+  $senha = $mysqli->real_escape_string($_POST['senha']);
 
   $sql_code = "SELECT * FROM usuario WHERE email = '$email' AND senha = '$senha'";
-  $sql_query = $pdo->query($sql_code) or die('Error' . $pdo->error);
+  $sql_query = $mysqli->query($sql_code) or die('Error' . $mysqli->error);
 
   $quantidade = $sql_query->num_rows;
 
@@ -65,6 +65,7 @@ if (isset($_POST['email']) || isset($_POST['senha'])){
             Senha
             <input type="password" class="form-control" id="exampleInputPassword1" name="senha">
         </label>
+        </br> <a href="../View/Cadastro.html">Não possui uma conta? Cadastre-se!</a>
         </div>
       <button type="submit" class="btn btn-primary">Log-In</button>
       </form>

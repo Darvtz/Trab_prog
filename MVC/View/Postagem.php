@@ -1,3 +1,36 @@
+<?php>
+
+if(isset($_FILES["arquivo"])){
+    $arquivo = $_FILES["arquivo"];
+    
+    if($arquivo['error'])
+      die("Falha ao enviar o arquivo");
+    
+     if($arquivo['size'] > 2097152)
+       die("Arquivo muito grande!");
+    
+       $pasta = "arquivos/";
+       $nomeDoArquivo = $arquivo['name'];
+       $novoNomeDoArquivo = uniqid();
+       $extensao = strtolower(pathinfo($nomeDoArquivo, PATHINFO_EXTENSION));
+    
+      if($extensao != "jpg" && $extensao != "png")
+        die("Tipo de arquivo não aceito");
+  
+        $path = $pasta . $novoNomeDoArquivo . "." . $extensao;
+        $deu_certo = move_uplaod_file($arquivo["tmp_name"], $path);
+        if($deu_certo){
+          $mysqli->query("INSERT INTO arquivos(nome, path) VALUES('$nomeDoArquivo', '$path')") or die($mysqli->error);
+  
+        }else{
+          echo "<p>Falha ao enviar o arquivo<p>";
+        }
+    }
+  
+    $sql_querry = $mysqli->query("SELECT * FROM arquivos") or die($mysqli->error);
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -46,6 +79,13 @@
                     <imput type="name" id="exampleImputDescricao" name="descricao">
                 </label>
             </div>
+            <form method="POST" action="">
+
+                <p><label>Insira a imagem do animal</label></p> <br>
+              
+                <p><imput name="arquivo" type="file">
+                  <buttom name="upload" type="submit">Enviar imagem</buttom>
+                </p>
         </form>
     </div>
 
