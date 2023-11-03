@@ -1,5 +1,7 @@
 <?php>
 
+function enviarArquivo($error, $size, $name, $tmp_name){
+
 if(isset($_FILES["arquivo"])){
     $arquivo = $_FILES["arquivo"];
     
@@ -10,7 +12,7 @@ if(isset($_FILES["arquivo"])){
        die("Arquivo muito grande!");
     
        $pasta = "arquivos/";
-       $nomeDoArquivo = $arquivo['name'];
+       $nomeDoArquivo = $name;
        $novoNomeDoArquivo = uniqid();
        $extensao = strtolower(pathinfo($nomeDoArquivo, PATHINFO_EXTENSION));
     
@@ -20,13 +22,24 @@ if(isset($_FILES["arquivo"])){
         $path = $pasta . $novoNomeDoArquivo . "." . $extensao;
         $deu_certo = move_uplaod_file($arquivo["tmp_name"], $path);
         if($deu_certo){
-          $mysqli->query("INSERT INTO arquivos(nome, path) VALUES('$nomeDoArquivo', '$path')") or die($mysqli->error);
-  
+            $mysqli->query("INSERT INTO arquivos(nome, path) VALUES('$nomeDoArquivo', '$path')") or die($mysqli->error);
+            return true;
         }else{
-          echo "<p>Falha ao enviar o arquivo<p>";
+          return false;
         }
     }
-  
+}
+
+if(isset($_FILES['arquivos'])){
+    $arquivos = $_FILES['arquivos'];
+    $tudo_certo = true;
+    foreach($arquivos['name'] as $index => $arq){
+        $deu_certo = enviarArquivo($arquivos['error'][$index], $arquivos['size'][$index], $arquivos['name'][$index], $arquivos['tmp_name'][$index]);
+        if(!$deu_certo)
+            $tudo_certo = true;
+    }
+}
+    
     $sql_querry = $mysqli->query("SELECT * FROM arquivos") or die($mysqli->error);
 
 ?>
