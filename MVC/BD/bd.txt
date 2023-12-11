@@ -1,0 +1,50 @@
+CREATE TABLE Usuario(
+    id int not null auto_increment,
+    cpf Varchar(12) NOT NULL UNIQUE,
+    nome VARCHAR(60),
+    email varchar(60) not null UNIQUE,
+    senha varchar(60) not null,
+    data_nascimento DATE,
+    celular varchar (60),
+    data_cadastro timestamp,
+    foto varchar(60),
+    Banido Boolean,
+
+    CONSTRAINT pk_id_usuario PRIMARY KEY (id)
+);
+
+CREATE TABLE Cargo(
+    id int not null auto_increment,
+    cargo varchar(60),
+
+    CONSTRAINT pk_id_cargo PRIMARY KEY (id)
+);
+
+CREATE TABLE cargo_usuario(
+    id_usuario int,
+    id_cargo int,
+
+    CONSTRAINT fk_id_usuario_cargo FOREIGN KEY (id_usuario) REFERENCES usuario(id),
+    CONSTRAINT fk_id_cargo_usuario FOREIGN KEY (id_cargo) REFERENCES cargo(id)
+);
+
+CREATE TABLE postagem_animal(
+    id int not null auto_increment,
+    nome varchar(60),
+    especie varchar(60),
+    raca varchar(60),
+    genero varchar(60),
+    cor varchar(60),
+    ultimo_endereco varchar(60),
+    descricao varchar(60),
+    
+    CONSTRAINT pk_id_postagem_animal PRIMARY KEY (id)
+);
+
+Create table postagem_usuario(
+    id_usuario int,
+    id_postagem int,
+
+    CONSTRAINT fk_id_usuario_postagem FOREIGN KEY (id_usuario) REFERENCES usuario(id),
+    CONSTRAINT fk_id_postagem_usuario FOREIGN KEY (id_postagem) REFERENCES postagem_animal(id)
+);

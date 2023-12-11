@@ -1,8 +1,5 @@
 <?php
-
-class conexao{
-
-public function conexao(){
+function conexao(){
     try {
     
         $pdo = new PDO('mysql:host=localhost;dbname=trabalho_final; charset=utf8', 'root', '');
@@ -13,5 +10,3 @@ public function conexao(){
             echo 'Erro de conexão: ' . $e->getMessage();
         }
     }
-}   
-?>

@@ -1,10 +1,10 @@
 <?php
 include_once 'Conexao.php';
 
-class Papel{
+class Cargo{
 
     private $id;
-    private $papel;
+    private $cargo;
 
     /// Getters e Setters
 
@@ -16,12 +16,12 @@ class Papel{
         $this->id = $id;
     }
 
-    public function getPapel(){
-        return $this->papel;
+    public function getCargo(){
+        return $this->cargo;
     }
 
-    public function setPapel($papel){
-        $this->papel = $papel;
+    public function setCargo($cargo){
+        $this->getcargo = $cargo;
     }
 
     
@@ -33,7 +33,7 @@ class Papel{
 
         try{
         
-            $stmt = $pdo->prepare('INSERT INTO papel (papel) VALUES(:papel)');
+            $stmt = $pdo->prepare('INSERT INTO Cargo (cargo) VALUES(:papel)');
             $stmt->execute([':papel' => $this->papel]);
       
         } catch(Exception $e) {

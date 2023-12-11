@@ -3,6 +3,7 @@ include_once 'conexao.php';
 
 class Usuario{
 
+    private $id;
     private $cpf;
     private $nome;
     private $senha;
@@ -13,6 +14,14 @@ class Usuario{
     private $datacad;
 
     /// Getters e Setters
+
+    public function getId(){
+        return $this->id;
+    }
+
+    public function setId($id){
+        $this->id = $id;
+    }
 
     public function getCpf(){
         return $this->cpf;
@@ -82,24 +91,34 @@ class Usuario{
 
     public function save()
     {
-        $pdo = new Conexao;
+        $pdo = conexao();
 
         try{
         
-            $stmt = $pdo->prepare('INSERT INTO usuario (cpf, nome, senha, email, datanasc, celular, datacad, foto) VALUES(:cpf, :nome, :senha, :email, :datanasc, :celular, :datacad)');
-            $stmt->execute([':cpf' => $this->cpf], [':nome' => $this->nome], [':senha' => $this->senha], [':email' => $this->email], [':datanasc' => $this->datanasc], [':celular' => $this->celular], [':datacad' => $this->datacad], [':foto' => $this->foto]);
+            $stmt = $pdo->prepare('INSERT INTO usuario (cpf, nome, senha, email, data_nascimento, celular, datacad, foto) 
+            VALUES(:cpf, :nome, :senha, :email, :datanasc, :celular, :datacad, :foto)');
+            $stmt->execute([':cpf' => $this->cpf,
+                            ':nome' => $this->nome,
+                            ':senha' => $this->senha,
+                            ':email' => $this->email,
+                            ':datanasc' => $this->datanasc,
+                            ':celular' => $this->celular,
+                            ':datacad' => $this->datacad,
+                            ':foto' => $this->foto]);
             
 
             $id = $pdo->lastInsertID();
             /// Selecionar ID do papel
             
-            $stmtx = $pdo->prepare('INSERT INTO papel_usuario (usuario_id, papel_id) VALUES(:usuario_id, :papel_id)');
-            $stmtx->execute([':usuario_id => $id'], [':senha' => $this->senha]);
+            $stmtx = $pdo->prepare('INSERT INTO cargo_usuario (id_usuario, id_cargo) VALUES(:id_usuario, :id_cargo)');
+            $stmtx->execute([':id_usuario'=> $id]);
 
             
 
         } catch(Exception $e) {
             //Log
+            echo '<pre>';
+            var_dump($e);
             return false;
         }
     }
