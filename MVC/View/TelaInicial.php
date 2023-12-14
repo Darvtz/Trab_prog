@@ -6,6 +6,7 @@ if(!isset($_SESSION)){
     session_start();
   }
 
+  /*
 if(isset($_FILES) && count($_FILES)>0){
   var_dump($_FILES);
   die();
@@ -29,7 +30,7 @@ if(isset($_FILES["arquivo"])){
       die("Tipo de arquivo não aceito");
 
       $path = $pasta . $novoNomeDoArquivo . "." . $extensao;
-      $deu_certo = move_uplaod_file($arquivo["tmp_name"], $path);
+      $deu_certo = move_upload_file($arquivo["tmp_name"], $path);
       if($deu_certo){
         $mysqli->query("INSERT INTO arquivos(nome, path) VALUES('$nomeDoArquivo', '$path')") or die($mysqli->error);
 
@@ -40,7 +41,7 @@ if(isset($_FILES["arquivo"])){
 
   $sql_querry = $mysqli->query("SELECT * FROM arquivos") or die($mysqli->error);
 
-
+*/
 ?>
 
 <!DOCTYPE html>

@@ -3,18 +3,18 @@ CREATE TABLE Usuario(
     cpf Varchar(12) NOT NULL UNIQUE,
     nome VARCHAR(60),
     email varchar(60) not null UNIQUE,
-    senha varchar(60) not null,
+    senha varchar(256) not null,
     data_nascimento DATE,
     celular varchar (60),
     data_cadastro timestamp,
     foto varchar(60),
-    Banido Boolean,
+    banido Boolean,
 
     CONSTRAINT pk_id_usuario PRIMARY KEY (id)
 );
 
 CREATE TABLE Cargo(
-    id int not null auto_increment,
+    id int not null ,
     cargo varchar(60),
 
     CONSTRAINT pk_id_cargo PRIMARY KEY (id)

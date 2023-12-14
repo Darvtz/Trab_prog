@@ -12,6 +12,7 @@ class Animal{
     private $cor;
     private $ultimoEndereco;
     private $descricao;
+    private $foto;
 
     public function getNome(){
         return $this->nome;
@@ -39,6 +40,10 @@ class Animal{
 
     public function getGenero(){
         return $this->genero;
+    }
+
+    public function setGenero($genero){
+        $this->genero -  $genero
     }
 
     public function getCor(){

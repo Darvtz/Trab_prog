@@ -21,7 +21,7 @@ class Cargo{
     }
 
     public function setCargo($cargo){
-        $this->getcargo = $cargo;
+        $this->cargo = $cargo;
     }
 
     
@@ -33,8 +33,8 @@ class Cargo{
 
         try{
         
-            $stmt = $pdo->prepare('INSERT INTO Cargo (cargo) VALUES(:papel)');
-            $stmt->execute([':papel' => $this->papel]);
+            $stmt = $pdo->prepare('INSERT INTO Cargo (id, cargo) VALUES(3, :cargo)');
+            $stmt->execute([':cargo' => $this->cargo]);
       
         } catch(Exception $e) {
             //Log
@@ -51,7 +51,7 @@ class Cargo{
 
         try{
 
-            $stmt = $pdo->prepare('DELETE FROM papel WHERE id = :id');
+            $stmt = $pdo->prepare('DELETE FROM Cargo WHERE id = :id');
             $stmt->execute([':id => $id']);
 
         } catch(Exception $e) {
@@ -70,8 +70,8 @@ class Cargo{
         
         try{
 
-        $stmt = $pdo->prepare('UPDATE papel SET papel = :papel WHERE id = :id');
-        $stmt->execute([':papel' => $this->papel, ':id' => $this->id]);
+        $stmt = $pdo->prepare('UPDATE Cargo SET cargo = :cargo WHERE id = :id');
+        $stmt->execute([':cargo' => $this->cargo, ':id' => $this->id]);
 
         } catch(Exception $e) {
             //Log
@@ -88,14 +88,14 @@ class Cargo{
         
         try{
             $lista = [];
-            foreach($pdo->query('SELECT * FROM papel') as $linha ){
+            foreach($pdo->query('SELECT * FROM cargo') as $linha ){
 
-                $papel = new Papel();
+                $cargo = new Cargo();
                 
-                $papel->setId($linha['id']);
-                $papel->setPapel($linha['papel']);
+                $cargo->setId($linha['id']);
+                $cargo->setCargo($linha['cargo']);
 
-                $lista[] = $papel;
+                $lista[] = $cargo;
     
             }
         } catch(Exception $e) {
@@ -115,13 +115,13 @@ class Cargo{
         #TODO id não deveria ser string, consertar
         try{
             $lista = [];
-            foreach($pdo->query('SELECT * FROM papel WHERE id = ' . $this.id) as $linha ){
+            foreach($pdo->query('SELECT * FROM Cargo WHERE id = ' . $this.id) as $linha ){
 
-                $papel = new papel();
+                $cargo = new Cargo();
 
-                $papel->setPapel($linha['papel']);
+                $cargo->setCargo($linha['cargo']);
 
-                $lista[] = $papel;
+                $lista[] = $cargo;
     
             }
         } catch(Exception $e) {
@@ -142,9 +142,9 @@ class Cargo{
         #TODO ver que esse código cheira mal...
         try{
         
-            foreach($pdo->query('SELECT * FROM papel WHERE id = ' . $this->id) as $linha){
+            foreach($pdo->query('SELECT * FROM Cargo WHERE id = ' . $this->id) as $linha){
 
-                $this->setPapel($linha['papel']);
+                $this->setCargo($linha['cargo']);
 
             }
         

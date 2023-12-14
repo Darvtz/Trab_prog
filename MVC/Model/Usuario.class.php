@@ -12,6 +12,7 @@ class Usuario{
     private $datanasc;
     private $celular;
     private $datacad;
+    private $banido = false;
 
     /// Getters e Setters
 
@@ -95,8 +96,8 @@ class Usuario{
 
         try{
         
-            $stmt = $pdo->prepare('INSERT INTO usuario (cpf, nome, senha, email, data_nascimento, celular, datacad, foto) 
-            VALUES(:cpf, :nome, :senha, :email, :datanasc, :celular, :datacad, :foto)');
+            $stmt = $pdo->prepare('INSERT INTO usuario (cpf, nome, senha, email, data_nascimento, celular, data_cadastro, foto, banido) 
+            VALUES(:cpf, :nome, :senha, :email, :datanasc, :celular, :datacad, :foto, :banido)');
             $stmt->execute([':cpf' => $this->cpf,
                             ':nome' => $this->nome,
                             ':senha' => $this->senha,
@@ -104,13 +105,14 @@ class Usuario{
                             ':datanasc' => $this->datanasc,
                             ':celular' => $this->celular,
                             ':datacad' => $this->datacad,
-                            ':foto' => $this->foto]);
+                            ':foto' => $this->foto,
+                            ':banido' => $this->banido]);
             
 
             $id = $pdo->lastInsertID();
             /// Selecionar ID do papel
             
-            $stmtx = $pdo->prepare('INSERT INTO cargo_usuario (id_usuario, id_cargo) VALUES(:id_usuario, :id_cargo)');
+            $stmtx = $pdo->prepare('INSERT INTO cargo_usuario (id_usuario, id_cargo) VALUES(:id_usuario, 3)');
             $stmtx->execute([':id_usuario'=> $id]);
 
             
@@ -248,6 +250,34 @@ class Usuario{
         
         } catch (Exception $e) {
             //Log
+            return false;
+        }
+
+
+        return $this;
+    }
+
+    public  function loadByEmail(){
+        $pdo = conexao();
+
+        #TODO ver que esse código cheira mal...
+        try{
+        
+            foreach($pdo->query("SELECT * FROM Usuario WHERE email = '$this->email'") as $linha){
+                $this->setId($linha['id']);
+                $this->setNome($linha['nome']);
+                $this->setSenha($linha['senha']);
+                $this->setEmail($linha['email']);
+                $this->setDatanasc($linha['data_nascimento']);
+                $this->setCelular($linha['celular']);
+                $this->setDatacad($linha['data_cadastro']);
+                $this->setFoto($linha['foto']);
+            }
+        
+        } catch (Exception $e) {
+            //Log
+            echo '<pre>';
+            var_dump($e);
             return false;
         }
 

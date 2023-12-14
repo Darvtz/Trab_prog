@@ -1,39 +1,3 @@
-<?php
-
-include '../Model/Conexao.class.php';
-
-if (isset($_POST['email']) || isset($_POST['senha'])){
-
-  $email = $mysqli->real_escape_string($_POST['email']);
-  $senha = $mysqli->real_escape_string($_POST['senha']);
-
-  $sql_code = "SELECT * FROM usuario WHERE email = '$email' AND senha = '$senha'";
-  $sql_query = $mysqli->query($sql_code) or die('Error' . $mysqli->error);
-
-  $quantidade = $sql_query->num_rows;
-
-  if($quantidade == 1){
-
-    $usuario = $sql_query->fetch_assoc();
-
-    if(!isset($_SESSION)){
-      session_start();
-    }
-
-    $_SESSION['user'] = $usuario['id'];
-    $_SESSION['nome'] = $usuario['nome'];
-
-    header("Location: TelaInicial.php");
-
-  }else{
-    echo "Falho ao evetuar login! Email ou senhas incorretos";
-  }
-
-}
-
-
-?>
-
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -53,7 +17,7 @@ if (isset($_POST['email']) || isset($_POST['senha'])){
     Login de Usuário
   </h1>
   </div>
-    <form action="" method = "POST">
+    <form action="../Controller/Usuario.php?acao=logar" method = "POST">
         <div>
           <label for="exampleInputEmail1" class="form-label">
             Endereço de e-mail
