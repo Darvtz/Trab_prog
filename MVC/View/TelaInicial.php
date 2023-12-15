@@ -1,47 +1,13 @@
 <?php
 
 include('protect.php');
+include_once('../Model/Animal.class.php');
 
 if(!isset($_SESSION)){
     session_start();
-  }
-
-  /*
-if(isset($_FILES) && count($_FILES)>0){
-  var_dump($_FILES);
-  die();
 }
 
-if(isset($_FILES["arquivo"])){
-  $arquivo = $_FILES["arquivo"];
-  
-  if($arquivo['error'])
-    die("Falha ao enviar o arquivo");
-  
-   if($arquivo['size'] > 2097152)
-     die("Arquivo muito grande!");
-  
-     $pasta = "arquivos/";
-     $nomeDoArquivo = $arquivo['name'];
-     $novoNomeDoArquivo = uniqid();
-     $extensao = strtolower(pathinfo($nomeDoArquivo, PATHINFO_EXTENSION));
-  
-    if($extensao != "jpg" && $extensao != "png")
-      die("Tipo de arquivo não aceito");
-
-      $path = $pasta . $novoNomeDoArquivo . "." . $extensao;
-      $deu_certo = move_upload_file($arquivo["tmp_name"], $path);
-      if($deu_certo){
-        $mysqli->query("INSERT INTO arquivos(nome, path) VALUES('$nomeDoArquivo', '$path')") or die($mysqli->error);
-
-      }else{
-        echo "<p>Falha ao enviar o arquivo<p>";
-      }
-  }
-
-  $sql_querry = $mysqli->query("SELECT * FROM arquivos") or die($mysqli->error);
-
-*/
+$animais = Animal::getAll();
 ?>
 
 <!DOCTYPE html>
@@ -49,11 +15,25 @@ if(isset($_FILES["arquivo"])){
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
     <title>GPetS</title>
 </head>
 <body>
     
   Seja bem vindo, <?php echo $_SESSION['nome']; ?>
+
+  <?php foreach($animais as $animal){?>
+
+  <div class="card" style="width: 18rem;">
+  <img class="card-img-top" src="fotos/<?= $animal->getImagem();?>" alt="Card image cap">
+  <div class="card-body">
+    <h5 class="card-title"><?= $animal->getNome();?></h5>
+    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+    <a href="#" class="btn btn-primary">Go somewhere</a>
+  </div>
+</div>
+  <?php } ?>
 
   <p>
     <a href="../View/Postagem.php">Fazer uma postagem</a>

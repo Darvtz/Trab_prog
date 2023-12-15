@@ -1,54 +1,3 @@
-<?php
-
-include_once '../Model/Conexao.php';
-
-$pdo = conexao();
-
-function enviarArquivo($error, $size, $name, $tmp_name){
-
-
-    if(isset($_FILES["arquivo"])){
-        $arquivo = $_FILES["arquivo"];
-        
-        if($arquivo['error'])
-        die("Falha ao enviar o arquivo");
-        
-        if($arquivo['size'] > 2097152)
-        die("Arquivo muito grande!");
-        
-        $pasta = "arquivos/";
-        $nomeDoArquivo = $name;
-        $novoNomeDoArquivo = uniqid();
-        $extensao = strtolower(pathinfo($nomeDoArquivo, PATHINFO_EXTENSION));
-        
-        if($extensao != "jpg" && $extensao != "png")
-            die("Tipo de arquivo não aceito");
-    
-            $path = $pasta . $novoNomeDoArquivo . "." . $extensao;
-            $deu_certo = move_upload_file($arquivo["tmp_name"], $path);
-
-            if($deu_certo){
-                $pdo->query("INSERT INTO arquivos(nome, path) VALUES('$nomeDoArquivo', '$path')");
-                return true;
-            }else{
-            return false;
-            }
-        }
-
-    
-}
-
-if(isset($_FILES['arquivos'])){
-    $arquivos = $_FILES['arquivos'];
-    $tudo_certo = true;
-    foreach($arquivos['name'] as $index => $arq){
-        $deu_certo = enviarArquivo($arquivos['error'][$index], $arquivos['size'][$index], $arquivos['name'][$index], $arquivos['tmp_name'][$index]);
-        if(!$deu_certo)
-            $tudo_certo = true;
-    }
-}
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -104,7 +53,7 @@ if(isset($_FILES['arquivos'])){
                 <p><label>Insira a imagem do animal</label></p> <br>
               
                 <p><input name="arquivo" type="file">
-                  <button name="upload" type="submit">Enviar imagem</button>
+                  <button name="upload" type="submit" >Fazer Postagem</button>
                 </p>
 </form>
     </div>

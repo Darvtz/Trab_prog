@@ -117,7 +117,7 @@ class Animal{
 
         try{
 
-            $stmt = $pdo->prepare('DELETE FROM animal WHERE id_animal = :id');
+            $stmt = $pdo->prepare('DELETE FROM Postagem_animal WHERE id_animal = :id');
             $stmt->execute([':id' => $this->id]);
 
         } catch(Exception $e) {
@@ -136,7 +136,7 @@ class Animal{
         
         try{
 
-        $stmt = $pdo->prepare('UPDATE animal SET id_animal  WHERE id_animal = :id');
+        $stmt = $pdo->prepare('UPDATE Postagem_animal SET id_animal  WHERE id_animal = :id');
         $stmt->execute([':id' => $this->id]);
         
         $stmt->execute([':id' => $this->id]);
@@ -156,7 +156,7 @@ class Animal{
         
         try{
             $lista = [];
-            foreach($pdo->query('SELECT * FROM Animal') as $linha ){
+            foreach($pdo->query('SELECT * FROM Postagem_animal') as $linha ){
 
                 $animal = new Animal();
                 
@@ -165,12 +165,14 @@ class Animal{
                 $animal->setRaca($linha['raca']);
                 $animal->setGenero($linha['genero']);
                 $animal->setCor($linha['cor']);
-                $animal->setUlimoEndereco($linha['ultimoEndereco']);
+                $animal->setUltimoEndereco($linha['ultimo_endereco']);
+                $animal->setImagem($linha['imagem']);
 
                 $lista[] = $animal;
     
             }
         } catch(Exception $e) {
+            var_dump($e);
             //Log
             return false;
         }   
@@ -187,7 +189,7 @@ class Animal{
         #TODO id não deveria ser string, consertar
         try{
             $lista = [];
-            foreach($pdo->query('SELECT * FROM Animal WHERE id = ' . $this->id) as $linha ){
+            foreach($pdo->query('SELECT * FROM Postagem_animal WHERE id = ' . $this->id) as $linha ){
 
                 $animal = new Animal();
 
@@ -203,6 +205,7 @@ class Animal{
             }
         } catch(Exception $e) {
             //Log
+            var_dump($e);
             return false;
         }   
 
@@ -219,7 +222,7 @@ class Animal{
         #TODO ver que esse código cheira mal...
         try{
         
-            foreach($pdo->query('SELECT * FROM Animal WHERE id = ' . $this->id) as $linha){
+            foreach($pdo->query('SELECT * FROM Postagem_animal WHERE id = ' . $this->id) as $linha){
                 $animal->setNome($linha['nome']);
                 $animal->setEspecie($linha['especie']);
                 $animal->setRaca($linha['raca']);
@@ -229,6 +232,7 @@ class Animal{
             }
         
         } catch (Exception $e) {
+            var_dump($e);
             //Log
             return false;
         }

@@ -50,9 +50,8 @@ if($acao=='postar'){
     if($imagem){
         $animal->setImagem($imagem);
     }
-
-
     $animal->save();
+    
 }else if($acao=='deletar'){
     $animal=new Animal();
     $animal>setId($_REQUEST['id']);
