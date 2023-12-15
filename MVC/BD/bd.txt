@@ -37,6 +37,7 @@ CREATE TABLE postagem_animal(
     cor varchar(60),
     ultimo_endereco varchar(60),
     descricao varchar(60),
+    imagem varchar(256);
     
     CONSTRAINT pk_id_postagem_animal PRIMARY KEY (id)
 );
@@ -48,3 +49,7 @@ Create table postagem_usuario(
     CONSTRAINT fk_id_usuario_postagem FOREIGN KEY (id_usuario) REFERENCES usuario(id),
     CONSTRAINT fk_id_postagem_usuario FOREIGN KEY (id_postagem) REFERENCES postagem_animal(id)
 );
+
+insert into cargo (id, cargo) values (1, 'administrador');
+insert into cargo (id, cargo) values (2, 'moderador');
+insert into cargo (id, cargo) values (3, 'usuário padão');

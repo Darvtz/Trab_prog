@@ -1,6 +1,6 @@
 <?php
 
-include_once 'Conexao.php'
+include_once 'Conexao.php';
 
 class Animal{
 
@@ -12,7 +12,7 @@ class Animal{
     private $cor;
     private $ultimoEndereco;
     private $descricao;
-    private $foto;
+    private $imagem;
 
     public function getNome(){
         return $this->nome;
@@ -27,7 +27,7 @@ class Animal{
     }
 
     public function setEspecie($especie){
-        $this->especie = $especie
+        $this->especie = $especie;
     }
 
     public function getRaca(){
@@ -43,7 +43,7 @@ class Animal{
     }
 
     public function setGenero($genero){
-        $this->genero -  $genero
+        $this->genero =  $genero;
     }
 
     public function getCor(){
@@ -51,7 +51,7 @@ class Animal{
     }
 
     public function setCor($cor){
-        $this->cor = $cor
+        $this->cor = $cor;
     }
 
     public function getUltimoEndereco(){
@@ -67,22 +67,42 @@ class Animal{
     }
 
     public function setDescricao($descricao){
-        $this->descricao = $descricao
+        $this->descricao = $descricao;
     }
 
-    public function save($id)
+    public function getImagem(){
+        return $this->imagem;
+    }
+
+    public function setImagem($imagem){
+        $this->imagem = $imagem;
+    }
+
+    public function save()
     {
         $pdo = conexao();
 
         try{
         
-            $stmt = $pdo->prepare('INSERT INTO animal (id, nome, especie, raca, genero, cor, ultimoEndereco, descricao) VALUES(:id, :nome, especie, raca, genero, cor, ultimoEndereco, descricao)');
-            $stmt->execute([':id' => $this->id], [':nome' => $this->nome], [':senha' => $this->senha], [':especie' => $this->especie], [':raca' => $this->raca], [':genero' => $this->genero], [':cor' => $this->cor], [':ultimoEndereco' => $this->ultimoEndereco], [':descricao' => $this->descricao]);
+            $stmt = $pdo->prepare('INSERT INTO postagem_animal (nome, especie, raca, genero, cor, ultimo_Endereco, descricao, imagem) 
+                                    VALUES( :nome, :especie, :raca, :genero, :cor, :ultimoEndereco, :descricao, :imagem)');
+
+            $stmt->execute([ 
+                        ':nome' => $this->nome, 
+                        ':especie' => $this->especie, 
+                        ':raca' => $this->raca, 
+                        ':genero' => $this->genero, 
+                        ':cor' => $this->cor, 
+                        ':ultimoEndereco' => $this->ultimoEndereco, 
+                        ':descricao' => $this->descricao,
+                        ':imagem' => $this->imagem]);
             
 
             $id = $pdo->lastInsertID();         
 
         } catch(Exception $e) {
+            echo '<pre>';
+            var_dump($e);
             //Log
             return false;
         }
@@ -150,7 +170,7 @@ class Animal{
                 $lista[] = $animal;
     
             }
-        } catch(Exception e) {
+        } catch(Exception $e) {
             //Log
             return false;
         }   
@@ -181,7 +201,7 @@ class Animal{
                 $lista[] = $animal;
     
             }
-        } catch(Exception e) {
+        } catch(Exception $e) {
             //Log
             return false;
         }   
@@ -218,5 +238,3 @@ class Animal{
     }
 
 }
-
-?>

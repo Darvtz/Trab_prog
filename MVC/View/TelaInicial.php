@@ -55,19 +55,9 @@ if(isset($_FILES["arquivo"])){
     
   Seja bem vindo, <?php echo $_SESSION['nome']; ?>
 
-  <form method="POST" action="">
-
-  <p><label>Selecione um Arquivo</label></p> <br>
-
-  <p><imput name="arquivo" type="file">
-    <buttom name="upload" type="submit">Enviar imagem</buttom>
+  <p>
+    <a href="../View/Postagem.php">Fazer uma postagem</a>
   </p>
-
-  <?php
-    while($arquivo = $sql_querry->fetch_assoc()){
-      
-    }
-  ?>
 
 </body>
 </html>
