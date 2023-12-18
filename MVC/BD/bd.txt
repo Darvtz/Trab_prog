@@ -37,7 +37,7 @@ CREATE TABLE postagem_animal(
     cor varchar(60),
     ultimo_endereco varchar(60),
     descricao varchar(60),
-    imagem varchar(256);
+    imagem varchar(256),
     
     CONSTRAINT pk_id_postagem_animal PRIMARY KEY (id)
 );

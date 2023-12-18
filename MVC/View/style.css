@@ -11,6 +11,11 @@ h1{
     background-color: dodgerblue;
 }
 
+.l1{
+    text-align: left;
+    color: white;
+}
+
 .mb-1{
     background-color: rgb(61, 170, 234);
     color: white;

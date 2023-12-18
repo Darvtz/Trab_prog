@@ -87,6 +87,14 @@ class Usuario{
     public function setFoto($foto){
         $this->foto= $foto;
     }
+
+    public function getBanido(){
+        return $this->banido;
+    }
+
+    public function setBanido($banido){
+        $this->banido = $banido;
+    }
     
     /// Salvar, se conecta e faz um PS para a tabela, faz um catch com erros
 
@@ -147,16 +155,13 @@ class Usuario{
 
     /// Atualiza
 
-    public function update ($papel, $id) {
+    public function update ( $id) {
 
         $pdo = conexao();
         
         try{
 
-        /// Corrigir $stmt = $pdo->prepare('UPDATE papel_usuario SET id_papel =  WHERE id_usuario = :id');
-        /// Corrigir $stmt->execute([':papel => $papel', ':id => $id']);
-        
-        /// ? $stmt->execute([':papel' => $this->papel, ':id' => $this->id]);
+        //$stmt = $pdo->prepare('UPDATE Usuario SET nome=''  WHERE id_usuario = :id');
 
         } catch(Exception $e) {
             //Log
@@ -176,13 +181,17 @@ class Usuario{
             foreach($pdo->query('SELECT * FROM Usuario') as $linha ){
 
                 $usuario = new Usuario();
+                //echo '<pre>';
+                //var_dump($usuario);
                 
+                $usuario->setId($linha['id']);
+                $usuario->setCpf($linha['cpf']);
                 $usuario->setNome($linha['nome']);
                 $usuario->setSenha($linha['senha']);
                 $usuario->setEmail($linha['email']);
-                $usuario->setDatanasc($linha['datanasc']);
+                $usuario->setDatanasc($linha['data_nascimento']);
                 $usuario->setCelular($linha['celular']);
-                $usuario->setDatacad($linha['datacad']);
+                $usuario->setDatacad($linha['data_cadastro']);
                 $usuario->setFoto($linha['foto']);
 
                 $lista[] = $usuario;
