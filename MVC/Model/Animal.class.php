@@ -12,6 +12,7 @@ class Animal{
     private $cor;
     private $ultimoEndereco;
     private $descricao;
+    private $oculto = false;
     private $imagem;
 
     public function getNome(){
@@ -114,16 +115,18 @@ class Animal{
     public static function deletar ($id) {
         
         $pdo = conexao();
-
+        
         try{
 
-            $stmt = $pdo->prepare('DELETE FROM Postagem_animal WHERE id_animal = :id');
-            $stmt->execute([':id' => $this->id]);
+        $stmt = $pdo->prepare('UPDATE postagem_animal SET oculto = true  WHERE id_animal = :id');
+        $stmt->execute([':id' => $this->id]);
+        
 
         } catch(Exception $e) {
-            //Log
+            echo '<pre>';
+            var_dump($e);
             return false;
-    }
+        }
 
     }
 
@@ -136,13 +139,30 @@ class Animal{
         
         try{
 
-        $stmt = $pdo->prepare('UPDATE Postagem_animal SET id_animal  WHERE id_animal = :id');
-        $stmt->execute([':id' => $this->id]);
-        
-        $stmt->execute([':id' => $this->id]);
+        $stmt = $pdo->prepare('UPDATE postagem_animal SET nome = :nome,  
+                                                    especie = :especie,
+                                                    raca = :raca, 
+                                                    genero = :genero, 
+                                                    cor = :cor,  
+                                                    ultimo_endereco = :ultimoEndereco, 
+                                                    descricao = :descricao, 
+                                                    imagem = :imagem  
+                                                    WHERE id_animal = :id');
+
+        $stmt->execute([':id' => $this->id,
+
+            ':nome' => $this->nome, 
+            ':especie' => $this->especie, 
+            ':raca' => $this->raca, 
+            ':genero' => $this->genero, 
+            ':cor' => $this->cor, 
+            ':ultimoEndereco' => $this->ultimoEndereco,
+            ':descricao' => $this->descricao,
+            ':imagem' => $this->imagem]);
 
         } catch(Exception $e) {
-            //Log
+            echo '<pre>';
+            var_dump($e);
             return false;
         }
 
@@ -156,7 +176,7 @@ class Animal{
         
         try{
             $lista = [];
-            foreach($pdo->query('SELECT * FROM Postagem_animal') as $linha ){
+            foreach($pdo->query('SELECT * FROM postagem_animal') as $linha ){
 
                 $animal = new Animal();
                 
@@ -189,7 +209,7 @@ class Animal{
         #TODO id não deveria ser string, consertar
         try{
             $lista = [];
-            foreach($pdo->query('SELECT * FROM Postagem_animal WHERE id = ' . $this->id) as $linha ){
+            foreach($pdo->query('SELECT * FROM postagem_animal WHERE id = ' . $this->id) as $linha ){
 
                 $animal = new Animal();
 
@@ -222,7 +242,7 @@ class Animal{
         #TODO ver que esse código cheira mal...
         try{
         
-            foreach($pdo->query('SELECT * FROM Postagem_animal WHERE id = ' . $this->id) as $linha){
+            foreach($pdo->query('SELECT * FROM postagem_animal WHERE id = ' . $this->id) as $linha){
                 $animal->setNome($linha['nome']);
                 $animal->setEspecie($linha['especie']);
                 $animal->setRaca($linha['raca']);

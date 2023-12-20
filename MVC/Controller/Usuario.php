@@ -18,7 +18,7 @@ if($acao=='cadastrar'){
     $usuario->setCelular($_POST['celular']);
     $usuario->setDatacad(date('Y/m/d'));
     $usuario->save();
-    header('Location: ../View/Index.php');
+    header('Location: ../View/index.php');
 }else if($acao=='deletar'){
     $usuario=new Usuario();
     $usuario->setId($_REQUEST['id']);
@@ -34,11 +34,10 @@ if($acao=='cadastrar'){
 
     if(password_verify($_POST['senha'], $usuario->getSenha())){
     //    echo 'logado';
-        header('Location: ../View/TelaInicial.php');
-
         session_start();
         $_SESSION['id'] = $usuario->getId();
         $_SESSION['nome'] = $usuario->getNome();
+        header('Location: ../View/TelaInicial.php');
     }
 }
 ?>
