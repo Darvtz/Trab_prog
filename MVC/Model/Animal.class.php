@@ -1,6 +1,7 @@
 <?php
 
 include_once 'Conexao.php';
+include_once 'Usuario.class.php';
 
 class Animal{
 
@@ -14,6 +15,7 @@ class Animal{
     private $descricao;
     private $oculto = false;
     private $imagem;
+    private $user = null;
 
     public function getNome(){
         return $this->nome;
@@ -99,7 +101,8 @@ class Animal{
                         ':imagem' => $this->imagem]);
             
 
-            $id = $pdo->lastInsertID();         
+            $id = $pdo->lastInsertID();     
+                
 
         } catch(Exception $e) {
             echo '<pre>';
