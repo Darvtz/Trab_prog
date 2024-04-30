@@ -51,6 +51,8 @@ if($acao=='postar'){
         $animal->setImagem($imagem);
     }
     $animal->save();
+
+    header('Location: ../View/TelaInicial.php');
     
 }else if($acao=='deletar'){
     $animal=new Animal();

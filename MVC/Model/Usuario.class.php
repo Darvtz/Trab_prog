@@ -81,7 +81,7 @@ class Usuario{
     }
 
     public function getFoto(){
-        return $this->Foto;
+        return $this->foto;
     }
 
     public function setFoto($foto){
@@ -142,7 +142,7 @@ class Usuario{
 
         try{
 
-            $stmt = $pdo->prepare('DELETE FROM usuario, papel_usuario WHERE id_usuario = :id');
+            $stmt = $pdo->prepare('DELETE FROM usuario  WHERE id_usuario = :id');
             $stmt->execute([':id => $id']);
 
         } catch(Exception $e) {
@@ -178,7 +178,7 @@ class Usuario{
         
         try{
             $lista = [];
-            foreach($pdo->query('SELECT * FROM Usuario') as $linha ){
+            foreach($pdo->query('SELECT * FROM usuario') as $linha ){
 
                 $usuario = new Usuario();
                 //echo '<pre>';
@@ -214,7 +214,7 @@ class Usuario{
         #TODO id não deveria ser string, consertar
         try{
             $lista = [];
-            foreach($pdo->query('SELECT * FROM Usuario WHERE id = ' . $this.id) as $linha ){
+            foreach($pdo->query('SELECT * FROM usuario WHERE id = ' . $this->id) as $linha){
 
                 $usuario = new Usuario();
 
@@ -234,7 +234,7 @@ class Usuario{
             return false;
         }   
 
-        return $this;
+        return $lista;
 
     }
     
@@ -247,7 +247,7 @@ class Usuario{
         #TODO ver que esse código cheira mal...
         try{
         
-            foreach($pdo->query('SELECT * FROM Usuario WHERE id = ' . $this->id) as $linha){
+            foreach($pdo->query('SELECT * FROM usuario WHERE id = ' . $this->id) as $linha){
                 $this->setNome($linha['nome']);
                 $this->setSenha($linha['senha']);
                 $this->setEmail($linha['email']);
@@ -272,7 +272,7 @@ class Usuario{
         #TODO ver que esse código cheira mal...
         try{
         
-            foreach($pdo->query("SELECT * FROM Usuario WHERE email = '$this->email'") as $linha){
+            foreach($pdo->query("SELECT * FROM usuario WHERE email = '$this->email'") as $linha){
                 $this->setId($linha['id']);
                 $this->setNome($linha['nome']);
                 $this->setSenha($linha['senha']);

@@ -34,6 +34,7 @@ $usuarios = Usuario::getAll();
     <h5 class="card-title"><?= $animal->getNome();?></h5>
     <p class="card-text">Ultimo endereço visto: <?= $animal->getUltimoEndereco();?></p>
     <p class="card-text"><?= $animal->getDescricao();?></p>
+    <p class="card-text">Contato com o dono:</p>
     <a href="#" class="btn btn-primary">Go somewhere</a>
   </div>
 </div>

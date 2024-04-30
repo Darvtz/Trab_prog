@@ -33,7 +33,7 @@ class Cargo{
 
         try{
         
-            $stmt = $pdo->prepare('INSERT INTO Cargo (id, cargo) VALUES(3, :cargo)');
+            $stmt = $pdo->prepare('INSERT INTO cargo (id, cargo) VALUES(3, :cargo)');
             $stmt->execute([':cargo' => $this->cargo]);
       
         } catch(Exception $e) {
@@ -51,7 +51,7 @@ class Cargo{
 
         try{
 
-            $stmt = $pdo->prepare('DELETE FROM Cargo WHERE id = :id');
+            $stmt = $pdo->prepare('DELETE FROM cargo WHERE id = :id');
             $stmt->execute([':id => $id']);
 
         } catch(Exception $e) {
@@ -70,7 +70,7 @@ class Cargo{
         
         try{
 
-        $stmt = $pdo->prepare('UPDATE Cargo SET cargo = :cargo WHERE id = :id');
+        $stmt = $pdo->prepare('UPDATE cargo SET cargo = :cargo WHERE id = :id');
         $stmt->execute([':cargo' => $this->cargo, ':id' => $this->id]);
 
         } catch(Exception $e) {
@@ -115,7 +115,7 @@ class Cargo{
         #TODO id não deveria ser string, consertar
         try{
             $lista = [];
-            foreach($pdo->query('SELECT * FROM Cargo WHERE id = ' . $this.id) as $linha ){
+            foreach($pdo->query('SELECT * FROM cargo WHERE id = ' . $this->id) as $linha ){
 
                 $cargo = new Cargo();
 
@@ -129,7 +129,7 @@ class Cargo{
             return false;
         }   
 
-        return $this;
+        return $lista;
 
     }
     
@@ -142,7 +142,7 @@ class Cargo{
         #TODO ver que esse código cheira mal...
         try{
         
-            foreach($pdo->query('SELECT * FROM Cargo WHERE id = ' . $this->id) as $linha){
+            foreach($pdo->query('SELECT * FROM cargo WHERE id = ' . $this->id) as $linha){
 
                 $this->setCargo($linha['cargo']);
 
