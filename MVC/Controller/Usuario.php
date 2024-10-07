@@ -53,10 +53,12 @@ if($acao=='cadastrar'){
     }
     $usuario->save();
     header('Location: ../View/index.php');
+
 }else if($acao=='deletar'){
     $usuario=new Usuario();
     $usuario->setId($_REQUEST['id']);
     $usuario->deletar($id);
+
 }else if($acao=='logar'){
     $usuario = new Usuario();
 
@@ -73,5 +75,44 @@ if($acao=='cadastrar'){
         $_SESSION['nome'] = $usuario->getNome();
         header('Location: ../View/TelaInicial.php');
     }
-}
+
+}else if ($acao="recuperar_senha"){
+    require_once "PHPMailer/PHPMailerAutoLoad.php";
+    require_once "interno/conecta.php";
+    require_once "interno/funcoes.php";
+
+
+    $recupera = $_POST['recuperar-senha'];
+    $link = "http://localhost/toqve/recuperar.php?recupera=".$recupera;
+
+    $mail = new PHPMailer();
+
+    $mail->IsSMTP();
+    $mail->isHTML(true);
+    $mail->CharSet = 'utf-8';
+    $mail->Host = 'mx1.weblink.com.br';
+    $mail->Port = 587;
+    $mail->SMTPSecure = 'tls';
+    $mail->SMTPAuth = true;
+    $mail->Username = 'cadastro@dalvz.com.br';
+    $mail->Password = '*********';
+    $mail->setFrom("cadastro@dalvz.com.br", "daLvz");
+    $mail->FromName = 'daLvz';
+    $mail->Subject = "Recuperar senha";
+
+    $mensagem = "Clique <a href=".$link.">aqui</a> para recuperar sua senha. "
+
+    $mail->Body = $mensagem;
+    $mail->AltBody = "Conteudo do email em texto";
+
+    $mail->addAddress($recupera);
+
+    if($mail->Send()) {
+
+        header("Location: confirmacao.php");
+    } else {
+
+        echo "Erro ao enviar email". $mail->ErrorInfo;
+    }
+    }
 ?>

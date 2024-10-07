@@ -209,26 +209,23 @@ class Usuario{
 
     /// getOne
 
-    public static function getOne() {
+    public static function getOne($id) {
         $pdo = conexao();
         #TODO id não deveria ser string, consertar
         try{
-            $lista = [];
-            foreach($pdo->query('SELECT * FROM usuario WHERE id = ' . $this->id) as $linha){
-
-                $usuario = new Usuario();
+            $usuario = new Usuario();
+            foreach($pdo->query('SELECT * FROM usuario WHERE id = ' . $id) as $linha){
 
                 $usuario->setNome($linha['nome']);
                 $usuario->setSenha($linha['senha']);
                 $usuario->setEmail($linha['email']);
-                $usuario->setDatanasc($linha['datanasc']);
+                $usuario->setDatanasc($linha['data_nascimento']);
                 $usuario->setCelular($linha['celular']);
-                $usuario->setDatacad($linha['datacad']);
+                $usuario->setDatacad($linha['data_cadastro']);
                 $usuario->setFoto($linha['foto']);
-
-                $lista[] = $usuario;
     
             }
+            return $usuario;
         } catch(Exception $e) {
             //Log
             return false;

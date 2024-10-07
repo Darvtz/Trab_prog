@@ -30,6 +30,7 @@
             <input type="password" class="form-control" id="exampleInputPassword1" name="senha">
         </label>
         </br> <a href="../View/Cadastro.html">Não possui uma conta? Cadastre-se!</a>
+              <a href="../Controller/Usuario.php?acao=recuperar_senha">Esqueceu a senha?</a>
         </div>
       <button type="submit" class="btn btn-primary">Log-In</button>
       </form>

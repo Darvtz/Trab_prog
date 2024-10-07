@@ -8,7 +8,7 @@ if(!isset($_SESSION)){
     session_start();
 }
 
-$usuarios = Usuario::getOne();
+$usuario = Usuario::getOne($_SESSION['id']);
 ?>
 
 <html lang="en">
@@ -17,13 +17,13 @@ $usuarios = Usuario::getOne();
 </head>
 <body>
     <div class="card" style="width: 18rem;">
-    <img class="card-img-top" src="fotos/<?= $lista[$usuario->getFoto()]?>" alt="Card image cap">
+    <img class="card-img-top" src="fotos/<?= $usuario->getFoto()?>" alt="Card image cap">
     <div class="card-body">
     <h2>Informações do Usuário</h2>
-    <p>Nome: <?php echo $lista[$usuario->getNome()]; ?></p>
-    <p>Email: <?php echo $lista[$usuario->getEmail()]; ?></p>
-    <p>Telefone: <?php echo $lista[$usuario->getCelular()]; ?></p>
-    <p>Cadastrado em: <?php echo $lista[$usuario->getDatacad()] ?><p>
+    <p>Nome: <?php echo $usuario->getNome(); ?></p>
+    <p>Email: <?php echo $usuario->getEmail(); ?></p>
+    <p>Telefone: <?php echo $usuario->getCelular(); ?></p>
+    <p>Cadastrado em: <?php echo $usuario->getDatacad(); ?><p>
     <p><a href="logout.php">Logout</a></p>
 </body>
 </html>
