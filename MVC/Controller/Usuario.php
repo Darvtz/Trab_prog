@@ -75,8 +75,8 @@ if($acao=='cadastrar'){
         $_SESSION['nome'] = $usuario->getNome();
         header('Location: ../View/TelaInicial.php');
     }
-
-}else if ($acao="recuperar_senha"){
+}
+/*}else if ($acao="recuperar_senha"){
     require_once "PHPMailer/PHPMailerAutoLoad.php";
     require_once "interno/conecta.php";
     require_once "interno/funcoes.php";
@@ -115,4 +115,5 @@ if($acao=='cadastrar'){
         echo "Erro ao enviar email". $mail->ErrorInfo;
     }
     }
+*/
 ?>

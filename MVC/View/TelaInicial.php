@@ -36,6 +36,26 @@ $usuarios = Usuario::getAll();
     <p class="card-text"><?= $animal->getDescricao();?></p>
     <p class="card-text">Contato com o dono:</p>
     <a href="#" class="btn btn-primary">Go somewhere</a>
+
+    <a href="#" class="facebook-btn">
+        <i class="fab fa-facebook"></i>
+      </a>
+
+      <a href="#" class="twitter-btn">
+        <i class="fab fa-twitter"></i>
+      </a>
+
+      <a href="#" class="pinterest-btn">
+        <i class="fab fa-pinterest"></i>
+      </a>
+
+      <a href="#" class="linkedin-btn">
+        <i class="fab fa-linkedin"></i>
+      </a>
+
+      <a href="#" class="whatsapp-btn">
+        <i class="fab fa-whatsapp"></i>
+      </a>
   </div>
 </div>
   <?php } ?>
