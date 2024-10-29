@@ -58,5 +58,9 @@ if($acao=='postar'){
     $animal=new Animal();
     $animal>setId($_REQUEST['id']);
     $animal->deletar();
+}else if($acao='editar'){
+    $animal = new Animal();
+    $animal->setId($_REQUEST['id']);
+    $animal->update();
 }
 ?>
