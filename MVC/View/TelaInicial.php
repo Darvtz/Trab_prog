@@ -35,7 +35,10 @@ $usuarios = Usuario::getAll();
     <p class="card-text">Ultimo endereço visto: <?= $animal->getUltimoEndereco();?></p>
     <p class="card-text"><?= $animal->getDescricao();?></p>
     <p class="card-text">Contato com o dono: </p>
-    <a href="../View/EditarPostagem.php" class="btn btn-primary">Ver Postagem</a>
+    <?php if ($status == 'COMPLETE'){ 
+      echo
+      <a href="../View/EditarPostagem.php?id=<?= $animal->getId();?>" class="btn btn-primary">Editar Postagem</a>
+    }?>
 
     <a href="#" class="facebook-btn">
         <i class="fab fa-facebook"></i>

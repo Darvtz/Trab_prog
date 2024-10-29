@@ -1,42 +1,22 @@
 <?php
 
-    include("Conexao.php");
+    include("../Model/Conexao.php");
 
-    if(isset($_POST[ok])){
+    include("../Model/Email.php");
 
-        $email = $mysqli->escape_string($_POST['email']);
+    if(isset($_POST['ok'])){
 
-        if(!filter_var($email, FILTER_VALIDADE_EMAIL)){
-            $error[] = "E-mail invalido.";
-        }
+        $pdo = conexao();
 
-        $sql_code = "SELECT senha, from usuario where email = $email";
-        $sql_query = $mysqli->querry($sql_code) or die ($mysqli->error);
-        $dado = $sql_query->fetch_assoc();
-        $total = $sql_query->num_rows;
+        $recuperarSenha = uniqid();
 
-        if($total==0){
-            $error = "O e-mail informado não existe no banco de dados";
-        }
+        $email = ($_POST['email']);
 
-        if(count($error)==0 && $total > 0){
+        $stmt = $pdo->prepare("UPDATE Usuario SET recuperar_senha = '$recuperarSenha' WHERE usuario.email = '$email'");
 
-            $novasenha = substr(password_hash(time()), 0, 6);
-            $nscriptografada = password_hash(password_hash($novasenha));
+        $stmt->execute();
 
-            if(mail($email, "Sua nova senha", "Sua nova senha: ".$novasenha)){
-
-                $sql_code = "UPDATE usuario SET senha = '$nscriptografada' WHERE email = '$email'";
-                $sql_query = $mysqli->query($sql_code) or die ($mysqli->error);
-
-                if($sql_query){
-                    $error[] = "Senha alterada com sucesso!";
-                }
-
-            }
-
-        }
-
+        email($email, "Recuperação de senha", "para recuperar a senha acesse o link http: . $recuperarSenha");
     }
 
 ?>
@@ -47,7 +27,7 @@
 </head>
 
 <body>
-    <form action="">
+    <form action="" method='POST'>
         <input placeholder="Seu E-mail" name="email" type="text">
         <input name="ok" value="ok" type="submit">
 </body>

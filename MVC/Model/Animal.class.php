@@ -191,6 +191,7 @@ class Animal{
 
                 $animal = new Animal();
                 
+                $animal->setId($linha['id']);
                 $animal->setNome($linha['nome']);
                 $animal->setEspecie($linha['especie']);
                 $animal->setRaca($linha['raca']);
@@ -215,25 +216,20 @@ class Animal{
 
     /// getOne
 
-    public static function getOne() {
+    public static function getOne($id) {
         $pdo = conexao();
-        #TODO id não deveria ser string, consertar
+        $animal = new Animal();
         try{
-            $lista = [];
-            foreach($pdo->query('SELECT * FROM postagem_animal WHERE id = ' . $this->id) as $linha ){
+            foreach($pdo->query('SELECT * FROM postagem_animal WHERE id = ' . $id) as $linha ){
 
-                $animal = new Animal();
-
+                $animal->setId($linha['id']);
                 $animal->setNome($linha['nome']);
                 $animal->setEspecie($linha['especie']);
                 $animal->setRaca($linha['raca']);
                 $animal->setGenero($linha['genero']);
                 $animal->setCor($linha['cor']);
-                $animal->setUltimoEndereco($linha['ultimoEndereco']);
-                $animal->setImagem($linha['imagem']);
-
-                $lista[] = $animal;
-    
+                $animal->setUltimoEndereco($linha['ultimo_endereco']);
+                $animal->setImagem($linha['imagem']);    
             }
         } catch(Exception $e) {
             //Log
@@ -241,8 +237,7 @@ class Animal{
             return false;
         }   
 
-        return $lista;
-
+        return $animal;
     }
     
 

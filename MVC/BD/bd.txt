@@ -3,6 +3,7 @@ CREATE TABLE Usuario(
     cpf Varchar(12) NOT NULL UNIQUE,
     nome VARCHAR(60),
     email varchar(60) not null UNIQUE,
+    recuperar_senha varchar(30),
     senha varchar(256) not null,
     data_nascimento DATE,
     celular varchar (60),
@@ -42,12 +43,36 @@ CREATE TABLE postagem_animal(
     CONSTRAINT pk_id_postagem_animal PRIMARY KEY (id)
 );
 
-Create table postagem_usuario(
+CREATE TABLE postagem_usuario(
     id_usuario int,
     id_postagem int,
 
     CONSTRAINT fk_id_usuario_postagem FOREIGN KEY (id_usuario) REFERENCES usuario(id),
     CONSTRAINT fk_id_postagem_usuario FOREIGN KEY (id_postagem) REFERENCES postagem_animal(id)
+);
+
+CREATE TABLE comentario(
+    id int not null auto_increment,
+    id_usuario int,
+    comentario varchar(256),
+
+    CONSTRAINT pk_id_comentario PRIMARY KEY (id)
+);
+
+CREATE TABLE comentario_postagem(
+    id_comentario int,
+    id_postagem int,
+
+    CONSTRAINT fk_id_postagem_comenatrio FOREIGN KEY (id_postagem) REFERENCES postagem_animal(id),
+    CONSTRAINT fk_id_comenatrio_postagem FOREIGN KEY (id_comentario) REFERENCES comentario(id)
+);
+
+CREATE TABLE comentario_usuario(
+    id_comentario int,
+    id_usuario int,
+
+    CONSTRAINT fk_id_usuario_comenatrio FOREIGN KEY (id_usuario) REFERENCES usuario(id),
+    CONSTRAINT fk_id_comenatrio_usuario FOREIGN KEY (id_comettario) REFERENCES comentario(id)
 );
 
 insert into cargo (id, cargo) values (1, 'administrador');

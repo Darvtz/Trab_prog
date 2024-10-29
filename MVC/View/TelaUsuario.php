@@ -24,6 +24,6 @@ $usuario = Usuario::getOne($_SESSION['id']);
     <p>Email: <?php echo $usuario->getEmail(); ?></p>
     <p>Telefone: <?php echo $usuario->getCelular(); ?></p>
     <p>Cadastrado em: <?php echo $usuario->getDatacad(); ?><p>
-    <p><a href="logout.php">Logout</a></p>
+    <p><a href="../View/logout.php">Logout</a></p>
 </body>
 </html>

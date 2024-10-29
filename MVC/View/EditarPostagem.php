@@ -1,3 +1,15 @@
+<?php
+
+include_once('../Model/Animal.class.php');
+
+if(!isset($_SESSION)){
+    session_start();
+}
+
+$animal = Animal::getOne($_REQUEST['id']);
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,50 +22,50 @@
     <title>Postagem</title>
 </head>
 <body>
-    <h1>Insira as informações do post abaixo</h1>
+    <h1>Edite sua postagem</h1>
 
     <div>
         <form action="../Controller/Postagem.php?acao=editar" method = "POST"  enctype="multipart/form-data">
             <div>
                     <label for="exampleInputNome">
                         Nome
-                        <input type="text" class="form-control" id="exampleImputNome" name = "nome">
+                        <input type="text" class="form-control" id="exampleImputNome" name = "nome" value="<?php echo $animal->getNome(); ?>">
                     </label>
             </div>
             <div>
                 <label for="exampleInputNome">Espécie
-                    <input type="text" class="form-control" id="exampleImputEspecie" name = "especie">
+                    <input type="text" class="form-control" id="exampleImputEspecie" name = "especie" value="<?php echo $animal->getEspecie();?>">
                 </label>
             </div>
             <div>
                 <label for="exampleInputNome">Raça
-                    <input type="text" class="form-control" id="exampleImputRaca" name = "raca">
+                    <input type="text" class="form-control" id="exampleImputRaca" name = "raca" value="<?php echo $animal->getRaca();?>">
                 </label>
             </div>
             <div>
                 <label for="exampleInputNome">Genero
-                <input type="text" class="form-control" id="exampleImputGenero" name = "genero">
+                <input type="text" class="form-control" id="exampleImputGenero" name = "genero" value="<?php echo $animal->getGenero();?>">
                 </label>
             </div>
             <div>
                 <label for="exampleInputNome">Cor
-                    <input type="text" class="form-control" id="exampleImputCor" name = "cor">
+                    <input type="text" class="form-control" id="exampleImputCor" name = "cor" value="<?php echo $animal->getCor();?>">
                 </label>
             </div>
             <div>
                 <label for="exampleInputNome">Ultimo endereço visto
-                    <input type="name" class="form-control" id="exampleImputUltimoEndereco" name="ultimoEndereco">
+                    <input type="name" class="form-control" id="exampleImputUltimoEndereco" name="ultimoEndereco" value="<?php echo $animal->getUltimoEndereco();?>">
                 </label>
             </div>
             <div>
                 <label for="exampleInputNome">Descrição adicional
-                    <input type="name" class="form-control" id="exampleImputDescricao" name="descricao">
+                    <input type="name" class="form-control" id="exampleImputDescricao" name="descricao" value="<?php echo $animal->getDescricao();?>">
                 </label>
             </div>
                 <p><label>Insira a imagem do animal</label></p> <br>
               
                 <p><input name="arquivo" type="file">
-                  <button name="upload" type="submit" >Fazer Postagem</button>
+                  <button name="upload" type="submit" >Editar Postagem</button>
                 </p>
 </form>
     </div>
