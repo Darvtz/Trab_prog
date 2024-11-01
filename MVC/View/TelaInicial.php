@@ -35,10 +35,10 @@ $usuarios = Usuario::getAll();
     <p class="card-text">Ultimo endereço visto: <?= $animal->getUltimoEndereco();?></p>
     <p class="card-text"><?= $animal->getDescricao();?></p>
     <p class="card-text">Contato com o dono: </p>
-    <?php if ($status == 'COMPLETE'){ 
-      echo
+    <p><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3458.9493243850884!2d-51.15462771687573!3d-29.894560759862568!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95196fd8f13d8b8d:0x86db994a478111c0!2sR.Mariluz,70-Estância Velha,Canoas-RS,92412-546!5e0!3m2!1spt-BR!2sbr!4v1730474836124!5m2!1spt-BR!2sbr" width="800" height="600" frameborder="0" style="border:0" allowfullscreen></iframe></p>
+    <?php //if ($status == 'COMPLETE'){?> 
       <a href="../View/EditarPostagem.php?id=<?= $animal->getId();?>" class="btn btn-primary">Editar Postagem</a>
-    }?>
+    <?php//}?>
 
     <a href="#" class="facebook-btn">
         <i class="fab fa-facebook"></i>
