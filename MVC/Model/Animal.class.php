@@ -11,7 +11,10 @@ class Animal{
     private $raca;
     private $genero;
     private $cor;
-    private $ultimoEndereco;
+    private $estado;
+    private $cidade;
+    private $rua;
+    private $numero;
     private $descricao;
     private $oculto = false;
     private $imagem;
@@ -65,12 +68,36 @@ class Animal{
         $this->cor = $cor;
     }
 
-    public function getUltimoEndereco(){
-        return $this->ultimoEndereco;
+    public function getEstado(){
+        return $this->estado;
     }
 
-    public function setUltimoEndereco($ultimoEndereco){
-        $this->ultimoEndereco = $ultimoEndereco;
+    public function setEstado($estado){
+        $this->estado = $estado;
+    }
+
+    public function getCidade(){
+        return $this->cidade;
+    }
+
+    public function setCidade($cidade){
+        $this->cidade = $cidade;
+    }
+
+    public function getRua(){
+        return $this->rua;
+    }
+
+    public function setRua($rua){
+        $this->rua = $rua;
+    }
+
+    public function getNumero(){
+        return $this->numero;
+    }
+
+    public function setNumero($numero){
+        $this->numero = $numero;
     }
 
     public function getDescricao(){
@@ -95,7 +122,7 @@ class Animal{
 
         try{
         
-            $stmt = $pdo->prepare('INSERT INTO postagem_animal (nome, especie, raca, genero, cor, ultimo_Endereco, descricao, imagem) 
+            $stmt = $pdo->prepare('INSERT INTO postagem_animal (nome, especie, raca, genero, cor, estado, cidade, rua, numero, descricao, imagem) 
                                     VALUES( :nome, :especie, :raca, :genero, :cor, :ultimoEndereco, :descricao, :imagem)');
 
             $stmt->execute([ 
@@ -104,7 +131,10 @@ class Animal{
                         ':raca' => $this->raca, 
                         ':genero' => $this->genero, 
                         ':cor' => $this->cor, 
-                        ':ultimoEndereco' => $this->ultimoEndereco, 
+                        ':estado' => $this->estado,
+                        ':cidade' => $this->cidade,
+                        ':rua' => $this->rua,
+                        ':numero' => $this->numero,
                         ':descricao' => $this->descricao,
                         ':imagem' => $this->imagem]);
             
@@ -155,7 +185,10 @@ class Animal{
                                                     raca = :raca, 
                                                     genero = :genero, 
                                                     cor = :cor,  
-                                                    ultimo_endereco = :ultimoEndereco, 
+                                                    estado = :estado, 
+                                                    cidade = :cidade, 
+                                                    rua = :rua, 
+                                                    numero = :numero, 
                                                     descricao = :descricao, 
                                                     imagem = :imagem  
                                                     WHERE id_animal = :id');
@@ -167,7 +200,10 @@ class Animal{
             ':raca' => $this->raca, 
             ':genero' => $this->genero, 
             ':cor' => $this->cor, 
-            ':ultimoEndereco' => $this->ultimoEndereco,
+            ':estado' => $this->estado,
+            ':cidade' => $this->cidade,
+            ':rua' => $this->rua,
+            ':numero' => $this->numero,
             ':descricao' => $this->descricao,
             ':imagem' => $this->imagem]);
 
@@ -197,8 +233,12 @@ class Animal{
                 $animal->setRaca($linha['raca']);
                 $animal->setGenero($linha['genero']);
                 $animal->setCor($linha['cor']);
-                $animal->setUltimoEndereco($linha['ultimo_endereco']);
+                $animal->setDescricao($linha['descricao']); 
                 $animal->setImagem($linha['imagem']);
+                $animal->setEstado($linha['estado']);
+                $animal->setCiade($linha['cidade']);
+                $animal->setRua($linha['rua']);
+                $animal->setNumero($linha['numero']);
 
                 $lista[] = $animal;
     
@@ -228,8 +268,12 @@ class Animal{
                 $animal->setRaca($linha['raca']);
                 $animal->setGenero($linha['genero']);
                 $animal->setCor($linha['cor']);
-                $animal->setUltimoEndereco($linha['ultimo_endereco']);
-                $animal->setImagem($linha['imagem']);    
+                $animal->setDescricao($linha['descricao']); 
+                $animal->setImagem($linha['imagem']);
+                $animal->setEstado($linha['estado']);
+                $animal->setCiade($linha['cidade']);
+                $animal->setRua($linha['rua']);
+                $animal->setNumero($linha['numero']);
             }
         } catch(Exception $e) {
             //Log
@@ -256,7 +300,12 @@ class Animal{
                 $animal->setRaca($linha['raca']);
                 $animal->setGenero($linha['genero']);
                 $animal->setCor($linha['cor']);
-                $animal->setUltimoEndereco($linha['ultimoEndereco']);
+                $animal->setDescricao($linha['descricao']); 
+                $animal->setImagem($linha['imagem']);
+                $animal->setEstado($linha['estado']);
+                $animal->setCiade($linha['cidade']);
+                $animal->setRua($linha['rua']);
+                $animal->setNumero($linha['numero']);
             }
         
         } catch (Exception $e) {

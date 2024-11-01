@@ -53,10 +53,13 @@ $animal = Animal::getOne($_REQUEST['id']);
                 </label>
             </div>
             <div>
-                <label for="exampleInputNome">Ultimo endereço visto
-                    <input type="name" class="form-control" id="exampleImputUltimoEndereco" name="ultimoEndereco" value="<?php echo $animal->getUltimoEndereco();?>">
-                </label>
+                <label for="exampleInputNome">Ultimo endereço visto:</label></br></br>
+                    <label>Estado<input type="name" class="form-control" id="exampleImputEstado" name="estado"></label></br>
+                    <label>Cidade<input type="name" class="form-control" id="exampleImputCidade" name="cidade"></label></br>
+                    <label>Rua<input type="name" class="form-control" id="exampleImputRua" name="rua"></label></br>
+                    <label>Número<input type="number" class="form-control" id="exampleImputNumero" name="numero"></label></br>
             </div>
+            <div>
             <div>
                 <label for="exampleInputNome">Descrição adicional
                     <input type="name" class="form-control" id="exampleImputDescricao" name="descricao" value="<?php echo $animal->getDescricao();?>">

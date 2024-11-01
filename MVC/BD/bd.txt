@@ -36,7 +36,11 @@ CREATE TABLE postagem_animal(
     raca varchar(60),
     genero varchar(60),
     cor varchar(60),
-    ultimo_endereco varchar(60),
+    estado varchar(60),
+    cidade varchar(60),
+    bairro varchar(60),
+    rua varchar(60),
+    numero int,
     descricao varchar(60),
     imagem varchar(256),
     
@@ -72,7 +76,7 @@ CREATE TABLE comentario_usuario(
     id_usuario int,
 
     CONSTRAINT fk_id_usuario_comenatrio FOREIGN KEY (id_usuario) REFERENCES usuario(id),
-    CONSTRAINT fk_id_comenatrio_usuario FOREIGN KEY (id_comettario) REFERENCES comentario(id)
+    CONSTRAINT fk_id_comenatrio_usuario FOREIGN KEY (id_comentario) REFERENCES comentario(id)
 );
 
 insert into cargo (id, cargo) values (1, 'administrador');

@@ -44,7 +44,10 @@ if($acao=='postar'){
     $animal->setRaca($_POST['raca']);
     $animal->setGenero($_POST['genero']);
     $animal->setCor($_POST['cor']);
-    $animal->setUltimoEndereco($_POST['ultimoEndereco']);
+    $animal->setEstado($_POST['estado']);
+    $animal->setCidade($_POST['cidade']);
+    $animal->setRua($_POST['rua']);
+    $animal->setNumero($_POST['numero']);
     $animal->setDescricao($_POST['descricao']);
     $imagem = enviarArquivo('arquivo');
     if($imagem){
