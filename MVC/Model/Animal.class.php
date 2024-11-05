@@ -123,7 +123,7 @@ class Animal{
         try{
         
             $stmt = $pdo->prepare('INSERT INTO postagem_animal (nome, especie, raca, genero, cor, estado, cidade, rua, numero, descricao, imagem) 
-                                    VALUES( :nome, :especie, :raca, :genero, :cor, :ultimoEndereco, :descricao, :imagem)');
+                                    VALUES( :nome, :especie, :raca, :genero, :cor, :estado, :cidade, :rua, :numero, :descricao, :imagem)');
 
             $stmt->execute([ 
                         ':nome' => $this->nome, 
@@ -236,7 +236,7 @@ class Animal{
                 $animal->setDescricao($linha['descricao']); 
                 $animal->setImagem($linha['imagem']);
                 $animal->setEstado($linha['estado']);
-                $animal->setCiade($linha['cidade']);
+                $animal->setCidade($linha['cidade']);
                 $animal->setRua($linha['rua']);
                 $animal->setNumero($linha['numero']);
 
@@ -271,7 +271,7 @@ class Animal{
                 $animal->setDescricao($linha['descricao']); 
                 $animal->setImagem($linha['imagem']);
                 $animal->setEstado($linha['estado']);
-                $animal->setCiade($linha['cidade']);
+                $animal->setCidade($linha['cidade']);
                 $animal->setRua($linha['rua']);
                 $animal->setNumero($linha['numero']);
             }

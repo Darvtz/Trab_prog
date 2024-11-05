@@ -67,7 +67,8 @@ $animal = Animal::getOne($_REQUEST['id']);
             </div>
                 <p><label>Insira a imagem do animal</label></p> <br>
               
-                <p><input name="arquivo" type="file">
+                <p>
+                  <input name="arquivo" type="file">
                   <button name="upload" type="submit" >Editar Postagem</button>
                 </p>
 </form>

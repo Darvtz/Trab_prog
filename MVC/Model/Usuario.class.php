@@ -211,7 +211,7 @@ class Usuario{
 
     public static function getOne($id) {
         $pdo = conexao();
-        #TODO id não deveria ser string, consertar
+
         try{
             $usuario = new Usuario();
             foreach($pdo->query('SELECT * FROM usuario WHERE id = ' . $id) as $linha){
@@ -240,8 +240,6 @@ class Usuario{
 
     public  function load(){
         $pdo = conexao();
-
-        #TODO ver que esse código cheira mal...
         try{
         
             foreach($pdo->query('SELECT * FROM usuario WHERE id = ' . $this->id) as $linha){
@@ -266,7 +264,6 @@ class Usuario{
     public  function loadByEmail(){
         $pdo = conexao();
 
-        #TODO ver que esse código cheira mal...
         try{
         
             foreach($pdo->query("SELECT * FROM usuario WHERE email = '$this->email'") as $linha){

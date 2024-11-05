@@ -32,18 +32,11 @@ $usuarios = Usuario::getAll();
   <img class="card-img-top" src="fotos/<?= $animal->getImagem();?>" alt="Card image cap">
   <div class="card-body">
     <h5 class="card-title"><?= $animal->getNome();?></h5>
-    <p class="card-text">Ultimo endereço visto: <?= $animal->getUltimoEndereco();?></p>
+    <p class="card-text">Ultimo endereço visto: <?= $animal->getRua();?>, <?= $animal->getNumero();?>, <?= $animal->getCidade();?>, <?= $animal->getEstado();?></p>
     <p class="card-text"><?= $animal->getDescricao();?></p>
     <p class="card-text">Contato com o dono: </p>
-    <p><iframe
-        width="600"
-        height="450"
-        style="border:0"
-        loading="lazy"
-        allowfullscreen
-        referrerpolicy="no-referrer-when-downgrade"
-        src="https://www.google.com/maps/embed/v1/place?key=AIzaSyC2okGl9xUgWaf7B6Sy7oTlNcXYEDVrpnE&q=<?php $aniamal->getRua();?>,<?php $animal->getCidade();?>+<?php $animal->getEstado();?>">
-</iframe><p>
+    
+    <a href="../View/VizualizarPostagem.php?id=<?= $animal->getId();?>" class="btn btn-primary">Ver Postagem</a>
     <?php //if ($status == 'COMPLETE'){?> 
       <a href="../View/EditarPostagem.php?id=<?= $animal->getId();?>" class="btn btn-primary">Editar Postagem</a>
     <?php//}?>

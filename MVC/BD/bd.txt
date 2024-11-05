@@ -29,7 +29,7 @@ CREATE TABLE cargo_usuario(
     CONSTRAINT fk_id_cargo_usuario FOREIGN KEY (id_cargo) REFERENCES cargo(id)
 );
 
-CREATE TABLE postagem_animal(
+CREATE TABLE postagem(
     id int not null auto_increment,
     nome varchar(60),
     especie varchar(60),
@@ -66,19 +66,23 @@ CREATE TABLE comentario(
 CREATE TABLE comentario_postagem(
     id_comentario int,
     id_postagem int,
-
-    CONSTRAINT fk_id_postagem_comenatrio FOREIGN KEY (id_postagem) REFERENCES postagem_animal(id),
-    CONSTRAINT fk_id_comenatrio_postagem FOREIGN KEY (id_comentario) REFERENCES comentario(id)
-);
-
-CREATE TABLE comentario_usuario(
-    id_comentario int,
     id_usuario int,
 
-    CONSTRAINT fk_id_usuario_comenatrio FOREIGN KEY (id_usuario) REFERENCES usuario(id),
-    CONSTRAINT fk_id_comenatrio_usuario FOREIGN KEY (id_comentario) REFERENCES comentario(id)
+    CONSTRAINT fk_id_postagem_comenatrio FOREIGN KEY (id_postagem) REFERENCES postagem_animal(id),
+    CONSTRAINT fk_id_comenatrio_postagem FOREIGN KEY (id_comentario) REFERENCES comentario(id),
+    CONSTRAINT fk_id_comenatrio_usuario FOREIGN KEY (id_usuario) REFERENCES usuario(id)
 );
 
 insert into cargo (id, cargo) values (1, 'administrador');
 insert into cargo (id, cargo) values (2, 'moderador');
 insert into cargo (id, cargo) values (3, 'usuário padão');
+
+<p><iframe
+        width="600"
+        height="450"
+        style="border:0"
+        loading="lazy"
+        allowfullscreen
+        referrerpolicy="no-referrer-when-downgrade"
+        src="https://www.google.com/maps/embed/v1/place?key=AIzaSyC2okGl9xUgWaf7B6Sy7oTlNcXYEDVrpnE&q=<?php $aniamal->getRua();?>,<?php $animal->getCidade();?>+<?php $animal->getEstado();?>">
+    </iframe><p>

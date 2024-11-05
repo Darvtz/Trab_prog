@@ -6,7 +6,7 @@
 
 <body>
     <form action="">
-        <input placeholder="Seu E-mail" name="email" type="text">
+        <input placeholder="Seu E-mail" name="email" type="email">
         <input name="ok" value="ok" type="submit">
 </body>
 

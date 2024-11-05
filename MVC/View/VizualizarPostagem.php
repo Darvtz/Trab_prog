@@ -1,12 +1,17 @@
 <?php
 
 include_once('../Model/Animal.class.php');
+include_once('../Model/Usuario.class.php');
+include_once('../Model/Comentario.class.php');
 
 if(!isset($_SESSION)){
     session_start();
 }
 
 $animal = Animal::getOne($_REQUEST['id']);
+$usuarios = Usuario::getAll();
+$comentarios = Comentario::getComentarios();
+
 
 ?>
 
@@ -27,47 +32,59 @@ $animal = Animal::getOne($_REQUEST['id']);
     <div>
         <div>
             <label for="exampleInputNome">
-                Nome
-                <input type="text" class="form-control" id="exampleImputNome" name = "nome" value="<?php echo $animal->getNome(); ?>">
+                <?php echo $animal->getNome();?>
             </label>
         </div>
         <div>
-            <label for="exampleInputNome">Espécie
-                <input type="text" class="form-control" id="exampleImputEspecie" name = "especie" value="<?php echo $animal->getEspecie();?>">
+            <label for="exampleInputNome">
+                Espécie: <?php echo $animal->getEspecie();?>
             </label>
         </div>
         <div>
-              <label for="exampleInputNome">Raça
-                <input type="text" class="form-control" id="exampleImputRaca" name = "raca" value="<?php echo $animal->getRaca();?>">
+              <label for="exampleInputNome">
+                Raça: <?php echo $animal->getRaca();?>"
              </label>
         </div>
         <div>
-            <label for="exampleInputNome">Genero
-            <input type="text" class="form-control" id="exampleImputGenero" name = "genero" value="<?php echo $animal->getGenero();?>">
+            <label for="exampleInputNome">
+                Sexo: <?php echo $animal->getGenero();?>
             </label>
         </div>
         <div>
-            <label for="exampleInputNome">Cor
-                <input type="text" class="form-control" id="exampleImputCor" name = "cor" value="<?php echo $animal->getCor();?>">
+            <label for="exampleInputNome">
+                Cor: <?php echo $animal->getCor();?>
             </label>
         </div>
         <div>
-            <label for="exampleInputNome">Ultimo endereço visto
-                <input type="name" class="form-control" id="exampleImputUltimoEndereco" name="ultimoEndereco" value="<?php echo $animal->getUltimoEndereco();?>">
+                <label for="exampleInputNome">Ultimo endereço visto:</label></br></br>
+                    <label>Estado: <?php  echo $animal->getEstado()?></label></br>
+                    <label>Cidade: <?php  echo $animal->getCidade()?></label></br>
+                    <label>Rua: <?php  echo $animal->getRua()?></label></br>
+                    <label>Número: <?php  echo $animal->getNumero()?></label></br>
+            </div>
+        <div>
+            <label for="exampleInputNome">
+                Descrição: <?php echo $animal->getDescricao();?>
             </label>
         </div>
+        </br>
         <div>
-            <label for="exampleInputNome">Descrição adicional
-                <input type="name" class="form-control" id="exampleImputDescricao" name="descricao" value="<?php echo $animal->getDescricao();?>">
-            </label>
-        </div>
-
-        <div>
-        <form action="../Controller/Comentario.php?acao=editar" method = "POST"  enctype="multipart/form-data">
-            
-            <imput type="text" class="form-control" id="comentario" name="comentario">
+        <form action="../Controller/Comentario.php?acao=postar" method = "POST"  enctype="multipart/form-data">
+            <div>
+                <textarea type="textarea" class="form-control" id="comentario" name="comentario"></textarea>
+            </div>
+            <button type="submit">Comentar</button>
 
         </form>
+        </div>
+
+        <?php foreach($comentarios as $comentario){?>
+
+        <div class="card" style="width: 18rem;">
+        <div class="card-body">
+        <h5 class="card-title"><?= $comentario->getUsuario();?></h5>
+        <p class="card-text"><?= $comentario->getComentario();}?></p>
+        </div>
         </div>
 
 </body>

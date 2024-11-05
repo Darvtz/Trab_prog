@@ -1,7 +1,7 @@
 <?php
 include_once 'Conexao.php';
 
-class Animal{
+class Comentario{
 
     private $id;
     private $comentario;
@@ -14,11 +14,11 @@ class Animal{
         $this->id = $id;
     }
 
-    public function getComentario()){
+    public function getComentario(){
         return $this->comentario;
     }
 
-    public function setId($comentario){
+    public function setComentario($comentario){
         $this->comentario = $comentario;
     }
 
@@ -49,6 +49,7 @@ class Animal{
         } catch(Exception $e) {
             //Log
             return false;
+        }
     }
 
     public function update() {
@@ -65,6 +66,35 @@ class Animal{
             return false;
         }
 
+    }
+
+    public static function getComentarios(){
+        $pdo = conexao();
+        
+        try{
+            $lista = [];
+            foreach($pdo->query('SELECT * FROM comentario c 
+
+            INNER JOIN comentario_postagem cp 
+            on c.id= cp.id_comentario 
+            
+            INNER JOIN usuario u
+            on cp.id_usuario = u.id' ) as $linha ){
+
+                $comentario = new Comentario();
+                
+                $comentario->setId($linha['id']);
+                $comentario->setComentario($linha['comentario']);
+
+                $lista[] = $comentario;
+    
+            }
+        } catch(Exception $e) {
+            //Log
+            return false;
+        }   
+
+        return $lista;
     }
 
     public static function getAll() {
@@ -136,5 +166,3 @@ class Animal{
     }
 
 }
-
-?>
