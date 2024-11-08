@@ -26,6 +26,13 @@ h1{
     text-align: center;
 }
 
+.card{
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+    text-align: center;
+}
+
 form{
     margin: auto;
     display: flex;

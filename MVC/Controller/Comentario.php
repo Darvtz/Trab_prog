@@ -2,14 +2,18 @@
 include_once('../Model/Comentario.class.php');
 include_once('../Model/Animal.class.php');
 
+session_start();
+
 $acao = $_GET['acao'];
 
 if($acao="postar"){
 
     $comentario= new Comentario();
-    $comentario->setComentario($_POST['cometario']);
+    $comentario->setComentario($_POST['comentario']);
+    $comentario->setPostagem($_POST['id']);
+    $comentario->setUsuario($_SESSION);
     $comentario->save();
-    header('Location: ../View/VizualizarPostagem.php?id='. $animal->getId());
+    //header('Location: ../View/VizualizarPostagem.php?id='. $_POST['id']);
 
 }else if($acao=='deletar'){
     $comentario=new Comentario();

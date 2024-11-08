@@ -1,10 +1,15 @@
 <?php
+
 include_once 'Conexao.php';
+include_once 'Usuario.class.php';
+include_once 'Animal.class.php';
 
 class Comentario{
 
     private $id;
     private $comentario;
+    private $usuario;
+    private $postagem;
 
     public function getId(){
         return $this->id;
@@ -22,17 +27,34 @@ class Comentario{
         $this->comentario = $comentario;
     }
 
+    public function getUsuario(){
+        return Usuario::getOne($this->usuario);
+
+    }
+
+    public function setUsuario($usuario){
+        $this->usuario = $usuario;
+    }
+
+    public function getPostagem(){
+        return Animal::getOne($this->postagem);
+    }
+
+    public function setPostagem($postagem){
+        $this->postagem = $postagem;
+    }
+
     public function save()
     {
         $pdo = conexao();
 
         try{
         
-            $stmt = $pdo->prepare('INSERT INTO cometario (id, comentario) VALUES(:comentario)');
+            $stmt = $pdo->prepare('INSERT INTO comentario (id, comentario) VALUES(:comentario)');
             $stmt->execute([':comentario' => $this->comentario]);
       
         } catch(Exception $e) {
-            //Log
+            var_dump($e);
             return false;
         }
     }
@@ -68,34 +90,60 @@ class Comentario{
 
     }
 
-    public static function getComentarios(){
-        $pdo = conexao();
+     public static function getComentarios(){
+         $pdo = conexao();
         
-        try{
-            $lista = [];
-            foreach($pdo->query('SELECT * FROM comentario c 
+         try{
+             $lista = [];
+             foreach($pdo->query('SELECT * FROM comentario c 
 
-            INNER JOIN comentario_postagem cp 
-            on c.id= cp.id_comentario 
+             INNER JOIN comentario_postagem cp 
+             on c.id= cp.id_comentario 
             
-            INNER JOIN usuario u
-            on cp.id_usuario = u.id' ) as $linha ){
+             INNER JOIN usuario u
+             on cp.id_usuario = u.id' ) as $linha ){
 
-                $comentario = new Comentario();
+                 $comentario = new Comentario();
                 
-                $comentario->setId($linha['id']);
-                $comentario->setComentario($linha['comentario']);
+                 $comentario->setId($linha['id']);
+                 $comentario->setComentario($linha['comentario']);
 
-                $lista[] = $comentario;
+                 $lista[] = $comentario;
     
-            }
-        } catch(Exception $e) {
-            //Log
-            return false;
-        }   
+             }
+         } catch(Exception $e) {
+             //Log
+             return false;
+         }   
 
-        return $lista;
-    }
+         return $lista;
+     }
+
+    // public function getUsuario(){
+    //     $pdo = conexao();
+        
+    //     try{
+    //         $lista = [];
+    //         foreach($pdo->query('SELECT nome FROM Usuario u 
+            
+    //         INNER JOIN comentario postagem cp
+    //         on u.id = cp.id_usuario
+            
+    //         INNER JOIN comentario c
+    //         on cp.id_comentario = c.id') as $linha){
+
+    //             $usuario = new Usuario();
+
+    //             $usuario->setId($linha['id']);
+    //             $usuario->setNome($linha['nome']);
+
+    //         }
+            
+    //     }catch(Exception $e) {
+    //         //Log
+    //         return false;
+    //     }
+    // }
 
     public static function getAll() {
         $pdo = conexao();

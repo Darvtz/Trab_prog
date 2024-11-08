@@ -72,6 +72,7 @@ $comentarios = Comentario::getComentarios();
         <form action="../Controller/Comentario.php?acao=postar" method = "POST"  enctype="multipart/form-data">
             <div>
                 <textarea type="textarea" class="form-control" id="comentario" name="comentario"></textarea>
+                <input type = 'hidden' value = '<?php  echo $animal->getid()?>' name = 'id'>
             </div>
             <button type="submit">Comentar</button>
 
@@ -82,7 +83,7 @@ $comentarios = Comentario::getComentarios();
 
         <div class="card" style="width: 18rem;">
         <div class="card-body">
-        <h5 class="card-title"><?= $comentario->getUsuario();?></h5>
+        <h5 class="card-title"><?= $comentario->getUsuario()->getNome();?></h5>
         <p class="card-text"><?= $comentario->getComentario();}?></p>
         </div>
         </div>

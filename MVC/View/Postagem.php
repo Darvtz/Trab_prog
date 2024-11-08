@@ -21,34 +21,46 @@
                     </label>
             </div>
             <div>
-                <label for="exampleInputNome">Espécie
-                    <input type="text" class="form-control" id="exampleImputEspecie" name = "especie">
+                <label for="exampleInputEspecie">Tipo de animal
+                    <select name="cars" id="exampleImputEspecie">
+                        <option value="Selecionar">Selecionar</option>
+                        <option value="Ave">Ave</option>
+                        <option value="Cachorro Doméstico">Cachorro Doméstico</option>
+                        <option value="Gato Doméstico">Gato Doméstico</option>
+                        <option value="Reptil">Reptil</option>
+                        <option value="Peixe">Peixe</option>
+                        <option value="Roedor">Roedor</option>
+                        <option value="">Outro/a</option>
+                    </select>
                 </label>
             </div>
             <div>
-                <label for="exampleInputNome">Raça
+                <label for="exampleInputRaca">Raça Específica
                     <input type="text" class="form-control" id="exampleImputRaca" name = "raca">
                 </label>
             </div>
             <div>
-                <label for="exampleInputNome">Genero
-                <input type="text" class="form-control" id="exampleImputGenero" name = "genero">
+                <label>Sexo</label>
+                <input type="radio"  id="exampleImputGenero1" name = "genero"> 
+                <label for='exampleImputGenero1'>Macho</label>
+                <input type="radio" id="exampleImputGenero2" name = "genero">
+                <label for='exampleImputGenero2'>Fêmea</label>
                 </label>
             </div>
             <div>
-                <label for="exampleInputNome">Cor
+                <label for="exampleInputCor">Cor
                     <input type="text" class="form-control" id="exampleImputCor" name = "cor">
                 </label>
             </div>
             <div>
-                <label for="exampleInputNome">Ultimo endereço visto:</label></br></br>
+                <label">Ultimo endereço visto:</label></br></br>
                     <label>Estado<input type="name" class="form-control" id="exampleImputEstado" name="estado"></label></br>
                     <label>Cidade<input type="name" class="form-control" id="exampleImputCidade" name="cidade"></label></br>
                     <label>Rua<input type="name" class="form-control" id="exampleImputRua" name="rua"></label></br>
                     <label>Número<input type="number" class="form-control" id="exampleImputNumero" name="numero"></label></br>
             </div>
             <div>
-                <label for="exampleInputNome">Descrição adicional
+                <label for="exampleInputDescricao">Descrição adicional
                     <input type="name" class="form-control" id="exampleImputDescricao" name="descricao">
                 </label>
             </div>
