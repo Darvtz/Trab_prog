@@ -50,16 +50,21 @@ class Comentario{
 
         try{
         
-            $stmt = $pdo->prepare('INSERT INTO comentario (id, comentario) VALUES(:comentario)');
+            $stmt = $pdo->prepare('INSERT INTO comentario (comentario) VALUES(:comentario)');
             $stmt->execute([':comentario' => $this->comentario]);
+
+            $stmtx = $pdo->prepare('INSERT INTO comentario_postagem (id_comentario, id_postagem, id_usuario) VALUES(::id_comentario, :id_postagem, :id_usuario)');
+            $stmtx->execute([':id_comentario'=>$id,
+                             ':id_postagem'=>$postagem,
+                             ':id_usuario'=> $usuario]);
       
-        } catch(Exception $e) {
+        } catch(Exception $e){
             var_dump($e);
             return false;
         }
     }
 
-    public static function deletar ($id) {
+    public static function deletar($id){
         
         $pdo = conexao();
 

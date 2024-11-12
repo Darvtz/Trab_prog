@@ -216,6 +216,7 @@ class Usuario{
             $usuario = new Usuario();
             foreach($pdo->query('SELECT * FROM usuario WHERE id = ' . $id) as $linha){
 
+                $usuario->getId($linha['id']);
                 $usuario->setNome($linha['nome']);
                 $usuario->setSenha($linha['senha']);
                 $usuario->setEmail($linha['email']);

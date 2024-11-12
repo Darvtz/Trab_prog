@@ -10,6 +10,11 @@ if(!isset($_SESSION)){
 
 $animais = Animal::getAll();
 $usuarios = Usuario::getAll();
+
+if(isset($_POST['search'])){
+  $animais = Animal::getBusca($_POST['search']);
+
+}
 ?>
 
 <!DOCTYPE html>
@@ -25,6 +30,15 @@ $usuarios = Usuario::getAll();
 <body>
     
   <h1><a href="TelaUsuario.php" class="l1">Usuário</a></p1>Seja bem vindo, <?php echo $_SESSION['nome']; ?></h1>
+
+  <form method="POST" >
+    <input type="text" name="search" required>
+    <input type="submit" value="Search">
+  </form>
+
+  <p>
+    <a href="../View/Postagem.php">Fazer uma postagem</a>
+  </p>
 
   <?php foreach($animais as $animal){?>
 
@@ -63,10 +77,5 @@ $usuarios = Usuario::getAll();
   </div>
 </div>
   <?php } ?>
-
-  <p>
-    <a href="../View/Postagem.php">Fazer uma postagem</a>
-  </p>
-
 </body>
 </html>

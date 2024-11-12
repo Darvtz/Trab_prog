@@ -22,7 +22,7 @@
             </div>
             <div>
                 <label for="exampleInputEspecie">Tipo de animal
-                    <select name="cars" id="exampleImputEspecie">
+                    <select name="especie" id="exampleImputEspecie">
                         <option value="Selecionar">Selecionar</option>
                         <option value="Ave">Ave</option>
                         <option value="Cachorro Doméstico">Cachorro Doméstico</option>

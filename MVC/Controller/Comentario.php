@@ -13,7 +13,7 @@ if($acao="postar"){
     $comentario->setPostagem($_POST['id']);
     $comentario->setUsuario($_SESSION);
     $comentario->save();
-    //header('Location: ../View/VizualizarPostagem.php?id='. $_POST['id']);
+    header('Location: ../View/VizualizarPostagem.php?id='. $_POST['id']);
 
 }else if($acao=='deletar'){
     $comentario=new Comentario();

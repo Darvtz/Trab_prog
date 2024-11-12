@@ -252,6 +252,47 @@ class Animal{
         return $lista;
 
     }
+
+    public static function  getBusca($busca){
+        $pdo = conexao();
+        
+        try{
+            $lista = [];
+            foreach($pdo->query("SELECT * FROM postagem_animal WHERE nome LIKE '%$busca%'
+            OR especie LIKE '%$busca%'  
+            OR raca LIKE '%$busca%'  
+            OR genero LIKE '%$busca%' 
+            OR descricao LIKE '%$busca%'
+            OR estado LIKE '%$busca%' 
+            OR cidade LIKE '%$busca%' 
+            OR rua LIKE '%$busca%'") as $linha ){
+
+                $animal = new Animal();
+                
+                $animal->setId($linha['id']);
+                $animal->setNome($linha['nome']);
+                $animal->setEspecie($linha['especie']);
+                $animal->setRaca($linha['raca']);
+                $animal->setGenero($linha['genero']);
+                $animal->setCor($linha['cor']);
+                $animal->setDescricao($linha['descricao']); 
+                $animal->setImagem($linha['imagem']);
+                $animal->setEstado($linha['estado']);
+                $animal->setCidade($linha['cidade']);
+                $animal->setRua($linha['rua']);
+                $animal->setNumero($linha['numero']);
+
+                $lista[] = $animal;
+    
+            }
+        } catch(Exception $e) {
+            var_dump($e);
+            //Log
+            return false;
+        }   
+
+        return $lista;
+    }
     
 
     /// getOne
