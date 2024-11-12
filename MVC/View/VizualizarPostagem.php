@@ -10,7 +10,7 @@ if(!isset($_SESSION)){
 
 $animal = Animal::getOne($_REQUEST['id']);
 $usuarios = Usuario::getAll();
-$comentarios = Comentario::getComentarios();
+$comentarios = Comentario::getComentarios($_REQUEST['id']);
 
 
 ?>

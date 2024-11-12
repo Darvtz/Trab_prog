@@ -50,13 +50,8 @@ class Comentario{
 
         try{
         
-            $stmt = $pdo->prepare('INSERT INTO comentario (comentario) VALUES(:comentario)');
-            $stmt->execute([':comentario' => $this->comentario]);
-
-            $stmtx = $pdo->prepare('INSERT INTO comentario_postagem (id_comentario, id_postagem, id_usuario) VALUES(::id_comentario, :id_postagem, :id_usuario)');
-            $stmtx->execute([':id_comentario'=>$id,
-                             ':id_postagem'=>$postagem,
-                             ':id_usuario'=> $usuario]);
+            $stmt = $pdo->prepare('INSERT INTO comentario (comentario, id_postagem, id_usuario) VALUES(:comentario, :id_postagem, :id_usuario)');
+            $stmt->execute([':comentario' => $this->comentario, ':id_postagem'=>$this->postagem,':id_usuario'=> $this->usuario]);
       
         } catch(Exception $e){
             var_dump($e);
@@ -95,22 +90,17 @@ class Comentario{
 
     }
 
-     public static function getComentarios(){
+     public static function getComentarios(int $postagem){
          $pdo = conexao();
         
          try{
              $lista = [];
-             foreach($pdo->query('SELECT * FROM comentario c 
-
-             INNER JOIN comentario_postagem cp 
-             on c.id= cp.id_comentario 
-            
-             INNER JOIN usuario u
-             on cp.id_usuario = u.id' ) as $linha ){
+             foreach($pdo->query('SELECT * FROM comentario c WHERE id_postagem = '. $postagem ) as $linha ){
 
                  $comentario = new Comentario();
                 
                  $comentario->setId($linha['id']);
+                 $comentario->setUsuario($linha['id_usuario']);
                  $comentario->setComentario($linha['comentario']);
 
                  $lista[] = $comentario;

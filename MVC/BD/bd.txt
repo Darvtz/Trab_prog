@@ -56,20 +56,12 @@ CREATE TABLE postagem_usuario(
 );
 
 CREATE TABLE comentario(
-    id int not null auto_increment,
+    id int not null auto_increment PRIMARY KEY,
+    id_postagem int,
     id_usuario int,
     comentario varchar(256),
 
-    CONSTRAINT pk_id_comentario PRIMARY KEY (id)
-);
-
-CREATE TABLE comentario_postagem(
-    id_comentario int,
-    id_postagem int,
-    id_usuario int,
-
     CONSTRAINT fk_id_postagem_comenatrio FOREIGN KEY (id_postagem) REFERENCES postagem_animal(id),
-    CONSTRAINT fk_id_comenatrio_postagem FOREIGN KEY (id_comentario) REFERENCES comentario(id),
     CONSTRAINT fk_id_comenatrio_usuario FOREIGN KEY (id_usuario) REFERENCES usuario(id)
 );
 
