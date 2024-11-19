@@ -1,44 +1,81 @@
+<?php
+
+include('protect.php');
+include_once('../Model/Animal.class.php');
+include_once('../Model/Usuario.class.php');
+
+if(!isset($_SESSION)){
+    session_start();
+}
+
+$animais = Animal::getAll();
+$usuarios = Usuario::getAll();
+
+if(isset($_POST['search'])){
+  $animais = Animal::getBusca($_POST['search']);
+
+}
+?>
+
 <!DOCTYPE html>
-<html lang="pt-br">
-
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Login</title>
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
-        <link rel="stylesheet" href="style.css">
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
-    </head>
-
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <title>GPetS</title>
+</head>
 <body>
-  <div>
-  <h1>
-    Login de Usuário
-  </h1>
-  </div>
-    <form action="../Controller/Usuario.php?acao=logar" method = "POST">
-        <div>
-          <label for="exampleInputEmail1" class="form-label">
-            Endereço de e-mail
-            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="email">
-        </label>
-        </div>
-        <div class="mb-3">
-          <label for="exampleInputPassword1" class="form-label">
-            Senha
-            <input type="password" class="form-control" id="exampleInputPassword1" name="senha">
-        </label>
-        </br> <a href="../View/Cadastro.html">Não possui uma conta? Cadastre-se!</a>
-        </br>
-              <a href="../View/EsqueceuASenha.php" target="_blank">Esqueceu a senha?</a>
-        </div>
-      <button type="submit" class="btn btn-primary">Log-In</button>
-      </form>
     
-    <script>
-        
-    </script>
-</body>
+  <h1><a href="TelaUsuario.php" class="l1">Usuário</a></p1>Seja bem vindo, <?php echo $_SESSION['nome']; ?></h1>
 
+  <form method="POST" >
+    <input type="text" name="search" required>
+    <input type="submit" value="Search">
+  </form>
+
+  <p>
+    <a href="../View/Postagem.php">Fazer uma postagem</a>
+  </p>
+
+  <?php foreach($animais as $animal){?>
+
+  <div class="card" style="width: 18rem;">
+  <img class="card-img-top" src="fotos/<?= $animal->getImagem();?>" alt="Card image cap">
+  <div class="card-body">
+    <h5 class="card-title"><?= $animal->getNome();?></h5>
+    <p class="card-text">Ultimo endereço visto: <?= $animal->getRua();?>, <?= $animal->getNumero();?>, <?= $animal->getCidade();?>, <?= $animal->getEstado();?></p>
+    <p class="card-text"><?= $animal->getDescricao();?></p>
+    <p class="card-text">Contato com o dono: </p>
+    
+    <a href="../View/VizualizarPostagem.php?id=<?= $animal->getId();?>" class="btn btn-primary">Ver Postagem</a>
+    <?php //if ($status == 'COMPLETE'){?> 
+      <a href="../View/EditarPostagem.php?id=<?= $animal->getId();?>" class="btn btn-primary">Editar Postagem</a>
+    <?php//}?>
+
+    <a href="#" class="facebook-btn">
+        <i class="fab fa-facebook"></i>
+      </a>
+
+      <a href="#" class="twitter-btn">
+        <i class="fab fa-twitter"></i>
+      </a>
+
+      <a href="#" class="pinterest-btn">
+        <i class="fab fa-pinterest"></i>
+      </a>
+
+      <a href="#" class="linkedin-btn">
+        <i class="fab fa-linkedin"></i>
+      </a>
+
+      <a href="#" class="whatsapp-btn">
+        <i class="fab fa-whatsapp"></i>
+      </a>
+  </div>
+</div>
+  <?php } ?>
+</body>
 </html>

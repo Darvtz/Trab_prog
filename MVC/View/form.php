@@ -15,10 +15,4 @@ foreach($_POST as $chave => $valor){
     var_dump($valor);
 
 }
-
-
-
-
-
-
 ?>
