@@ -193,6 +193,7 @@ class Usuario{
                 $usuario->setCelular($linha['celular']);
                 $usuario->setDatacad($linha['data_cadastro']);
                 $usuario->setFoto($linha['foto']);
+                $usuario->setBanido($linha['banido']);
 
                 $lista[] = $usuario;
     
@@ -216,7 +217,7 @@ class Usuario{
             $usuario = new Usuario();
             foreach($pdo->query('SELECT * FROM usuario WHERE id = ' . $id) as $linha){
 
-                $usuario->getId($linha['id']);
+                $usuario->setId($linha['id']);
                 $usuario->setNome($linha['nome']);
                 $usuario->setSenha($linha['senha']);
                 $usuario->setEmail($linha['email']);
@@ -224,6 +225,7 @@ class Usuario{
                 $usuario->setCelular($linha['celular']);
                 $usuario->setDatacad($linha['data_cadastro']);
                 $usuario->setFoto($linha['foto']);
+                $usuario->setBanido($linha['banido']);
     
             }
             return $usuario;
@@ -251,6 +253,7 @@ class Usuario{
                 $this->setCelular($linha['celular']);
                 $this->setDatacad($linha['datacad']);
                 $this->setFoto($linha['foto']);
+                $this->setBanido($linha['banido']);
             }
         
         } catch (Exception $e) {
@@ -276,6 +279,7 @@ class Usuario{
                 $this->setCelular($linha['celular']);
                 $this->setDatacad($linha['data_cadastro']);
                 $this->setFoto($linha['foto']);
+                $this->setBanido($linha['banido']);
             }
         
         } catch (Exception $e) {

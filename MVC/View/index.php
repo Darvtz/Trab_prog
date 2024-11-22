@@ -4,9 +4,6 @@ include('protect.php');
 include_once('../Model/Animal.class.php');
 include_once('../Model/Usuario.class.php');
 
-if(!isset($_SESSION)){
-    session_start();
-}
 
 $animais = Animal::getAll();
 $usuarios = Usuario::getAll();
@@ -33,7 +30,7 @@ if(isset($_POST['search'])){
 
   <form method="POST" >
     <input type="text" name="search" required>
-    <input type="submit" value="Search">
+    <input type="submit" value="Pesquisar">
   </form>
 
   <p>
@@ -51,29 +48,21 @@ if(isset($_POST['search'])){
     <p class="card-text">Contato com o dono: </p>
     
     <a href="../View/VizualizarPostagem.php?id=<?= $animal->getId();?>" class="btn btn-primary">Ver Postagem</a>
-    <?php //if ($status == 'COMPLETE'){?> 
+    <?php 
+      if ($animal->getIdUsuario() == $_SESSION['id']){
+    ?> 
       <a href="../View/EditarPostagem.php?id=<?= $animal->getId();?>" class="btn btn-primary">Editar Postagem</a>
-    <?php//}?>
 
-    <a href="#" class="facebook-btn">
-        <i class="fab fa-facebook"></i>
-      </a>
-
-      <a href="#" class="twitter-btn">
-        <i class="fab fa-twitter"></i>
-      </a>
-
-      <a href="#" class="pinterest-btn">
-        <i class="fab fa-pinterest"></i>
-      </a>
-
-      <a href="#" class="linkedin-btn">
-        <i class="fab fa-linkedin"></i>
-      </a>
-
-      <a href="#" class="whatsapp-btn">
-        <i class="fab fa-whatsapp"></i>
-      </a>
+    <?php
+      }
+    ?>
+    <ul class="row justify-content-end">                  
+      <li><a class="btn btn-dark btn-shared mx-2 share" data-rede="twitter" data-dica="90" href="https://twitter.com/share?url=https://gpets2provisorio1.websiteseguro.com/Trab_prog/MVC/View/VizualizarPostagem.php?id=<?= $animal->getId();?>&text=Há um animal perdido!" target="_blank" title="Twetar poema"><i class="fab fa-twitter" target="_blank"></i></a></li>
+      <li><a class="btn btn-dark btn-shared mx-2 share" data-rede="facebook" data-dica="90" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fgpets2provisorio1.websiteseguro.com%2FTrab_prog%2FMVC%2F/View%2FVizualizarPostagem.php?id=<?= $animal->getId();?>" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
+      <li><a class="btn btn-dark btn-shared mx-2 share" data-rede="whats" data-dica="90" href="https://api.whatsapp.com/send?text=Há um animal perdido! Veja em https://gpets2provisorio1.websiteseguro.com/Trab_prog/MVC/View/VizualizarPostagem.php?id=<?= $animal->getId();?>&" target="_blank"><i class="fab fa-whatsapp"></i></a>
+      <li><a class="btn btn-dark btn-shared mx-2 share" data-rede="telegram" data-dica="90" href="https://telegram.me/share/url?url=https://gpets2provisorio1.websiteseguro.com/Trab_prog/MVC/View/VizualizarPostagem.php?id=<?= $animal->getId();?>&&text=Há um animal perdido!" target="_blank"><i class="fab fa-telegram-plane"></i></a>
+      <li><a class="btn btn-dark btn-shared mx-2 share" data-rede="email" data-dica="90" href="mailto:?subject=Preciso de sua ajuda! &body=Há um animal perdido! em https://gpets2provisorio1.websiteseguro.com/Trab_prog/MVC/View/VizualizarPostagem.php?id=<?= $animal->getId();?>&"><i class="fas fa-envelope"></i></a>
+    </ul>
   </div>
 </div>
   <?php } ?>

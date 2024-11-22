@@ -29,7 +29,7 @@ CREATE TABLE cargo_usuario(
     CONSTRAINT fk_id_cargo_usuario FOREIGN KEY (id_cargo) REFERENCES cargo(id)
 );
 
-CREATE TABLE postagem(
+CREATE TABLE postagem_animal(
     id int not null auto_increment,
     nome varchar(60),
     especie varchar(60),
@@ -43,16 +43,10 @@ CREATE TABLE postagem(
     numero int,
     descricao varchar(60),
     imagem varchar(256),
-    
-    CONSTRAINT pk_id_postagem_animal PRIMARY KEY (id)
-);
-
-CREATE TABLE postagem_usuario(
     id_usuario int,
-    id_postagem int,
-
-    CONSTRAINT fk_id_usuario_postagem FOREIGN KEY (id_usuario) REFERENCES usuario(id),
-    CONSTRAINT fk_id_postagem_usuario FOREIGN KEY (id_postagem) REFERENCES postagem_animal(id)
+    
+    CONSTRAINT pk_id_postagem_animal PRIMARY KEY (id),
+    CONSTRAINT fk_id_usuario_postagem FOREIGN KEY (id_usuario) REFERENCES usuario(id)
 );
 
 CREATE TABLE comentario(

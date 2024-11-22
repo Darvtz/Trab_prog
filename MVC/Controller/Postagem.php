@@ -53,6 +53,7 @@ if($acao=='postar'){
     if($imagem){
         $animal->setImagem($imagem);
     }
+    $animal->setIdUsuario($_SESSION['id']);
     $animal->save();
 
     //header('Location: ../View/TelaInicial.php');

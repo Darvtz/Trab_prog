@@ -18,7 +18,7 @@ class Animal{
     private $descricao;
     private $oculto = false;
     private $imagem;
-    private $user = null;
+    private $idUsuario = null;
 
     public function getId(){
         return $this->id;
@@ -116,14 +116,22 @@ class Animal{
         $this->imagem = $imagem;
     }
 
+    public function getIdUsuario(){
+        return $this->idUsuario;
+    }
+
+    public function setIdUsuario($idUsuario){
+        $this->idUsuario = $idUsuario;
+    }
+
     public function save()
     {
         $pdo = conexao();
 
         try{
         
-            $stmt = $pdo->prepare('INSERT INTO postagem_animal (nome, especie, raca, genero, cor, estado, cidade, rua, numero, descricao, imagem) 
-                                    VALUES( :nome, :especie, :raca, :genero, :cor, :estado, :cidade, :rua, :numero, :descricao, :imagem)');
+            $stmt = $pdo->prepare('INSERT INTO postagem_animal (nome, especie, raca, genero, cor, estado, cidade, rua, numero, descricao, imagem, id_usuario) 
+                                    VALUES( :nome, :especie, :raca, :genero, :cor, :estado, :cidade, :rua, :numero, :descricao, :imagem, :idUsuario)');
 
             $stmt->execute([ 
                         ':nome' => $this->nome, 
@@ -136,7 +144,8 @@ class Animal{
                         ':rua' => $this->rua,
                         ':numero' => $this->numero,
                         ':descricao' => $this->descricao,
-                        ':imagem' => $this->imagem]);
+                        ':imagem' => $this->imagem,
+                        ':idUsuario' => $this->idUsuario]);
             
 
             $id = $pdo->lastInsertID();     
@@ -239,6 +248,7 @@ class Animal{
                 $animal->setCidade($linha['cidade']);
                 $animal->setRua($linha['rua']);
                 $animal->setNumero($linha['numero']);
+                $animal->setIdUsuario($linha['id_usuario']);
 
                 $lista[] = $animal;
     
@@ -281,6 +291,7 @@ class Animal{
                 $animal->setCidade($linha['cidade']);
                 $animal->setRua($linha['rua']);
                 $animal->setNumero($linha['numero']);
+                $animal->setIdUsuario($linha['id_usuario']);
 
                 $lista[] = $animal;
     
@@ -315,6 +326,7 @@ class Animal{
                 $animal->setCidade($linha['cidade']);
                 $animal->setRua($linha['rua']);
                 $animal->setNumero($linha['numero']);
+                $animal->setIdUsuario($linha['id_usuario']);
             }
         } catch(Exception $e) {
             //Log
@@ -347,6 +359,7 @@ class Animal{
                 $animal->setCiade($linha['cidade']);
                 $animal->setRua($linha['rua']);
                 $animal->setNumero($linha['numero']);
+                $animal->setIdUsuario($linha['id_usuario']);
             }
         
         } catch (Exception $e) {
