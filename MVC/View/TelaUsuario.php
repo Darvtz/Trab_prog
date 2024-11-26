@@ -3,9 +3,12 @@
 include('protect.php');
 include_once('../Model/Animal.class.php');
 include_once('../Model/Usuario.class.php');
+include_once('../Model/Cargo.class.php');
 
 $usuario = Usuario::getOne($_SESSION['id']);
 $animais = Animal::getAll();
+
+var_dump($_SESSION);
 ?>
 
 <html lang="en">
@@ -19,6 +22,9 @@ $animais = Animal::getAll();
     <div class="" style="width: 18rem;">
     <img class="" src="fotos/<?= $usuario->getFoto()?>" alt="">
     <div class="card-body">
+    <?php if(isset($_SESSION['ADMIN'])){?>
+        <a href = "../Controller/Adm.php?acao=banir&id= <?php $usuario->getId()?>">Banir Usuario</a>
+    <?php } ?>
     <h2>Informações do Usuário</h2>
     <p>Nome: <?php echo $usuario->getNome(); ?></p>
     <p>Cadastrado em: <?php echo $usuario->getDatacad(); ?>

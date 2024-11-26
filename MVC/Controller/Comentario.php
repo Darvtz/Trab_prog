@@ -6,7 +6,7 @@ session_start();
 
 $acao = $_GET['acao'];
 
-if($acao="postar"){
+if($acao=="postar"){
 
     $comentario= new Comentario();
     $comentario->setComentario($_POST['comentario']);

@@ -73,6 +73,8 @@ if($acao=='cadastrar'){
         session_start();
         $_SESSION['id'] = $usuario->getId();
         $_SESSION['nome'] = $usuario->getNome();
+        $usuario->getCargo();
+
         header('Location: ../View/index.php');
     }
 }

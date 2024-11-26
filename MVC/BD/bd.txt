@@ -59,6 +59,8 @@ CREATE TABLE comentario(
     CONSTRAINT fk_id_comenatrio_usuario FOREIGN KEY (id_usuario) REFERENCES usuario(id)
 );
 
+insert into usuario(id, cpf, nome, email, senha, celular) values(1, '000.000.000-00', 'Administrador', '02150154@aluno.canoas.ifrs.edu.com.br', 'D@v12004', '0000000000')
+
 insert into cargo (id, cargo) values (1, 'administrador');
 insert into cargo (id, cargo) values (2, 'moderador');
 insert into cargo (id, cargo) values (3, 'usuário padão');

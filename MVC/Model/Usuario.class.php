@@ -13,6 +13,7 @@ class Usuario{
     private $celular;
     private $datacad;
     private $banido = false;
+    private $cargos = [];
 
     /// Getters e Setters
 
@@ -291,6 +292,29 @@ class Usuario{
 
 
         return $this;
+    }
+
+    public function getCargo(){
+        $pdo = conexao();
+
+        try{
+
+            foreach($pdo->query("SELECT cu.id_cargo FROM cargo_usuario cu
+                                 INNER JOIN usuario u WHERE cu.id_usuario = u.id") as $linha){
+                if($linha['id_cargo'] == 1){
+                    $_SESSION['ADMIN'] = true;
+                } else if($linha['id_cargo'] == 2){
+                    $_SESSION['MODERADOR'] = true;
+                }
+                $this->cargos[] = $linha['id_cargo'];
+            }
+            
+        } catch (Exception $e) {
+            //Log
+            echo '<pre>';
+            var_dump($e);
+            return false;
+        }
     }
 
     ///Fim
