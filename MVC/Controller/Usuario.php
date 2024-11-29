@@ -1,5 +1,6 @@
 <?php
 $acao = $_GET['acao'];
+session_start();
     
 include_once '../Model/Usuario.class.php';
 include_once '../Model/Cargo.class.php';
@@ -51,8 +52,14 @@ if($acao=='cadastrar'){
     if($foto){
         $usuario->setFoto($foto);
     }
-    $usuario->save();
-    header('Location: ../View/index.php');
+
+    if($usuario->save() == true){
+        header('Location: ../View/Login.php');
+    }else{
+        header('Location: ../View/Cadastro.php?error=1');
+    }
+    
+
 
 }else if($acao=='deletar'){
     $usuario=new Usuario();

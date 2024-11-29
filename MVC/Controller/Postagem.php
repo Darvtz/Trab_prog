@@ -1,4 +1,5 @@
 <?php
+session_start();
 $acao = $_GET['acao'];
     
 include_once '../Model/Animal.class.php';
@@ -56,7 +57,11 @@ if($acao=='postar'){
     $animal->setIdUsuario($_SESSION['id']);
     $animal->save();
 
-    //header('Location: ../View/TelaInicial.php');
+    if($animal->save() == true){
+        header('Location: ../View/Index.php');
+    }else{
+        header('Location: ../View/Postagem.php?error=1');
+    }
     
 }else if($acao=='deletar'){
     $animal=new Animal();

@@ -124,7 +124,7 @@ class Usuario{
             $stmtx = $pdo->prepare('INSERT INTO cargo_usuario (id_usuario, id_cargo) VALUES(:id_usuario, 3)');
             $stmtx->execute([':id_usuario'=> $id]);
 
-            
+            return true;
 
         } catch(Exception $e) {
             //Log
@@ -232,6 +232,7 @@ class Usuario{
             return $usuario;
         } catch(Exception $e) {
             //Log
+            var_dump($e);
             return false;
         }   
 

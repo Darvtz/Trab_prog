@@ -124,6 +124,10 @@ class Animal{
         $this->idUsuario = $idUsuario;
     }
 
+    public function getUsuario(){
+        return Usuario::getOne($this->idUsuario);
+    }
+
     public function save()
     {
         $pdo = conexao();
@@ -149,6 +153,8 @@ class Animal{
             
 
             $id = $pdo->lastInsertID();     
+
+            return true;
                 
 
         } catch(Exception $e) {

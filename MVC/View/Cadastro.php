@@ -62,7 +62,8 @@
         </label>
         </div>
         <div>
-          <button type="submit">cadastrar</button>
+          <button type="submit">cadastrar</button></br>
+          <?php if(isset($_REQUEST['error'])){ echo 'erro no cadastro, verifique seus dados'; }?>
         </div>
       </form>
     
