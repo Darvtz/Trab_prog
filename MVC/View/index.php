@@ -26,7 +26,7 @@ if(isset($_POST['search'])){
 </head>
 <body>
     
-  <h1><a href="TelaUsuario.php" class="l1">Usuário</a></p1>Seja bem vindo, <?php echo $_SESSION['nome']; ?></h1>
+  <h1></p1>Seja bem vindo,<a href="TelaUsuario.php" class="l1" ><?php echo $_SESSION['nome']; ?></a></h1>
 
   <form method="POST" >
     <input type="text" name="search" required>
@@ -34,7 +34,7 @@ if(isset($_POST['search'])){
   </form>
 
   <p>
-    <a href="../View/Postagem.php">Fazer uma postagem</a>
+    <a href="../View/Postagem.php"  class="btn btn-primary">Fazer uma postagem</a>
   </p>
 
   <?php foreach($animais as $animal){ 
@@ -53,8 +53,8 @@ if(isset($_POST['search'])){
     <?php 
       if ($animal->getIdUsuario() == $_SESSION['id']){
     ?> 
-      <a href="../View/EditarPostagem.php?id=<?= $animal->getId();?>" class="btn btn-primary">Editar Postagem</a>
-      <a href="../Controller/Usuario.php?acao=deletar">Deletar Postagem</a>
+      <a href="../View/EditarPostagem.php?id=<?= $animal->getId();?>" class="btn btn-primary">Editar Postagem</a></br>
+      <a href="../Controller/Postagem.php?acao=deletar&id=<?= $animal->getId();?>" class="btn btn-primary">Deletar Postagem</a>
     <?php
       }
     ?>

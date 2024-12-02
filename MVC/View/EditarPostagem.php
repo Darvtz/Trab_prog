@@ -8,6 +8,7 @@ if(!isset($_SESSION)){
 
 $animal = Animal::getOne($_REQUEST['id']);
 
+
 ?>
 
 <!DOCTYPE html>
@@ -25,7 +26,7 @@ $animal = Animal::getOne($_REQUEST['id']);
     <h1>Edite sua postagem</h1>
 
     <div>
-        <form action="../Controller/Postagem.php?acao=editar" method = "POST"  enctype="multipart/form-data">
+        <form action="../Controller/Postagem.php?acao=editar&id=<?= $animal->getId()?>" method = "POST"  enctype="multipart/form-data">
             <div>
                     <label for="exampleInputNome">
                         Nome

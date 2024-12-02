@@ -168,13 +168,13 @@ class Animal{
 
     /// Deleta, pega o ID
 
-    public static function deletar ($id) {
+    public function deletar() {
         
         $pdo = conexao();
         
         try{
 
-        $stmt = $pdo->prepare('UPDATE postagem_animal SET oculto = true  WHERE id_animal = :id');
+        $stmt = $pdo->prepare('UPDATE postagem_animal SET Oculto = true  WHERE id = :id');
         $stmt->execute([':id' => $this->id]);
         
 
@@ -189,7 +189,7 @@ class Animal{
 
     /// Atualiza
 
-    public function update ($id) {
+    public function update () {
 
         $pdo = conexao();
         
@@ -206,7 +206,7 @@ class Animal{
                                                     numero = :numero, 
                                                     descricao = :descricao, 
                                                     imagem = :imagem  
-                                                    WHERE id_animal = :id');
+                                                    WHERE id = :id');
 
         $stmt->execute([':id' => $this->id,
 
@@ -221,6 +221,8 @@ class Animal{
             ':numero' => $this->numero,
             ':descricao' => $this->descricao,
             ':imagem' => $this->imagem]);
+
+        return true;
 
         } catch(Exception $e) {
             echo '<pre>';
@@ -238,7 +240,7 @@ class Animal{
         
         try{
             $lista = [];
-            foreach($pdo->query('SELECT * FROM postagem_animal') as $linha ){
+            foreach($pdo->query('SELECT * FROM postagem_animal WHERE Oculto = 0') as $linha ){
 
                 $animal = new Animal();
                 
@@ -274,7 +276,7 @@ class Animal{
         
         try{
             $lista = [];
-            foreach($pdo->query("SELECT * FROM postagem_animal WHERE nome LIKE '%$busca%'
+            foreach($pdo->query("SELECT * FROM postagem_animal WHERE Oculto=0 AND nome LIKE '%$busca%'
             OR especie LIKE '%$busca%'  
             OR raca LIKE '%$busca%'  
             OR genero LIKE '%$busca%' 

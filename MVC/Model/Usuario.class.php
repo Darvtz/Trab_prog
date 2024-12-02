@@ -137,13 +137,13 @@ class Usuario{
 
     /// Deleta, pega o ID
 
-    public static function deletar ($id) {
+    public static function deletar($id) {
         
         $pdo = conexao();
 
         try{
 
-            $stmt = $pdo->prepare('DELETE FROM usuario  WHERE id_usuario = :id');
+            $stmt = $pdo->prepare('DELETE FROM usuario  WHERE id = :id');
             $stmt->execute([':id => $id']);
 
         } catch(Exception $e) {
@@ -162,7 +162,12 @@ class Usuario{
         
         try{
 
-        //$stmt = $pdo->prepare('UPDATE Usuario SET nome=''  WHERE id_usuario = :id');
+        $stmt = $pdo->prepare('UPDATE Usuario SET nome=:nome,
+                                                  email=:email,
+                                                  foto=:foto,
+                                                  data_nascimento=:danatasc
+                                                  celular=:celular
+                                                  WHERE id = :id');
 
         } catch(Exception $e) {
             //Log

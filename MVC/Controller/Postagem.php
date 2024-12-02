@@ -55,7 +55,7 @@ if($acao=='postar'){
         $animal->setImagem($imagem);
     }
     $animal->setIdUsuario($_SESSION['id']);
-    $animal->save();
+    //$animal->save();
 
     if($animal->save() == true){
         header('Location: ../View/Index.php');
@@ -66,14 +66,36 @@ if($acao=='postar'){
 }else if($acao=='deletar'){
 
     $animal=new Animal();
-    $animal>setId($_REQUEST['id']);
+    $animal->setId($_REQUEST['id']);
     $animal->deletar();
 
 }else if($acao='editar'){
 
     $animal = new Animal();
     $animal->setId($_REQUEST['id']);
-    $animal->update();
+    $animal->setNome($_POST['nome']);
+    $animal->setEspecie($_POST['especie']);
+    $animal->setRaca($_POST['raca']);
+    $animal->setGenero($_POST['genero']);
+    $animal->setCor($_POST['cor']);
+    $animal->setEstado($_POST['estado']);
+    $animal->setCidade($_POST['cidade']);
+    $animal->setRua($_POST['rua']);
+    $animal->setNumero($_POST['numero']);
+    $animal->setDescricao($_POST['descricao']);
+    if(isset($_FILES['arquivo']) && !$_FILES['arquivo']['error']){
+        $imagem = enviarArquivo('arquivo');
+        if($imagem){
+            $animal->setImagem($imagem);
+        }
+    }
+    $animal->setIdUsuario($_SESSION['id']);
+
+    if($animal->update() == true){
+        header('Location: ../View/Index.php');
+    }else{
+        //header('Location: ../View/Postagem.php?error=1');
+    }
     
 }
 ?>

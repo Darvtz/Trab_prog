@@ -29,7 +29,7 @@
             Senha
             <input type="password" class="form-control" id="exampleInputPassword1" name="senha">
         </label>
-        </br> <a href="../View/Cadastro.html">Não possui uma conta? Cadastre-se!</a>
+        </br> <a href="../View/Cadastro.php">Não possui uma conta? Cadastre-se!</a>
         </br>
               <a href="../View/EsqueceuASenha.php" target="_blank">Esqueceu a senha?</a>
         </div>
