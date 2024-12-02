@@ -59,12 +59,16 @@ if($acao=='postar'){
     //header('Location: ../View/TelaInicial.php');
     
 }else if($acao=='deletar'){
+
     $animal=new Animal();
     $animal>setId($_REQUEST['id']);
     $animal->deletar();
+
 }else if($acao='editar'){
+
     $animal = new Animal();
     $animal->setId($_REQUEST['id']);
     $animal->update();
+    
 }
 ?>

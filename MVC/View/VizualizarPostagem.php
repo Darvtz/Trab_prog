@@ -85,6 +85,14 @@ $comentarios = Comentario::getComentarios($_REQUEST['id']);
         <div class="card-body">
         <h5 class="card-title"><?= $comentario->getUsuario()->getNome();?></h5>
         <p class="card-text"><?= $comentario->getComentario();}?></p>
+        <?php 
+        if ($Usuario->getId() == $_SESSION['id']){
+        ?> 
+        <a href="../Controller/Comentario.php?acao=editar" class="btn btn-primary">Editar Comentario</a>
+        <a href="../Controller/Comentario.php?acao=deletar">Deletar Comentario</a>
+        <?php
+        }
+        ?>
         </div>
         </div>
 

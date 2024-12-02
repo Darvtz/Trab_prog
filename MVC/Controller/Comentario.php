@@ -15,10 +15,17 @@ if($acao=="postar"){
     $comentario->save();
     header('Location: ../View/VizualizarPostagem.php?id='. $_POST['id']);
 
-}else if($acao=='deletar'){
+}else if($acao == 'deletar'){
+
     $comentario=new Comentario();
     $comentario->setId($_REQUEST['id']);
     $comentario->deletar($id);
+    
+}else if ($acao == 'editar'){
+
+    $comentario = new Comentario();
+    $comentario->setId($_REQUEST['id']);
+    $comentario->update();
 }
 
 ?>

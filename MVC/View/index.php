@@ -52,7 +52,7 @@ if(isset($_POST['search'])){
       if ($animal->getIdUsuario() == $_SESSION['id']){
     ?> 
       <a href="../View/EditarPostagem.php?id=<?= $animal->getId();?>" class="btn btn-primary">Editar Postagem</a>
-
+      <a href="../Controller/Usuario.php?acao=deletar">Deletar Postagem</a>
     <?php
       }
     ?>
