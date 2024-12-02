@@ -5,10 +5,14 @@ include_once('../Model/Animal.class.php');
 include_once('../Model/Usuario.class.php');
 include_once('../Model/Cargo.class.php');
 
-$usuario = Usuario::getOne($_SESSION['id']);
+if(isset($_GET['id'])){
+    $usuario = Usuario::getOne($_GET['id']);    
+}else{
+    $usuario = Usuario::getOne($_SESSION['id']);
+}
+
 $animais = Animal::getAll();
 
-var_dump($_SESSION);
 ?>
 
 <html lang="en">

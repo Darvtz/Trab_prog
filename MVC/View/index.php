@@ -37,11 +37,13 @@ if(isset($_POST['search'])){
     <a href="../View/Postagem.php">Fazer uma postagem</a>
   </p>
 
-  <?php foreach($animais as $animal){?>
-
+  <?php foreach($animais as $animal){ 
+    ?>
   <div class="card" style="width: 18rem;">
   <img class="card-img-top" src="fotos/<?= $animal->getImagem();?>" alt="Card image cap">
   <div class="card-body">
+    
+    <h4><a href="TelaUsuario.php?id=<?= $animal->getIdUsuario()?>"><?php echo $animal->getUsuario()->getNome(); ?></a></h4>
     <h5 class="card-title"><?= $animal->getNome();?></h5>
     <p class="card-text">Ultimo endereço visto: <?= $animal->getRua();?>, <?= $animal->getNumero();?>, <?= $animal->getCidade();?>, <?= $animal->getEstado();?></p>
     <p class="card-text"><?= $animal->getDescricao();?></p>

@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 $acao = $_GET['acao'];
 
 include('Usuario.class.php');

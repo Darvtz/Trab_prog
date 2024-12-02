@@ -17,7 +17,7 @@
             <div>
                     <label for="exampleInputNome">
                         Nome
-                        <input type="text" class="form-control" id="exampleImputNome" name = "nome">
+                        <input type="text" class="form-control" id="exampleImputNome" name = "nome" required>
                     </label>
             </div>
             <div>
@@ -36,26 +36,26 @@
             </div>
             <div>
                 <label for="exampleInputRaca">Raça Específica
-                    <input type="text" class="form-control" id="exampleImputRaca" name = "raca">
+                    <input type="text" class="form-control" id="exampleImputRaca" name = "raca" required>
                 </label>
             </div>
             <div>
                 <label>Sexo</label>
-                <input type="radio"  id="exampleImputGenero1" name = "genero"> 
+                <input type="radio"  id="exampleImputGenero1" name = "genero" required> 
                 <label for='exampleImputGenero1'>Macho</label>
-                <input type="radio" id="exampleImputGenero2" name = "genero">
+                <input type="radio" id="exampleImputGenero2" name = "genero" required>
                 <label for='exampleImputGenero2'>Fêmea</label>
                 </label>
             </div>
             <div>
                 <label for="exampleInputCor">Cor
-                    <input type="text" class="form-control" id="exampleImputCor" name = "cor">
+                    <input type="text" class="form-control" id="exampleImputCor" name = "cor" required>
                 </label>
             </div>
             <div>
                 <label">Ultimo endereço visto:</label></br></br>
-                    <label>Estado<input type="name" class="form-control" id="exampleImputEstado" name="estado"></label></br>
-                    <label>Cidade<input type="name" class="form-control" id="exampleImputCidade" name="cidade"></label></br>
+                    <label>Estado<input type="name" class="form-control" id="exampleImputEstado" name="estado" required></label></br>
+                    <label>Cidade<input type="name" class="form-control" id="exampleImputCidade" name="cidade" required></label></br>
                     <label>Rua<input type="name" class="form-control" id="exampleImputRua" name="rua"></label></br>
                     <label>Número<input type="number" class="form-control" id="exampleImputNumero" name="numero"></label></br>
             </div>
@@ -67,7 +67,8 @@
                 <p><label>Insira a imagem do animal</label></p> </br>
               
                 <p><input name="arquivo" type="file"></br></br>
-                  <button name="upload" type="submit" >Fazer Postagem</button>
+                  <button name="upload" type="submit" >Fazer Postagem</button></br>
+                  <?php if(isset($_REQUEST['error'])){ echo 'erro no postagem, verifique os dados'; }?>
                 </p>
 </form>
     </div>
