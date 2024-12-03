@@ -19,7 +19,9 @@ if($acao=="postar"){
 
     $comentario=new Comentario();
     $comentario->setId($_REQUEST['id']);
-    $comentario->deletar($id);
+    $comemtario->load();
+    $comentario->deletar();
+    header('Location: ../View/VizualizarPostagem.php?id='. $_POST['id']);
     
 }else if ($acao == 'editar'){
 

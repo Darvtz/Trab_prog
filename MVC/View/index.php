@@ -26,7 +26,7 @@ if(isset($_POST['search'])){
 </head>
 <body>
     
-  <h1></p1>Seja bem vindo,<a href="TelaUsuario.php" class="l1" ><?php echo $_SESSION['nome']; ?></a></h1>
+  <h1></p1>Seja bem vindo, <a href="TelaUsuario.php" class="l1" ><?php echo $_SESSION['nome']; ?></a></h1>
 
   <form method="POST" >
     <input type="text" name="search" required>
@@ -53,7 +53,7 @@ if(isset($_POST['search'])){
     <?php 
       if ($animal->getIdUsuario() == $_SESSION['id']){
     ?> 
-      <a href="../View/EditarPostagem.php?id=<?= $animal->getId();?>" class="btn btn-primary">Editar Postagem</a></br>
+      <a href="../View/EditarPostagem.php?acao=editar&id=<?= $animal->getId();?>" class="btn btn-primary">Editar Postagem</a></br>
       <a href="../Controller/Postagem.php?acao=deletar&id=<?= $animal->getId();?>" class="btn btn-primary">Deletar Postagem</a>
     <?php
       }

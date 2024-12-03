@@ -1,65 +1,71 @@
-CREATE TABLE Usuario(
-    id int not null auto_increment,
-    cpf Varchar(12) NOT NULL UNIQUE,
+CREATE TABLE Usuario (
+    id INT NOT NULL AUTO_INCREMENT,
+    cpf VARCHAR(12) NOT NULL UNIQUE,
     nome VARCHAR(60),
-    email varchar(60) not null UNIQUE,
-    recuperar_senha varchar(30),
-    senha varchar(256) not null,
+    email VARCHAR(60) NOT NULL UNIQUE,
+    recuperar_senha VARCHAR(30),
+    senha VARCHAR(256) NOT NULL,
     data_nascimento DATE,
-    celular varchar (60),
-    data_cadastro timestamp,
-    foto varchar(60),
-    banido Boolean,
+    celular VARCHAR(60),
+    data_cadastro TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    foto VARCHAR(60),
+    banido BOOLEAN DEFAULT FALSE,
 
     CONSTRAINT pk_id_usuario PRIMARY KEY (id)
 );
 
-CREATE TABLE Cargo(
-    id int not null ,
-    cargo varchar(60),
+-- Tabela Cargo
+CREATE TABLE Cargo (
+    id INT NOT NULL AUTO_INCREMENT,
+    cargo VARCHAR(60),
 
     CONSTRAINT pk_id_cargo PRIMARY KEY (id)
 );
 
-CREATE TABLE cargo_usuario(
-    id_usuario int,
-    id_cargo int,
+-- Tabela cargo_usuario
+CREATE TABLE cargo_usuario (
+    id_usuario INT NOT NULL,
+    id_cargo INT NOT NULL,
 
-    CONSTRAINT fk_id_usuario_cargo FOREIGN KEY (id_usuario) REFERENCES usuario(id),
-    CONSTRAINT fk_id_cargo_usuario FOREIGN KEY (id_cargo) REFERENCES cargo(id)
+    CONSTRAINT fk_id_usuario_cargo FOREIGN KEY (id_usuario) REFERENCES Usuario(id) ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT fk_id_cargo_usuario FOREIGN KEY (id_cargo) REFERENCES Cargo(id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
-CREATE TABLE postagem_animal(
-    id int not null auto_increment,
-    nome varchar(60),
-    especie varchar(60),
-    raca varchar(60),
-    genero varchar(60),
-    cor varchar(60),
-    estado varchar(60),
-    cidade varchar(60),
-    bairro varchar(60),
-    rua varchar(60),
-    numero int,
-    descricao varchar(60),
-    imagem varchar(256),
-    id_usuario int,
-    
+-- Tabela postagem_animal
+CREATE TABLE postagem_animal (
+    id INT NOT NULL AUTO_INCREMENT,
+    nome VARCHAR(60),
+    especie VARCHAR(60),
+    raca VARCHAR(60),
+    genero VARCHAR(60),
+    cor VARCHAR(60),
+    estado VARCHAR(60),
+    cidade VARCHAR(60),
+    bairro VARCHAR(60),
+    rua VARCHAR(60),
+    numero INT,
+    descricao VARCHAR(256),
+    imagem VARCHAR(256),
+    oculto BOOLEAN DEFAULT FALSE,
+    id_usuario INT NOT NULL,
+
     CONSTRAINT pk_id_postagem_animal PRIMARY KEY (id),
-    CONSTRAINT fk_id_usuario_postagem FOREIGN KEY (id_usuario) REFERENCES usuario(id)
+    CONSTRAINT fk_id_usuario_postagem FOREIGN KEY (id_usuario) REFERENCES Usuario(id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
-CREATE TABLE comentario(
-    id int not null auto_increment PRIMARY KEY,
-    id_postagem int,
-    id_usuario int,
-    comentario varchar(256),
+-- Tabela comentario
+CREATE TABLE comentario (
+    id INT NOT NULL AUTO_INCREMENT,
+    id_postagem INT NOT NULL,
+    id_usuario INT NOT NULL,
+    comentario VARCHAR(256),
 
-    CONSTRAINT fk_id_postagem_comenatrio FOREIGN KEY (id_postagem) REFERENCES postagem_animal(id),
-    CONSTRAINT fk_id_comenatrio_usuario FOREIGN KEY (id_usuario) REFERENCES usuario(id)
+    CONSTRAINT pk_id_comentario PRIMARY KEY (id),
+    CONSTRAINT fk_id_postagem_comentario FOREIGN KEY (id_postagem) REFERENCES postagem_animal(id) ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT fk_id_comentario_usuario FOREIGN KEY (id_usuario) REFERENCES Usuario(id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
-insert into usuario(id, cpf, nome, email, senha, celular) values(1, '000.000.000-00', 'Administrador', '02150154@aluno.canoas.ifrs.edu.com.br', 'D@v12004', '0000000000')
+insert into usuario(id, cpf, nome, email, senha, celular) values(1, '000.000.000-00', 'Administrador', '02150154@aluno.canoas.ifrs.edu.com.br', '$2y$10$iKzSD1penKwtshGTnZciGuG94Ib0MLy0iWM1igMkxPxdyHsankjmy', '0000000000')
 
 insert into cargo (id, cargo) values (1, 'administrador');
 insert into cargo (id, cargo) values (2, 'moderador');

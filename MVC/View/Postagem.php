@@ -54,7 +54,36 @@
             </div>
             <div>
                 <label">Ultimo endereço visto:</label></br></br>
-                    <label>Estado<input type="name" class="form-control" id="exampleImputEstado" name="estado" required></label></br>
+                    <label>Estado<select type="name" class="form-control" id="exampleImputEstado" name="estado" required>
+                                    <option value="">Selecionar</option>
+                                    <option value="AC">Acre</option>
+                                    <option value="AL">Alagoas</option>
+                                    <option value="AP">Amapá</option>
+                                    <option value="AM">Amazonas</option>
+                                    <option value="BA">Bahia</option>
+                                    <option value="CE">Ceará</option>
+                                    <option value="DF">Distrito Federal</option>
+                                    <option value="ES">Espírito Santo</option>
+                                    <option value="GO">Goiás</option>
+                                    <option value="MA">Maranhão</option>
+                                    <option value="MT">Mato Grosso</option>
+                                    <option value="MS">Mato Grosso do Sul</option>
+                                    <option value="MG">Minas Gerais</option>
+                                    <option value="PA">Pará</option>
+                                    <option value="PB">Paraíba</option>
+                                    <option value="PR">Paraná</option>
+                                    <option value="PE">Pernambuco</option>
+                                    <option value="PI">Piauí</option>
+                                    <option value="RJ">Rio de Janeiro</option>
+                                    <option value="RN">Rio Grande do Norte</option>
+                                    <option value="RS">Rio Grande do Sul</option>
+                                    <option value="RO">Rondônia</option>
+                                    <option value="RR">Roraima</option>
+                                    <option value="SC">Santa Catarina</option>
+                                    <option value="SP">São Paulo</option>
+                                    <option value="SE">Sergipe</option>
+                                    <option value="TO">Tocantins</option>
+                                </select></label></br>
                     <label>Cidade<input type="name" class="form-control" id="exampleImputCidade" name="cidade" required></label></br>
                     <label>Rua<input type="name" class="form-control" id="exampleImputRua" name="rua"></label></br>
                     <label>Número<input type="number" class="form-control" id="exampleImputNumero" name="numero"></label></br>

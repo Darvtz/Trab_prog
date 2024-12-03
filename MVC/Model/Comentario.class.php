@@ -59,14 +59,14 @@ class Comentario{
         }
     }
 
-    public static function deletar($id){
+    public function deletar(){
         
         $pdo = conexao();
 
         try{
 
             $stmt = $pdo->prepare('DELETE FROM comentario WHERE id = :id');
-            $stmt->execute([':id => $id']);
+            $stmt->execute([':id' => $this->id]);
 
         } catch(Exception $e) {
             //Log
@@ -80,8 +80,9 @@ class Comentario{
         
         try{
 
-        $stmt = $pdo->prepare('UPDATE cometario SET cometario = :cometario WHERE id = :id');
+        $stmt = $pdo->prepare('UPDATE comentario SET comentario = :comentario WHERE id = :id');
         $stmt->execute([':comentario' => $this->comentario, ':id' => $this->id]);
+        return true;
 
         } catch(Exception $e) {
             //Log
@@ -193,14 +194,15 @@ class Comentario{
         #TODO ver que esse código cheira mal...
         try{
         
-            foreach($pdo->query('SELECT * FROM cometario WHERE id = ' . $this->id) as $linha){
-
-                $this->setCometario($linha['cometario']);
+            foreach($pdo->query('SELECT * FROM comentario WHERE id = ' . $this->id) as $linha){
+                var_dump($linha);
+                $this->setComentario($linha['comentario']);
+                $this->setPostagem($linha['id_postagem']);
 
             }
         
         } catch (Exception $e) {
-            //Log
+            var_dump($e);
             return false;
         }
 
