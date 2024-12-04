@@ -156,24 +156,37 @@ class Usuario{
 
     /// Atualiza
 
-    public function update ( $id) {
-
+    public function update() {
         $pdo = conexao();
-        
-        try{
-
-        $stmt = $pdo->prepare('UPDATE Usuario SET nome=:nome,
-                                                  email=:email,
-                                                  foto=:foto,
-                                                  data_nascimento=:danatasc
-                                                  celular=:celular
-                                                  WHERE id = :id');
-
-        } catch(Exception $e) {
-            //Log
+    
+        try {
+            $stmt = $pdo->prepare('UPDATE usuario SET 
+                nome = :nome,
+                email = :email,
+                senha = :senha,
+                foto = :foto,
+                data_nascimento = :datanasc,
+                celular = :celular,
+                banido = :banido
+                WHERE id = :id');
+    
+            // Corrigimos o nome do parâmetro ':datanasc'
+            $stmt->execute([
+                ':nome' => $this->nome,
+                ':email' => $this->email,
+                ':senha' => $this->senha,
+                ':foto' => $this->foto,
+                ':datanasc' => $this->datanasc,  // Corrigido o nome do parâmetro aqui
+                ':celular' => $this->celular,
+                ':banido' => $this->banido,
+                ':id' => $this->id
+            ]);
+            
+        } catch (Exception $e) {
+            // Log de erro
+            var_dump($e);  // Pode ser um log mais elaborado aqui
             return false;
         }
-
     }
 
 

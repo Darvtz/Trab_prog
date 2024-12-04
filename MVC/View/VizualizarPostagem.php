@@ -79,25 +79,26 @@ $comentarios = Comentario::getComentarios($_REQUEST['id']);
         </form>
         </div>
 
-        <?php foreach($comentarios as $comentario){
-            ?>
-
+        <?php foreach($comentarios as $comentario){?>
+            
         <div class="card" style="width: 18rem;">
         <div class="card-body">
         <h5 class="card-title"><?= $comentario->getUsuario()->getNome();?></h5>
         <p class="card-text"><?= $comentario->getComentario();?></p>
-        <?php 
-        if ($comentario->getUsuario()->getId() == $_SESSION['id']){
-        ?> 
-        <a href="../Controller/Comentario.php?acao=editar&id=<?= $comentario->getId();?>" class="btn btn-primary">Editar Comentario</a>
-        <a href="../Controller/Comentario.php?acao=deletar&id=<?= $comentario->getId();?>" class="btn btn-primary">Deletar Comentario</a>
-        <?php
-        }
-
-        }
+            <?php 
+            if ($comentario->getUsuario()->getId() == $_SESSION['id']){
+            ?> 
+            <a href="../View/EditarComentario.php?id=<?= $comentario->getId(); ?>" class="btn btn-primary">Editar Comentario</a>
+            <a href="../Controller/Comentario.php?acao=deletar&id=<?= $comentario->getId();?>" class="btn btn-primary">Deletar Comentario</a>
+            <?php
+            }
         ?>
         </div>
         </div>
-
+        </br>
+        <?php
+        }
+        ?>
+      
 </body>
 </html>

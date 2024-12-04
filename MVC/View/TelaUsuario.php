@@ -27,7 +27,7 @@ $animais = Animal::getAll();
     <img class="" src="fotos/<?= $usuario->getFoto()?>" alt="">
     <div class="card-body">
     <?php if(isset($_SESSION['ADMIN'])){?>
-        <a href = "../Controller/Adm.php?acao=banir&id= <?php $usuario->getId()?>">Banir Usuario</a>
+        <a href = "../Controller/Adm.php?acao=banir&id=<?= $usuario->getId()?>">Banir Usuario</a>
     <?php } ?>
     <h2>Informações do Usuário</h2>
     <p>Nome: <?php echo $usuario->getNome(); ?></p>

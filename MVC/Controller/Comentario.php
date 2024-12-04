@@ -19,15 +19,21 @@ if($acao=="postar"){
 
     $comentario=new Comentario();
     $comentario->setId($_REQUEST['id']);
-    $comemtario->load();
+    $comentario->load();
     $comentario->deletar();
-    header('Location: ../View/VizualizarPostagem.php?id='. $_POST['id']);
+    header('Location: ../View/VizualizarPostagem.php?id='. $comentario->getPostagem()->getId());
     
 }else if ($acao == 'editar'){
 
     $comentario = new Comentario();
     $comentario->setId($_REQUEST['id']);
-    $comentario->update();
+    $comentario->load();
+    $comentario->setComentario($_REQUEST['comentario']);
+    if($comentario->update() == true){
+        header('Location: ../View/VizualizarPostagem.php?id='. $comentario->getPostagem()->getId());
+    }else{
+        header('Location: ../View/Postagem.php?error=1');
+    }
 }
 
 ?>

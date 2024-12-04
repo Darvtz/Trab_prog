@@ -165,27 +165,31 @@ class Comentario{
 
     }
 
-    public static function getOne() {
-        $pdo = conexao();
-        #TODO id não deveria ser string, consertar
-        try{
-            $lista = [];
-            foreach($pdo->query('SELECT * FROM cometario WHERE id = ' . $this->id) as $linha ){
-
-                $comentario = new Comentario();
-
-                $comentario->setComentario($linha['comentario']);
-
-                $lista[] = $cometario;
+    public static function getOne($id) {
+        $pdo = conexao(); // Supondo que essa função de conexão exista
+        
+        try {
+            $comentario = null;
+            
+            // Use o parâmetro $id diretamente na consulta
+            $query = 'SELECT * FROM comentario WHERE id = :id';
+            $stmt = $pdo->prepare($query);
+            $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+            $stmt->execute();
     
+            // Agora, percorre os resultados da consulta
+            foreach ($stmt as $linha) {
+                $comentario = new Comentario();
+                $comentario->setId($linha['id']);
+                $comentario->setComentario($linha['comentario']);
             }
-        } catch(Exception $e) {
-            //Log
+    
+        } catch (Exception $e) {
+            // Log de erro, se necessário
             return false;
-        }   
-
-        return $lista;
-
+        }
+    
+        return $comentario;
     }
 
     public  function load(){

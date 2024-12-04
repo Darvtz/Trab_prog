@@ -40,6 +40,7 @@ function enviarArquivo($nomeInputFile, $size = 2097152){
 // Cadastrar no banco
 if($acao=='cadastrar'){
     $usuario=new Usuario();
+    $cargo=new Cargo();
     $usuario->setCpf($_POST['cpf']);
     $usuario->setNome($_POST['nome']);
     $usuario->setEmail($_POST['email']);
@@ -49,6 +50,8 @@ if($acao=='cadastrar'){
     $usuario->setCelular($_POST['celular']);
     $usuario->setDatacad(date('Y/m/d'));
     $foto = enviarArquivo('arquivo');
+    $cargo->setId(3);
+    $cargo->setCargo();
     if($foto){
         $usuario->setFoto($foto);
     }

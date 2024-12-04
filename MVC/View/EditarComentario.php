@@ -31,3 +31,4 @@ $comentario = Comentario::getOne($_REQUEST['id']);
         </form>
     </div>
 </body>
+</html>

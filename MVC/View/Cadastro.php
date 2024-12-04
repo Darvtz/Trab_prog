@@ -58,7 +58,7 @@
         <div class="mb-3">
           <label for="exampleInputCelular" class="form-label">
             Telefone para contato
-            <input type="number" class="form-control" id="exampleInputCelular" name="celular">
+            <input type="text" class="form-control" id="exampleInputCelular" name="celular">
         </label>
         </div>
         <div>

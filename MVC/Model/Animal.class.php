@@ -276,14 +276,17 @@ class Animal{
         
         try{
             $lista = [];
-            foreach($pdo->query("SELECT * FROM postagem_animal WHERE Oculto=0 AND nome LIKE '%$busca%'
+            foreach($pdo->query("SELECT * FROM postagem_animal WHERE Oculto=0 AND 
+            nome LIKE '%$busca%'
             OR especie LIKE '%$busca%'  
             OR raca LIKE '%$busca%'  
             OR genero LIKE '%$busca%' 
+            OR cor LIKE '%$busca%'
             OR descricao LIKE '%$busca%'
             OR estado LIKE '%$busca%' 
             OR cidade LIKE '%$busca%' 
-            OR rua LIKE '%$busca%'") as $linha ){
+            OR rua LIKE '%$busca%'
+            OR numero LIKE '%$busca%'") as $linha ){
 
                 $animal = new Animal();
                 

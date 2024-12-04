@@ -94,7 +94,7 @@ if($acao=='postar'){
     if($animal->update() == true){
         header('Location: ../View/Index.php');
     }else{
-        //header('Location: ../View/Postagem.php?error=1');
+        header('Location: ../View/Postagem.php?error=1');
     }
     
 }
