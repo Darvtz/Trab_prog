@@ -319,7 +319,7 @@ class Usuario{
         try{
 
             foreach($pdo->query("SELECT cu.id_cargo FROM cargo_usuario cu
-                                 INNER JOIN usuario u WHERE cu.id_usuario = u.id") as $linha){
+                                 INNER JOIN usuario u WHERE cu.id_usuario = " . $this->id) as $linha){
                 if($linha['id_cargo'] == 1){
                     $_SESSION['ADMIN'] = true;
                 } else if($linha['id_cargo'] == 2){

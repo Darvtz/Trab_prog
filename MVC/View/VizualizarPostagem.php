@@ -1,8 +1,9 @@
 <?php
 
-include_once('../Model/Animal.class.php');
-include_once('../Model/Usuario.class.php');
-include_once('../Model/Comentario.class.php');
+include_once '../View/protect.php' ;
+include_once '../Model/Animal.class.php';
+include_once '../Model/Usuario.class.php';
+include_once '../Model/Comentario.class.php';
 
 if(!isset($_SESSION)){
     session_start();

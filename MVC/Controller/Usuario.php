@@ -48,10 +48,10 @@ if($acao=='cadastrar'){
     $usuario->setSenha($hash);
     $usuario->setDatanasc($_POST['Data']);
     $usuario->setCelular($_POST['celular']);
-    $usuario->setDatacad(date('Y/m/d'));
+    $usuario->setDatacad(date("j, n, Y"));
     $foto = enviarArquivo('arquivo');
     $cargo->setId(3);
-    $cargo->setCargo();
+    $cargo->setCargo('usuario_padrão');
     if($foto){
         $usuario->setFoto($foto);
     }
@@ -85,7 +85,9 @@ if($acao=='cadastrar'){
         $_SESSION['nome'] = $usuario->getNome();
         $usuario->getCargo();
 
-        header('Location: ../View/index.php');
+        header('Location: ../View/TelaInicial.php');
     }
+    header('Location: ../View/Login.php?error=1');
+
 }
 ?>

@@ -1,4 +1,4 @@
-CREATE TABLE Usuario (
+CREATE TABLE usuario (
     id INT NOT NULL AUTO_INCREMENT,
     cpf VARCHAR(12) NOT NULL UNIQUE,
     nome VARCHAR(60),
@@ -14,8 +14,8 @@ CREATE TABLE Usuario (
     CONSTRAINT pk_id_usuario PRIMARY KEY (id)
 );
 
--- Tabela Cargo
-CREATE TABLE Cargo (
+-- Tabela cargo
+CREATE TABLE cargo (
     id INT NOT NULL AUTO_INCREMENT,
     cargo VARCHAR(60),
 
@@ -66,6 +66,8 @@ CREATE TABLE comentario (
 );
 
 insert into usuario(id, cpf, nome, email, senha, celular) values(1, '000.000.000-00', 'Administrador', '02150154@aluno.canoas.ifrs.edu.com.br', '$2y$10$iKzSD1penKwtshGTnZciGuG94Ib0MLy0iWM1igMkxPxdyHsankjmy', '0000000000')
+
+insert into cargo_usuario(id_cargo, id_usuario) values(1,1);
 
 insert into cargo (id, cargo) values (1, 'administrador');
 insert into cargo (id, cargo) values (2, 'moderador');

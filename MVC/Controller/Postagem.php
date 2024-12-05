@@ -71,8 +71,7 @@ if($acao=='postar'){
 
 }else if($acao='editar'){
 
-    $animal = new Animal();
-    $animal->setId($_REQUEST['id']);
+    $animal = Animal::getOne($_REQUEST['id']);
     $animal->setNome($_POST['nome']);
     $animal->setEspecie($_POST['especie']);
     $animal->setRaca($_POST['raca']);

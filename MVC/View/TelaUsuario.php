@@ -1,6 +1,6 @@
 <?php
 
-include('protect.php');
+include_once '../View/protect.php';
 include_once('../Model/Animal.class.php');
 include_once('../Model/Usuario.class.php');
 include_once('../Model/Cargo.class.php');
@@ -12,7 +12,7 @@ if(isset($_GET['id'])){
 }
 
 $animais = Animal::getAll();
-
+var_dump($_SESSION);
 ?>
 
 <html lang="en">
@@ -23,28 +23,27 @@ $animais = Animal::getAll();
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 </head>
 <body>
-    <div class="" style="width: 18rem;">
+    <div class="card" style="width: 60rem;">
     <img class="" src="fotos/<?= $usuario->getFoto()?>" alt="">
     <div class="card-body">
     <?php if(isset($_SESSION['ADMIN'])){?>
-        <a href = "../Controller/Adm.php?acao=banir&id=<?= $usuario->getId()?>">Banir Usuario</a>
+        <a href = "../Controller/Adm.php?acao=banir&id=<?= $usuario->getId()?>" class="btn btn-primary">Banir Usuario</a>
     <?php } ?>
-    <h2>Informações do Usuário</h2>
-    <p>Nome: <?php echo $usuario->getNome(); ?></p>
-    <p>Cadastrado em: <?php echo $usuario->getDatacad(); ?>
+    <h2><?php echo $usuario->getNome();?></h2>
+    <p>Entrou em: <?php date_default_timezone_set('UTC'); echo date($usuario->getDatacad()); ?>
     <?php if($usuario->getId() == $_SESSION['id']){?>
     <p>Email: <?php echo $usuario->getEmail(); ?></p>
     <p>Telefone: <?php echo $usuario->getCelular(); ?></p>
-    <p><a href="../View/logout.php">Logout</a></p>
+    <p><a href="../View/logout.php" class="btn btn-primary">Logout</a></p>
     <?php } ?>
     </div>
     </div>
 
 
     <?php foreach($animais as $animal){?>
-    <?php if($animal->getIdUsuario() == $_SESSION['id']){?>
+    <?php if($animal->getIdUsuario() == $_REQUEST['id']){?>
 
-    <div class="card" style="width: 18rem;">
+    <div class="card" style="width: 19rem;">
     <img class="card-img-top" src="fotos/<?= $animal->getImagem();?>" alt="Card image cap">
     <div class="card-body">
     <h5 class="card-title"><?= $animal->getNome();?></h5>

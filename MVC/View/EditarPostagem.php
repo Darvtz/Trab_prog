@@ -53,8 +53,11 @@ $animal = Animal::getOne($_REQUEST['id']);
                 </label>
             </div>
             <div>
-                <label for="exampleInputNome">Genero
-                <input type="text" class="form-control" id="exampleImputGenero" name = "genero" value="<?php echo $animal->getGenero();?>">
+                <label>Sexo</label>
+                <input type="radio"  id="exampleImputGenero1" name = "genero" required> 
+                <label for='exampleImputGenero1'>Macho</label>
+                <input type="radio" id="exampleImputGenero2" name = "genero" required>
+                <label for='exampleImputGenero2'>Fêmea</label>
                 </label>
             </div>
             <div>
@@ -64,36 +67,53 @@ $animal = Animal::getOne($_REQUEST['id']);
             </div>
             <div>
                 <label for="exampleInputNome">Ultimo endereço visto:</label></br></br>
-                <label>Estado<select type="name" class="form-control" id="exampleImputEstado" name="estado" required>
-                                    <option value="">Selecionar</option>
-                                    <option value="AC">Acre</option>
-                                    <option value="AL">Alagoas</option>
-                                    <option value="AP">Amapá</option>
-                                    <option value="AM">Amazonas</option>
-                                    <option value="BA">Bahia</option>
-                                    <option value="CE">Ceará</option>
-                                    <option value="DF">Distrito Federal</option>
-                                    <option value="ES">Espírito Santo</option>
-                                    <option value="GO">Goiás</option>
-                                    <option value="MA">Maranhão</option>
-                                    <option value="MT">Mato Grosso</option>
-                                    <option value="MS">Mato Grosso do Sul</option>
-                                    <option value="MG">Minas Gerais</option>
-                                    <option value="PA">Pará</option>
-                                    <option value="PB">Paraíba</option>
-                                    <option value="PR">Paraná</option>
-                                    <option value="PE">Pernambuco</option>
-                                    <option value="PI">Piauí</option>
-                                    <option value="RJ">Rio de Janeiro</option>
-                                    <option value="RN">Rio Grande do Norte</option>
-                                    <option value="RS">Rio Grande do Sul</option>
-                                    <option value="RO">Rondônia</option>
-                                    <option value="RR">Roraima</option>
-                                    <option value="SC">Santa Catarina</option>
-                                    <option value="SP">São Paulo</option>
-                                    <option value="SE">Sergipe</option>
-                                    <option value="TO">Tocantins</option>
-                                </select></label></br>
+                <label>Estado
+    <select class="form-control" id="exampleImputEstado" name="estado" required>
+        <option value="">Selecionar</option>
+        <?php
+        // Lista de estados
+        $estados = [
+            'AC' => 'Acre',
+            'AL' => 'Alagoas',
+            'AP' => 'Amapá',
+            'AM' => 'Amazonas',
+            'BA' => 'Bahia',
+            'CE' => 'Ceará',
+            'DF' => 'Distrito Federal',
+            'ES' => 'Espírito Santo',
+            'GO' => 'Goiás',
+            'MA' => 'Maranhão',
+            'MT' => 'Mato Grosso',
+            'MS' => 'Mato Grosso do Sul',
+            'MG' => 'Minas Gerais',
+            'PA' => 'Pará',
+            'PB' => 'Paraíba',
+            'PR' => 'Paraná',
+            'PE' => 'Pernambuco',
+            'PI' => 'Piauí',
+            'RJ' => 'Rio de Janeiro',
+            'RN' => 'Rio Grande do Norte',
+            'RS' => 'Rio Grande do Sul',
+            'RO' => 'Rondônia',
+            'RR' => 'Roraima',
+            'SC' => 'Santa Catarina',
+            'SP' => 'São Paulo',
+            'SE' => 'Sergipe',
+            'TO' => 'Tocantins'
+        ];
+
+        // Obter o estado atual do animal
+        $estadoSelecionado = $animal->getEstado();
+
+        // Gerar as opções do select
+        foreach ($estados as $sigla => $nome) {
+            // Verificar se o estado do animal corresponde à opção atual
+            $selected = ($sigla == $estadoSelecionado) ? 'selected' : '';
+            echo "<option value=\"$sigla\" $selected>$nome</option>";
+        }
+        ?>
+    </select>
+</label><br>
                     <label>Cidade<input type="name" class="form-control" id="exampleImputCidade" name="cidade"></label></br>
                     <label>Rua<input type="name" class="form-control" id="exampleImputRua" name="rua"></label></br>
                     <label>Número<input type="number" class="form-control" id="exampleImputNumero" name="numero"></label></br>

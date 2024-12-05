@@ -1,5 +1,6 @@
 <?php
 
+include('protect.php');
 include_once('../Model/Animal.class.php');
 include_once('../Model/Usuario.class.php');
 
@@ -25,12 +26,16 @@ if(isset($_POST['search'])){
 </head>
 <body>
     
-  <h1></p1>Seja bem vindo!</a></h1>
+  <h1></p1>Seja bem vindo, <a href="../View/TelaUsuario.php?id=<?=$_SESSION['id'];?>" class="l1" ><?php echo $_SESSION['nome']; ?></a></h1>
 
   <form method="POST" >
     <input type="text" name="search" required>
     <input type="submit" value="Pesquisar">
   </form>
+
+  <p>
+    <a href="../View/Postagem.php"  class="btn btn-primary">Fazer uma postagem</a>
+  </p>
 
   <?php foreach($animais as $animal){ 
     ?>
@@ -42,9 +47,17 @@ if(isset($_POST['search'])){
     <h5 class="card-title"><?= $animal->getNome();?></h5>
     <p class="card-text">Ultimo endereço visto: <?= $animal->getRua();?>, <?= $animal->getNumero();?>, <?= $animal->getCidade();?>, <?= $animal->getEstado();?></p>
     <p class="card-text"><?= $animal->getDescricao();?></p>
-    <p class="card-text">Contato com o dono: <?php echo $animal->getUsuario()->getCelular(); ?></p>
+    <p class="card-text">Contato com o dono: </p>
     
     <a href="../View/VizualizarPostagem.php?id=<?= $animal->getId();?>" class="btn btn-primary">Ver Postagem</a>
+    <?php 
+      if ($animal->getIdUsuario() == $_SESSION['id']){
+    ?> 
+      <a href="../View/EditarPostagem.php?acao=editar&id=<?= $animal->getId();?>" class="btn btn-primary">Editar Postagem</a></br>
+      <a href="../Controller/Postagem.php?acao=deletar&id=<?= $animal->getId();?>" class="btn btn-primary">Deletar Postagem</a>
+    <?php
+      }
+    ?>
     <ul class="row justify-content-end">                  
       <li><a class="btn btn-dark btn-shared mx-2 share" data-rede="twitter" data-dica="90" href="https://twitter.com/share?url=https://gpets2provisorio1.websiteseguro.com/Trab_prog/MVC/View/VizualizarPostagem.php?id=<?= $animal->getId();?>&text=Há um animal perdido!" target="_blank" title="Twetar poema"><i class="fab fa-twitter" target="_blank"></i></a></li>
       <li><a class="btn btn-dark btn-shared mx-2 share" data-rede="facebook" data-dica="90" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fgpets2provisorio1.websiteseguro.com%2FTrab_prog%2FMVC%2F/View%2FVizualizarPostagem.php?id=<?= $animal->getId();?>" target="_blank"><i class="fab fa-facebook-f"></i></a></li>

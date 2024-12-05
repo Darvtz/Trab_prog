@@ -17,6 +17,7 @@
     Login de Usuário
   </h1>
   </div>
+    <?php if(!isset($_REQUEST['error'])){ echo 'Cadastrado com sucesso!'; }?>
     <form action="../Controller/Usuario.php?acao=logar" method = "POST">
         <div>
           <label for="exampleInputEmail1" class="form-label">
@@ -33,7 +34,8 @@
         </br>
               <a href="../View/EsqueceuASenha.php" target="_blank">Esqueceu a senha?</a>
         </div>
-      <button type="submit" class="btn btn-primary">Log-In</button>
+        <? if($_REQUEST['error']) {echo 'verifique seus dados!'}; ?>
+      <button type="submit" class="btn btn-primary" style="allign:center">Log-In</button>
       </form>
     
     <script>
