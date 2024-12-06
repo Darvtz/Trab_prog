@@ -10,7 +10,6 @@ class Usuario{
     private $email;
     private $foto;
     private $datanasc;
-    private $celular;
     private $datacad;
     private $banido = false;
     private $cargos = [];
@@ -65,14 +64,6 @@ class Usuario{
         $this->datanasc = $datanasc;
     }
 
-    public function getCelular(){
-        return $this->celular;
-    }
-
-    public function setCelular($celular){
-        $this->celular = $celular;
-    }
-
     public function getDatacad(){
         return $this->datacad;
     }
@@ -105,14 +96,13 @@ class Usuario{
 
         try{
         
-            $stmt = $pdo->prepare('INSERT INTO usuario (cpf, nome, senha, email, data_nascimento, celular, data_cadastro, foto, banido) 
-            VALUES(:cpf, :nome, :senha, :email, :datanasc, :celular, :datacad, :foto, :banido)');
+            $stmt = $pdo->prepare('INSERT INTO usuario (cpf, nome, senha, email, data_nascimento, data_cadastro, foto, banido) 
+            VALUES(:cpf, :nome, :senha, :email, :datanasc, :datacad, :foto, :banido)');
             $stmt->execute([':cpf' => $this->cpf,
                             ':nome' => $this->nome,
                             ':senha' => $this->senha,
                             ':email' => $this->email,
                             ':datanasc' => $this->datanasc,
-                            ':celular' => $this->celular,
                             ':datacad' => $this->datacad,
                             ':foto' => $this->foto,
                             ':banido' => $this->banido]);
@@ -166,7 +156,6 @@ class Usuario{
                 senha = :senha,
                 foto = :foto,
                 data_nascimento = :datanasc,
-                celular = :celular,
                 banido = :banido
                 WHERE id = :id');
     
@@ -177,7 +166,6 @@ class Usuario{
                 ':senha' => $this->senha,
                 ':foto' => $this->foto,
                 ':datanasc' => $this->datanasc,  // Corrigido o nome do parâmetro aqui
-                ':celular' => $this->celular,
                 ':banido' => $this->banido,
                 ':id' => $this->id
             ]);
@@ -209,7 +197,6 @@ class Usuario{
                 $usuario->setSenha($linha['senha']);
                 $usuario->setEmail($linha['email']);
                 $usuario->setDatanasc($linha['data_nascimento']);
-                $usuario->setCelular($linha['celular']);
                 $usuario->setDatacad($linha['data_cadastro']);
                 $usuario->setFoto($linha['foto']);
                 $usuario->setBanido($linha['banido']);
@@ -241,7 +228,6 @@ class Usuario{
                 $usuario->setSenha($linha['senha']);
                 $usuario->setEmail($linha['email']);
                 $usuario->setDatanasc($linha['data_nascimento']);
-                $usuario->setCelular($linha['celular']);
                 $usuario->setDatacad($linha['data_cadastro']);
                 $usuario->setFoto($linha['foto']);
                 $usuario->setBanido($linha['banido']);
@@ -270,7 +256,6 @@ class Usuario{
                 $this->setSenha($linha['senha']);
                 $this->setEmail($linha['email']);
                 $this->setDatanasc($linha['datanasc']);
-                $this->setCelular($linha['celular']);
                 $this->setDatacad($linha['datacad']);
                 $this->setFoto($linha['foto']);
                 $this->setBanido($linha['banido']);
@@ -296,7 +281,6 @@ class Usuario{
                 $this->setSenha($linha['senha']);
                 $this->setEmail($linha['email']);
                 $this->setDatanasc($linha['data_nascimento']);
-                $this->setCelular($linha['celular']);
                 $this->setDatacad($linha['data_cadastro']);
                 $this->setFoto($linha['foto']);
                 $this->setBanido($linha['banido']);

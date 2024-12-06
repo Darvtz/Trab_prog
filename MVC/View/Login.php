@@ -32,9 +32,8 @@
         </label>
         </br> <a href="../View/Cadastro.php">Não possui uma conta? Cadastre-se!</a>
         </br>
-              <a href="../View/EsqueceuASenha.php" target="_blank">Esqueceu a senha?</a>
         </div>
-        <? if($_REQUEST['error']) {echo 'verifique seus dados!'}; ?>
+        <?php if(isset($_REQUEST['error'])){ echo 'Confira seus dados!'; }?>
       <button type="submit" class="btn btn-primary" style="allign:center">Log-In</button>
       </form>
     

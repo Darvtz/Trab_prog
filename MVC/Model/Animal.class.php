@@ -15,6 +15,7 @@ class Animal{
     private $cidade;
     private $rua;
     private $numero;
+    private $contato;
     private $descricao;
     private $oculto = false;
     private $imagem;
@@ -100,6 +101,14 @@ class Animal{
         $this->numero = $numero;
     }
 
+    public function getContato(){
+        return $this->contato;
+    }
+
+    public function setContato($contato){
+        $this->contato = $contato;
+    }
+
     public function getDescricao(){
         return $this->descricao;
     }
@@ -134,8 +143,8 @@ class Animal{
 
         try{
         
-            $stmt = $pdo->prepare('INSERT INTO postagem_animal (nome, especie, raca, genero, cor, estado, cidade, rua, numero, descricao, imagem, id_usuario) 
-                                    VALUES( :nome, :especie, :raca, :genero, :cor, :estado, :cidade, :rua, :numero, :descricao, :imagem, :idUsuario)');
+            $stmt = $pdo->prepare('INSERT INTO postagem_animal (nome, especie, raca, genero, cor, estado, cidade, rua, numero, contato, descricao, imagem, id_usuario) 
+                                    VALUES( :nome, :especie, :raca, :genero, :cor, :estado, :cidade, :rua, :numero, :descricao, contato, :imagem, :idUsuario)');
 
             $stmt->execute([ 
                         ':nome' => $this->nome, 
@@ -147,6 +156,7 @@ class Animal{
                         ':cidade' => $this->cidade,
                         ':rua' => $this->rua,
                         ':numero' => $this->numero,
+                        ':contato' => $this->contato,
                         ':descricao' => $this->descricao,
                         ':imagem' => $this->imagem,
                         ':idUsuario' => $this->idUsuario]);
@@ -174,7 +184,25 @@ class Animal{
         
         try{
 
-        $stmt = $pdo->prepare('UPDATE postagem_animal SET Oculto = true  WHERE id = :id');
+        $stmt = $pdo->prepare(' UPDATE postagem_animal SET Oculto = true  WHERE id = :id');
+        $stmt->execute([':id' => $this->id]);
+        
+
+        } catch(Exception $e) {
+            echo '<pre>';
+            var_dump($e);
+            return false;
+        }
+
+    }
+
+    public function mostrar() {
+        
+        $pdo = conexao();
+        
+        try{
+
+        $stmt = $pdo->prepare(' UPDATE postagem_animal SET Oculto = false  WHERE id = :id');
         $stmt->execute([':id' => $this->id]);
         
 
@@ -204,6 +232,7 @@ class Animal{
                                                     cidade = :cidade, 
                                                     rua = :rua, 
                                                     numero = :numero, 
+                                                    contato = :contato,
                                                     descricao = :descricao, 
                                                     imagem = :imagem  
                                                     WHERE id = :id');
@@ -218,7 +247,8 @@ class Animal{
             ':estado' => $this->estado,
             ':cidade' => $this->cidade,
             ':rua' => $this->rua,
-            ':numero' => $this->numero,
+            ':numero' => $this->numero,            
+            ':contato' => $this->contato,
             ':descricao' => $this->descricao,
             ':imagem' => $this->imagem]);
 
@@ -255,7 +285,45 @@ class Animal{
                 $animal->setEstado($linha['estado']);
                 $animal->setCidade($linha['cidade']);
                 $animal->setRua($linha['rua']);
-                $animal->setNumero($linha['numero']);
+                $animal->setNumero($linha['numero']);                
+                $animal->setContato($linha['contato']);
+                $animal->setIdUsuario($linha['id_usuario']);
+
+                $lista[] = $animal;
+    
+            }
+        } catch(Exception $e) {
+            var_dump($e);
+            //Log
+            return false;
+        }   
+
+        return $lista;
+
+    }
+
+    public static function getOculto() {
+        $pdo = conexao();
+        
+        try{
+            $lista = [];
+            foreach($pdo->query('SELECT * FROM postagem_animal WHERE Oculto = 1') as $linha ){
+
+                $animal = new Animal();
+                
+                $animal->setId($linha['id']);
+                $animal->setNome($linha['nome']);
+                $animal->setEspecie($linha['especie']);
+                $animal->setRaca($linha['raca']);
+                $animal->setGenero($linha['genero']);
+                $animal->setCor($linha['cor']);
+                $animal->setDescricao($linha['descricao']); 
+                $animal->setImagem($linha['imagem']);
+                $animal->setEstado($linha['estado']);
+                $animal->setCidade($linha['cidade']);
+                $animal->setRua($linha['rua']);
+                $animal->setNumero($linha['numero']);                
+                $animal->setContato($linha['contato']);
                 $animal->setIdUsuario($linha['id_usuario']);
 
                 $lista[] = $animal;
@@ -286,7 +354,8 @@ class Animal{
             OR estado LIKE '%$busca%' 
             OR cidade LIKE '%$busca%' 
             OR rua LIKE '%$busca%'
-            OR numero LIKE '%$busca%'") as $linha ){
+            OR numero LIKE '%$busca%'
+            OR contato LIKE '%$busca%'") as $linha ){
 
                 $animal = new Animal();
                 
@@ -302,6 +371,8 @@ class Animal{
                 $animal->setCidade($linha['cidade']);
                 $animal->setRua($linha['rua']);
                 $animal->setNumero($linha['numero']);
+                $animal->setContato($linha['contato']);
+
                 $animal->setIdUsuario($linha['id_usuario']);
 
                 $lista[] = $animal;
@@ -337,6 +408,7 @@ class Animal{
                 $animal->setCidade($linha['cidade']);
                 $animal->setRua($linha['rua']);
                 $animal->setNumero($linha['numero']);
+                $animal->setContato($linha['contato']);
                 $animal->setIdUsuario($linha['id_usuario']);
             }
         } catch(Exception $e) {
@@ -369,7 +441,8 @@ class Animal{
                 $animal->setEstado($linha['estado']);
                 $animal->setCiade($linha['cidade']);
                 $animal->setRua($linha['rua']);
-                $animal->setNumero($linha['numero']);
+                $animal->setNumero($linha['numero']);                
+                $animal->setContato($linha['contato']);
                 $animal->setIdUsuario($linha['id_usuario']);
             }
         

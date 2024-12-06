@@ -87,6 +87,12 @@
                     <label>Cidade<input type="name" class="form-control" id="exampleImputCidade" name="cidade" required></label></br>
                     <label>Rua<input type="name" class="form-control" id="exampleImputRua" name="rua"></label></br>
                     <label>Número<input type="number" class="form-control" id="exampleImputNumero" name="numero"></label></br>
+            </div>            
+            <div class="mb-3">
+            <label for="exampleInputCelular" class="form-label">
+                Meio de contato com o dono do animal:
+                <input type="text" class="form-control" id="exampleInputCelular" name="contato">
+            </label>
             </div>
             <div>
                 <label for="exampleInputDescricao">Descrição adicional

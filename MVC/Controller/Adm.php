@@ -10,7 +10,15 @@ if($acao=="banir"){
     if($usuario->getId() == $_REQUEST['id']){
         $usuario->setBanido(true);
         if($usuario->update() == true){
-            header("../View/index.php");
+            header("../View/TelaInicial.php");
         }
     }
+}else if($acao=="ocultar"){
+    $animal=new Animal();
+    $animal->setId($_REQUEST['id']);
+    $animal->deletar();
+}else if($acao=='mostrar'){
+    $animal=new Animal();
+    $animal->setId($_REQUEST['id']);
+    $animal->mostrar();
 }

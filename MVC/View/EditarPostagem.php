@@ -8,7 +8,6 @@ if(!isset($_SESSION)){
 
 $animal = Animal::getOne($_REQUEST['id']);
 
-
 ?>
 
 <!DOCTYPE html>
@@ -68,57 +67,62 @@ $animal = Animal::getOne($_REQUEST['id']);
             <div>
                 <label for="exampleInputNome">Ultimo endereço visto:</label></br></br>
                 <label>Estado
-    <select class="form-control" id="exampleImputEstado" name="estado" required>
-        <option value="">Selecionar</option>
-        <?php
-        // Lista de estados
-        $estados = [
-            'AC' => 'Acre',
-            'AL' => 'Alagoas',
-            'AP' => 'Amapá',
-            'AM' => 'Amazonas',
-            'BA' => 'Bahia',
-            'CE' => 'Ceará',
-            'DF' => 'Distrito Federal',
-            'ES' => 'Espírito Santo',
-            'GO' => 'Goiás',
-            'MA' => 'Maranhão',
-            'MT' => 'Mato Grosso',
-            'MS' => 'Mato Grosso do Sul',
-            'MG' => 'Minas Gerais',
-            'PA' => 'Pará',
-            'PB' => 'Paraíba',
-            'PR' => 'Paraná',
-            'PE' => 'Pernambuco',
-            'PI' => 'Piauí',
-            'RJ' => 'Rio de Janeiro',
-            'RN' => 'Rio Grande do Norte',
-            'RS' => 'Rio Grande do Sul',
-            'RO' => 'Rondônia',
-            'RR' => 'Roraima',
-            'SC' => 'Santa Catarina',
-            'SP' => 'São Paulo',
-            'SE' => 'Sergipe',
-            'TO' => 'Tocantins'
-        ];
+                    <select class="form-control" id="exampleImputEstado" name="estado" required>
+                        <option value="">Selecionar</option>
+                        <?php
+                        // Lista de estados
+                        $estados = [
+                            'AC' => 'Acre',
+                            'AL' => 'Alagoas',
+                            'AP' => 'Amapá',
+                            'AM' => 'Amazonas',
+                            'BA' => 'Bahia',
+                            'CE' => 'Ceará',
+                            'DF' => 'Distrito Federal',
+                            'ES' => 'Espírito Santo',
+                            'GO' => 'Goiás',
+                            'MA' => 'Maranhão',
+                            'MT' => 'Mato Grosso',
+                            'MS' => 'Mato Grosso do Sul',
+                            'MG' => 'Minas Gerais',
+                            'PA' => 'Pará',
+                            'PB' => 'Paraíba',
+                            'PR' => 'Paraná',
+                            'PE' => 'Pernambuco',
+                            'PI' => 'Piauí',
+                            'RJ' => 'Rio de Janeiro',
+                            'RN' => 'Rio Grande do Norte',
+                            'RS' => 'Rio Grande do Sul',
+                            'RO' => 'Rondônia',
+                            'RR' => 'Roraima',
+                            'SC' => 'Santa Catarina',
+                            'SP' => 'São Paulo',
+                            'SE' => 'Sergipe',
+                            'TO' => 'Tocantins'
+                        ];
 
-        // Obter o estado atual do animal
-        $estadoSelecionado = $animal->getEstado();
+                        // Obter o estado atual do animal
+                        $estadoSelecionado = $animal->getEstado();
 
-        // Gerar as opções do select
-        foreach ($estados as $sigla => $nome) {
-            // Verificar se o estado do animal corresponde à opção atual
-            $selected = ($sigla == $estadoSelecionado) ? 'selected' : '';
-            echo "<option value=\"$sigla\" $selected>$nome</option>";
-        }
-        ?>
-    </select>
-</label><br>
-                    <label>Cidade<input type="name" class="form-control" id="exampleImputCidade" name="cidade"></label></br>
-                    <label>Rua<input type="name" class="form-control" id="exampleImputRua" name="rua"></label></br>
-                    <label>Número<input type="number" class="form-control" id="exampleImputNumero" name="numero"></label></br>
+                        // Gerar as opções do select
+                        foreach ($estados as $sigla => $nome) {
+                            // Verificar se o estado do animal corresponde à opção atual
+                            $selected = ($sigla == $estadoSelecionado) ? 'selected' : '';
+                            echo "<option value=\"$sigla\" $selected>$nome</option>";
+                        }
+                        ?>
+                    </select>
+                    </label><br>
+                    
+                    <label>Cidade<input type="name" class="form-control" id="exampleImputCidade" name="cidade" value="<?php echo $animal->getContato();?>></label></br>
+                    <label>Rua<input type="name" class="form-control" id="exampleImputRua" name="rua" value="<?php echo $animal->getContato();?>></label></br>
+                    <label>Número<input type="number" class="form-control" id="exampleImputNumero" name="numero" value="<?php echo $animal->getContato();?>></label></br>
             </div>
             <div>
+            <label for="exampleInputCelular" class="form-label">
+                Meio de contato com o dono do animal:
+                <input type="text" class="form-control" id="exampleInputCelular" name="contato" value="<?php echo $animal->getContato();?>">
+            </label>
             <div>
                 <label for="exampleInputNome">Descrição adicional
                     <input type="name" class="form-control" id="exampleImputDescricao" name="descricao" value="<?php echo $animal->getDescricao();?>">

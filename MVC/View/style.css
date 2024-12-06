@@ -51,48 +51,76 @@ button{
     text-align: left;
 }
 
-/* Share Buttons */
-
+/* Estilo para os botões de compartilhamento */
 .share-btn-container {
-    background: #fff;
-    display: flex;
-    flex-direction: column;
-    padding: 16px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-    position: fixed;
-    top: 50%;
-    transform: translateY(-50%);
-  }
-  
-  .share-btn-container a i {
-    font-size: 32px;
-  }
-  
-  .share-btn-container a {
-    margin: 12px 0;
-    transition: 500ms;
-  }
-  
-  .share-btn-container a:hover {
-    transform: scale(1.2);
-  }
-  
-  .share-btn-container .fa-facebook {
-    color: #3b5998;
-  }
-  
-  .share-btn-container .fa-twitter {
-    color: #1da1f2;
-  }
-  
-  .share-btn-container .fa-linkedin {
-    color: #0077b5;
-  }
-  
-  .share-btn-container .fa-pinterest {
-    color: #bd081c;
-  }
-  
-  .share-btn-container .fa-whatsapp {
-    color: #25d366;
-  }
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  border-radius: 8px;
+  position: relative;
+}
+
+/* Estilização dos botões de compartilhamento */
+.share-btn-container a {
+  display: flex;
+  align-items: center; /* Alinha o ícone e o texto no centro verticalmente */
+  padding: 8px 16px;
+  text-decoration: none;
+  color: white;
+  font-size: 16px;
+  margin: 8px 0;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+  border-radius: 8px; /* Borda arredondada */
+}
+
+.share-btn-container a i {
+  margin-right: 8px; /* Espaço entre o ícone e o texto */
+  font-size: 20px;
+}
+
+/* Estilos individuais para cada rede social */
+.share-btn-container .fa-facebook {
+  background-color: #3b5998;
+}
+
+.share-btn-container .fa-twitter {
+  background-color: #1da1f2;
+}
+
+.share-btn-container .fa-whatsapp {
+  background-color: #25d366;
+}
+
+.share-btn-container .fa-telegram-plane {
+  background-color: #0088cc;
+}
+
+.share-btn-container .fa-envelope {
+  background-color: #d44638;
+}
+
+/* Efeito ao passar o mouse */
+.share-btn-container a:hover {
+  transform: scale(1.05);  /* Aumenta ligeiramente o botão */
+  background-color: rgba(0, 0, 0, 0.1);  /* Dá um efeito de destaque ao passar o mouse */
+}
+
+.share-btn-container a:active {
+  transform: scale(0.98); /* Efeito de clique */
+}
+
+.foto-usuario {
+  width: 150px !important;
+  height: 150px !important;
+  object-fit: cover !important;
+  border-radius: 50% !important;
+  border: 3px solid #fff !important;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1) !important;
+  transition: transform 0.3s ease, box-shadow 0.3s ease !important;
+}
+
+.foto-usuario:hover {
+  transform: scale(1.1); /* Aumenta ligeiramente a imagem ao passar o mouse */
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2); /* Aumenta a sombra ao passar o mouse */
+}

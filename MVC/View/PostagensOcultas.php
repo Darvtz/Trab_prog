@@ -1,10 +1,11 @@
 <?php
 
+include('protect.php');
 include_once('../Model/Animal.class.php');
 include_once('../Model/Usuario.class.php');
 
 
-$animais = Animal::getAll();
+$animais = Animal::getOculto();
 $usuarios = Usuario::getAll();
 
 if(isset($_POST['search'])){
@@ -24,13 +25,37 @@ if(isset($_POST['search'])){
     <title>GPetS</title>
 </head>
 <body>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">GPetS</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="../View/TelaUsuario.php?id=<?=$_SESSION['id'];?>">Tela do Usuário</a>
+                    </li>
+                    <li>
+                      <p><a class="nav-link active" href="../View/logout.php">Logout</a></p>
+                    </li>
+                </ul>
+                
+            </div>
+        </div>
+    </nav>
     
-  <h1></p1>Seja bem vindo!</a></h1>
+  <h1></p1>Seja bem vindo, <?php echo $_SESSION['nome']; ?></h1>
 
   <form method="POST" >
     <input type="text" name="search" required>
     <input type="submit" value="Pesquisar">
   </form>
+
+  <p>
+    <a href="../View/Postagem.php"  class="btn btn-primary">Fazer uma postagem</a>
+  </p>
 
   <?php foreach($animais as $animal){ 
     ?>
@@ -42,11 +67,28 @@ if(isset($_POST['search'])){
     <h5 class="card-title"><?= $animal->getNome();?></h5>
     <p class="card-text">Ultimo endereço visto: <?= $animal->getRua();?>, <?= $animal->getNumero();?>, <?= $animal->getCidade();?>, <?= $animal->getEstado();?></p>
     <p class="card-text"><?= $animal->getDescricao();?></p>
-    <p class="card-text">Contato com o dono: <?php echo $animal->getContato();?></p>
+    <p class="card-text">Contato com o dono: <?php echo $animal->getContato(); ?></p>
     
     <a href="../View/VizualizarPostagem.php?id=<?= $animal->getId();?>" class="btn btn-primary">Ver Postagem</a></br></br>
+    <?php 
+      if ($animal->getIdUsuario() == $_SESSION['id']){
+    ?> 
+      <a href="../View/EditarPostagem.php?acao=editar&id=<?= $animal->getId();?>" class="btn btn-primary">Editar Postagem</a></br></br>
+      <a href="../Controller/Postagem.php?acao=deletar&id=<?= $animal->getId();?>" class="btn btn-primary">Deletar Postagem</a></br></br>
+    <?php
+      }
+    ?> 
+    
+    <?php if(isset($_SESSION['ADMIN'])){?>
+      <?php if($animal->getOculto()==false){ ?>
+        <a href = "../Controller/Adm.php?acao=ocultar&id=<?= $animal->getId();?>" class="btn btn-primary">Ocultar Postagem</a>
+        <?php } ?>
+        <?php if($animal->getOculto()==true){ ?>
+        <a href = "../Controller/Adm.php?acao=mostrar&id=<?= $animal->getId();?>" class="btn btn-primary">Mostrar Postagem</a>
+        <?php } ?>
+    <?php } ?>
 
-    <p>Compartilhar:</p>         
+      <p>Compartilhar:</p>         
       <a class="btn btn-primary" data-rede="twitter" data-dica="90" href="https://twitter.com/share?url=https://gpets2provisorio1.websiteseguro.com/Trab_prog/MVC/View/VizualizarPostagem.php?id=<?= $animal->getId();?>&text=Há um animal perdido!" target="_blank" title="Twittar postagem">
         <i class="fab fa-twitter"></i> Twitter
       </a>

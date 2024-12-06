@@ -5,36 +5,38 @@ session_start();
 include_once '../Model/Usuario.class.php';
 include_once '../Model/Cargo.class.php';
 
-function enviarArquivo($nomeInputFile, $size = 2097152){
+function enviarArquivo($nomeInputFile, $size = 2097152) {
     echo '<pre>';
-    if(isset($_FILES[$nomeInputFile])){
+    if (isset($_FILES[$nomeInputFile])) {
 
-        $arquivo = $_FILES["arquivo"];
-        
-        if($arquivo['error'])
-        die("Falha ao enviar o arquivo");
-        
-        if($arquivo['size'] > $size)
-        die("Arquivo muito grande!");
-        
-        $pasta = __DIR__. "/../View/fotos/";
-        $novoNomeDoArquivo = uniqid();
+        $arquivo = $_FILES[$nomeInputFile];
 
-    
-            $path = $pasta . $novoNomeDoArquivo . ".jpg" ;
-            var_dump($path);
-            $deu_certo = move_uploaded_file($arquivo["tmp_name"], $path);
-
-            if($deu_certo){                    
-                return $novoNomeDoArquivo . ".jpg";
-            }else{
-                die('Não pude enviar a imagem');
-                return false;
-            }
+        if ($arquivo['error']) {
+            die("Falha ao enviar o arquivo");
         }
-        return false;
 
-    
+        if ($arquivo['size'] > $size) {
+            die("Arquivo muito grande!");
+        }
+
+        $pasta = __DIR__ . "/../View/fotos/";
+        $novoNomeDoArquivo = uniqid(); // Gerar nome único para o arquivo
+
+        // Definir o caminho final do arquivo
+        $path = $pasta . $novoNomeDoArquivo . ".jpg";
+        var_dump($path);
+
+        // Mover o arquivo para o diretório desejado
+        $deu_certo = move_uploaded_file($arquivo["tmp_name"], $path);
+
+        if ($deu_certo) {
+            return $novoNomeDoArquivo . ".jpg"; // Retorna o nome do arquivo se o upload foi bem-sucedido
+        } else {
+            die('Não pude enviar a imagem');
+            return false; // Se não conseguiu enviar, retorna falso
+        }
+    }
+    return false; // Caso o campo de arquivo não tenha sido enviado
 }
 
 // Cadastrar no banco
@@ -47,7 +49,6 @@ if($acao=='cadastrar'){
     $hash = password_hash($_POST['senha'], PASSWORD_DEFAULT);
     $usuario->setSenha($hash);
     $usuario->setDatanasc($_POST['Data']);
-    $usuario->setCelular($_POST['celular']);
     $usuario->setDatacad(date("j, n, Y"));
     $foto = enviarArquivo('arquivo');
     $cargo->setId(3);
@@ -85,9 +86,33 @@ if($acao=='cadastrar'){
         $_SESSION['nome'] = $usuario->getNome();
         $usuario->getCargo();
 
-        header('Location: ../View/TelaInicial.php');
-    }
-    header('Location: ../View/Login.php?error=1');
+        if($usuario->getBanido() == true){
+            header('Location: ../View/Banido.php');
+        }
 
+        header('Location: ../View/TelaInicial.php');
+    }else{
+        header('Location: ../View/Login.php?error=1');
+    }
+}else if($acao='editar'){
+
+    $usuario = Usuario::getOne($_REQUEST['id']);
+    $usuario->setNome($_POST['nome']);
+    $usuario->setEmail($_POST['email']);
+    $hash = password_hash($_POST['senha'], PASSWORD_DEFAULT);
+    $usuario->setSenha($hash);
+    $usuario->setDatanasc($_POST['Data']);
+    $usuario->setDatacad(date("j, n, Y"));
+    if(isset($_FILES['arquivo']) && !$_FILES['arquivo']['error']){
+        $foto = enviarArquivo('arquivo');
+        if($foto){
+            $usuario->setFoto($foto);
+        }
+    }
+
+    $usuario->update();
+    
+    header('Location: ../View/TelaUsuario.php?id='. $_REQUEST['id']);
+    
 }
 ?>

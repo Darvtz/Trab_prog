@@ -1,3 +1,15 @@
+<?php
+
+include_once('../Model/Animal.class.php');
+
+if(!isset($_SESSION)){
+    session_start();
+}
+
+$usuario = Usuario::getOne($_REQUEST['id']);
+
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -5,7 +17,7 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Cadastro</title>
+        <title>Edição de Usuário</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
         <link rel="stylesheet" href="style.css">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
@@ -15,31 +27,25 @@
 <body>
   <div>
   <h1>
-    Cadastro de Usuário
+    Edite suas informações de usuario
   </h1>
   </div>
-    <form action="../Controller/Usuario.php?acao=cadastrar" method = "POST">
-        <div class="mb-3">
-            <label for="exampleInputCpf" class="dorm-label">
-                CPF
-                <input type="text" class="form-control" id="exampleImputCpf" name = "cpf" placeholder="###.###.###-##" onkeyup="mascara('###.###.###-##',this,event,true)" maxlength="14">
-            </label>
-        </div>
+    <form action="../Controller/Usuario.php?acao=editar&id=<?= $usuario->getId()?>" method = "POST" enctype="multipart/form-data">
         <div class="mb-3">
             <label for="exampleInputName" class="dorm-label">
-                Nome completo
-                <input type="name" class="form-control" id="exampleImputName" name = "nome">
+                Nome
+                <input type="name" class="form-control" id="exampleImputName" name = "nome" value="<?php echo $usuario->getNome(); ?>">
             </label>
         </div>
         <div>
           <label for="exampleInputEmail" class="form-label">
             Endereço de e-mail
-            <input type="email" class="form-control" id="exampleInputEmail" aria-describedby="emailHelp" name="email">
+            <input type="email" class="form-control" id="exampleInputEmail" aria-describedby="emailHelp" name="email" value="<?php echo $usuario->getEmail(); ?>">
         </label>
         </div>
         <div class="mb-3">
           <label for="exampleInputPassword" class="form-label">
-            Senha
+            Nova Senha
             <input type="password" class="form-control" id="exampleInputPassword" name="senha">
         </label>
         </div>
@@ -56,12 +62,10 @@
         </label>
         </div>
         <div>
-          
-          <p><label>Insira uma foto de perfil</label></p> </br>
-          <p><input name="arquivo" type="file"></br></br>
-          
+        <p><label>Insira uma foto de perfil</label></p> </br>
+        <p><input name="arquivo" type="file"></br></br>
           <button type="submit">cadastrar</button></br>
-          <?php if(isset($_REQUEST['error'])){ echo 'erro no cadastro, verifique seus dados'; }?>
+          <?php if(isset($_REQUEST['error'])){ echo 'Erro, verifique seus dados.'; }?>
         </div>
       </form>
     
