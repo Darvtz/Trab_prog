@@ -63,13 +63,13 @@ if(isset($_POST['search'])){
 
   <?php foreach($animais as $animal){ 
     ?>
-  <div class="card" style="width: 19rem;">
+  <div class="card" style="width: 19rem; height:25;">
   <img class="card-img-top" src="fotos/<?= $animal->getImagem();?>" alt="Card image cap">
   <div class="card-body">
     
     <h4><a href="TelaUsuario.php?id=<?= $animal->getIdUsuario()?>"><?php echo $animal->getUsuario()->getNome(); ?></a></h4>
     <h5 class="card-title"><?= $animal->getNome();?></h5>
-    <p class="card-text">Ultimo endereço visto: <?= $animal->getRua();?>, <?= $animal->getNumero();?>, <?= $animal->getCidade();?>, <?= $animal->getEstado();?></p>
+    <p class="card-text">Ultimo endereço visto: </br> <?= $animal->getRua();?>, <?= $animal->getNumero();?>, <?= $animal->getCidade();?>, <?= $animal->getEstado();?></p>
     <p class="card-text"><?= $animal->getDescricao();?></p>
     <p class="card-text">Contato com o dono: <?php echo $animal->getContato(); ?></p>
     

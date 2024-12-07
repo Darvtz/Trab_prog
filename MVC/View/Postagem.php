@@ -101,7 +101,7 @@
             </div>
                 <p><label>Insira a imagem do animal</label></p> </br>
               
-                <p><input name="arquivo" type="file"></br></br>
+                <p><input name="arquivo" type="file"></br></br></br>
                   <button name="upload" type="submit" >Fazer Postagem</button></br>
                   <?php if(isset($_REQUEST['error'])){ echo 'erro no postagem, verifique os dados'; }?>
                 </p>

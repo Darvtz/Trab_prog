@@ -144,7 +144,7 @@ class Animal{
         try{
         
             $stmt = $pdo->prepare('INSERT INTO postagem_animal (nome, especie, raca, genero, cor, estado, cidade, rua, numero, contato, descricao, imagem, id_usuario) 
-                                    VALUES( :nome, :especie, :raca, :genero, :cor, :estado, :cidade, :rua, :numero, :descricao, contato, :imagem, :idUsuario)');
+                                    VALUES( :nome, :especie, :raca, :genero, :cor, :estado, :cidade, :rua, :numero, :contato, :descricao, :imagem, :idUsuario)');
 
             $stmt->execute([ 
                         ':nome' => $this->nome, 

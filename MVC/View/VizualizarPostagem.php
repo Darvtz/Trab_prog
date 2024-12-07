@@ -52,6 +52,11 @@ $comentarios = Comentario::getComentarios($_REQUEST['id']);
 
     <div>
         <div>
+            <label for="exampleInputImagem">
+            <img class="" src="fotos/<?= $animal->getImagem();?>" alt="" style="width: 25%; height: 25%; border-radius: 10px;">
+            </label>
+        </div>
+        <div>
             <label for="exampleInputNome">
                 <?php echo $animal->getNome();?>
             </label>
@@ -92,7 +97,7 @@ $comentarios = Comentario::getComentarios($_REQUEST['id']);
         <div>
         <form action="../Controller/Comentario.php?acao=postar" method = "POST"  enctype="multipart/form-data">
             <div>
-                <textarea type="textarea" class="form-control" id="comentario" name="comentario"></textarea>
+                <textarea class="form-control" id="comentario" name="comentario" style="border: 2px solid #000; border-radius: 5px;"></textarea>
                 <input type = 'hidden' value = '<?php  echo $animal->getid()?>' name = 'id'>
             </div>
             <button type="submit">Comentar</button>

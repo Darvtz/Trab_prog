@@ -114,9 +114,9 @@ $animal = Animal::getOne($_REQUEST['id']);
                     </select>
                     </label><br>
                     
-                    <label>Cidade<input type="name" class="form-control" id="exampleImputCidade" name="cidade" value="<?php echo $animal->getContato();?>></label></br>
-                    <label>Rua<input type="name" class="form-control" id="exampleImputRua" name="rua" value="<?php echo $animal->getContato();?>></label></br>
-                    <label>Número<input type="number" class="form-control" id="exampleImputNumero" name="numero" value="<?php echo $animal->getContato();?>></label></br>
+                    <label>Cidade<input type="name" class="form-control" id="exampleImputCidade" name="cidade" value="<?php echo $animal->getCidade();?>"></label></br>
+                    <label>Rua<input type="name" class="form-control" id="exampleImputRua" name="rua" value="<?php echo $animal->getRua();?>"></label></br>
+                    <label>Número<input type="number" class="form-control" id="exampleImputNumero" name="numero" value="<?php echo $animal->getNumero();?>"></label></br>
             </div>
             <div>
             <label for="exampleInputCelular" class="form-label">
@@ -128,10 +128,10 @@ $animal = Animal::getOne($_REQUEST['id']);
                     <input type="name" class="form-control" id="exampleImputDescricao" name="descricao" value="<?php echo $animal->getDescricao();?>">
                 </label>
             </div>
-                <p><label>Insira a imagem do animal</label></p> <br>
+                <p><label>Insira a imagem do animal</label></p> </br>
               
                 <p>
-                  <input name="arquivo" type="file">
+                  <input name="arquivo" type="file">x
                   <button name="upload" type="submit" >Editar Postagem</button>
                 </p>
 </form>
