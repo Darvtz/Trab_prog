@@ -22,6 +22,39 @@ $comentario = Comentario::getOne($_REQUEST['id']);
     <title>Editar Comentario</title>
 </head>
 <body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">GPetS</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link active" href="../View/TelaInicial.php">Tela Inicial</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link active" href="../View/TelaUsuario.php?id=<?=$_SESSION['id'];?>">Tela do Usuário</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav ms-auto"> <!-- Aqui foi adicionado ms-auto para alinhar à direita -->
+                <li class="nav-item">
+                    <a class="nav-link active" href="../View/logout.php">Sair do sistema</a>
+                </li>
+            </ul>
+            <?php if(isset($_SESSION['ADMIN'])){?>
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link active" href="../View/PostagensOcultas.php?id=<?=$_SESSION['id'];?>">Postagens Ocultas</a>
+                </li>
+            </ul>
+            <?php } ?>               
+        </div>
+    </div>
+</nav>
+
     <div>
         <form action="../Controller/Comentario.php?acao=editar&id=<?= $comentario->getId();?>" method = "POST">
         <textarea type="textarea" class="form-control" id="comentario" name="comentario"> <?php  echo $comentario->getComentario()?> </textarea>

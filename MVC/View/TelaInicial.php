@@ -26,29 +26,32 @@ if(isset($_POST['search'])){
 <body>
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#">GPetS</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link active" href="../View/TelaUsuario.php?id=<?=$_SESSION['id'];?>">Tela do Usuário</a>
-                    </li>
-                    <?php if(isset($_SESSION['ADMIN'])){?>
-                    <li class="nav-item">
-                        <a class="nav-link active" href="../View/PostagensOcultas.php?id=<?=$_SESSION['id'];?>">Postagens Ocultas</a>
-                    </li>
-                    <?php } ?>
-                    <li>
-                      <p><a class="nav-link active" href="../View/logout.php">Logout</a></p>
-                    </li>
-                </ul>
-                
-            </div>
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">GPetS</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link active" href="../View/TelaUsuario.php?id=<?=$_SESSION['id'];?>">Tela do Usuário</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav ms-auto"> <!-- Aqui foi adicionado ms-auto para alinhar à direita -->
+                <li class="nav-item">
+                    <a class="nav-link active" href="../View/logout.php">Sair do sistema</a>
+                </li>
+            </ul>
+            <?php if(isset($_SESSION['ADMIN'])){?>
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link active" href="../View/PostagensOcultas.php?id=<?=$_SESSION['id'];?>">Postagens Ocultas</a>
+                </li>
+            </ul>
+            <?php } ?>               
         </div>
-    </nav>
+    </div>
+</nav>
     
   <h1></p1>Seja bem vindo, <?php echo $_SESSION['nome']; ?></h1>
 

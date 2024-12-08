@@ -26,7 +26,7 @@ $animais = Animal::getAll();
     <style>
         .foto-usuario {
             display: flex;
-            justify-content: center !important;;   
+            justify-content: center !important;
             width: 150px !important;
             height: 150px !important;
             object-fit: cover !important;
@@ -37,8 +37,34 @@ $animais = Animal::getAll();
         }
 
         .foto-usuario:hover {
-        transform: scale(1.1); /* Aumenta ligeiramente a imagem ao passar o mouse */
-        box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2); /* Aumenta a sombra ao passar o mouse */
+            transform: scale(1.1); /* Aumenta ligeiramente a imagem ao passar o mouse */
+            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2); /* Aumenta a sombra ao passar o mouse */
+        }
+
+        /* Tornando o card do usuário mais largo */
+        .card-usuario {
+            max-width: 80rem; /* Largura maior para o card do usuário */
+        }
+
+        /* Ajustando o layout dos cards de animais para ocupar o mínimo de espaço possível */
+        .card-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px; /* Menor espaço entre os cards */
+            justify-content: flex-start; /* Alinhamento à esquerda para evitar muito espaço */
+        }
+
+        .card {
+            width: 15rem; /* Cards menores para ocupar menos espaço */
+        }
+
+        .card-body {
+            padding: 10px; /* Menos padding para os cards de animais */
+        }
+
+        .btn-share {
+            margin-top: 10px;
+            display: inline-block;
         }
     </style>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
@@ -46,23 +72,34 @@ $animais = Animal::getAll();
 <body>
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#">GPetS</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link active" href="../View/TelaInicial.php">Tela Inicial</a>
-                    </li>
-                </ul>
-            </div>
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">GPetS</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link active" href="../View/TelaInicial.php">Tela Inicial</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav ms-auto"> <!-- Aqui foi adicionado ms-auto para alinhar à direita -->
+                <li class="nav-item">
+                    <a class="nav-link active" href="../View/logout.php">Sair do sistema</a>
+                </li>
+            </ul>
+            <?php if(isset($_SESSION['ADMIN'])){?>
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link active" href="../View/PostagensOcultas.php?id=<?=$_SESSION['id'];?>">Postagens Ocultas</a>
+                </li>
+            </ul>
+            <?php } ?>               
         </div>
-    </nav>
+    </div>
+</nav>
 
-
-    <div class="card" style="width: 60rem;">
+        <div class="card" style="width: 60rem;">
     <img class="foto-usuario" src="fotos/<?= $usuario->getFoto()?>" alt="">
     <div class="card-body">
     <?php if(isset($_SESSION['ADMIN'])){?>
@@ -78,48 +115,54 @@ $animais = Animal::getAll();
     </div>
     </div>
 
+    <div class="card-container">
+        <?php foreach($animais as $animal){ ?>
+            <div class="card">
+                <img class="card-img-top" src="fotos/<?= $animal->getImagem();?>" alt="Card image cap">
+                <div class="card-body">
+                    <h4><a href="TelaUsuario.php?id=<?= $animal->getIdUsuario()?>"><?php echo $animal->getUsuario()->getNome(); ?></a></h4>
+                    <h5 class="card-title"><?= $animal->getNome();?></h5>
+                    <p class="card-text">Ultimo endereço visto: </br> <?= $animal->getRua();?>, <?= $animal->getNumero();?>, <?= $animal->getCidade();?>, <?= $animal->getEstado();?></p>
+                    <p class="card-text"><?= $animal->getDescricao();?></p>
+                    <p class="card-text">Contato com o dono: <?php echo $animal->getContato(); ?></p>
 
-    <?php foreach($animais as $animal){?>
-    <?php if($animal->getIdUsuario() == $_REQUEST['id']){?>
+                    <a href="../View/VizualizarPostagem.php?id=<?= $animal->getId();?>" class="btn btn-primary">Ver Postagem</a></br></br>
+                    <?php if ($animal->getIdUsuario() == $_SESSION['id']){ ?> 
+                        <a href="../View/EditarPostagem.php?acao=editar&id=<?= $animal->getId();?>" class="btn btn-primary">Editar Postagem</a></br></br>
+                        <a href="../Controller/Postagem.php?acao=deletar&id=<?= $animal->getId();?>" class="btn btn-primary">Deletar Postagem</a></br></br>
+                    <?php } ?> 
 
-    <div class="card" style="width: 19rem;">
-    <img class="card-img-top" src="fotos/<?= $animal->getImagem();?>" alt="Card image cap">
-    <div class="card-body">
-    <h5 class="card-title"><?= $animal->getNome();?></h5>
-    <p class="card-text">Ultimo endereço visto: <?= $animal->getRua();?>, <?= $animal->getNumero();?>, <?= $animal->getCidade();?>, <?= $animal->getEstado();?></p>
-    <p class="card-text"><?= $animal->getDescricao();?></p>
-    <p class="card-text">Contato com o dono: </p>
-    
-    <a href="../View/VizualizarPostagem.php?id=<?= $animal->getId();?>" class="btn btn-primary">Ver Postagem</a>
-    <?php 
-        if ($animal->getIdUsuario() == $_SESSION['id']){
-    ?> 
-        <a href="../View/EditarPostagem.php?id=<?= $animal->getId();?>" class="btn btn-primary">Editar Postagem</a>
+                    <?php if(isset($_SESSION['ADMIN'])){?>
+                        <?php if($animal->getOculto()==false){ ?>
+                            <a href = "../Controller/Adm.php?acao=ocultar&id=<?= $animal->getId();?>" class="btn btn-primary">Ocultar Postagem</a>
+                        <?php } ?>
+                        <?php if($animal->getOculto()==true){ ?>
+                            <a href = "../Controller/Adm.php?acao=mostrar&id=<?= $animal->getId();?>" class="btn btn-primary">Mostrar Postagem</a>
+                        <?php } ?>
+                    <?php } ?>
 
-    <?php
-        }
-    ?>
-    <a href="#" class="facebook-btn">
-        <i class="fab fa-facebook"></i>
-        </a>
-
-        <a href="#" class="twitter-btn">
-        <i class="fab fa-twitter"></i>
-        </a>
-
-        <a href="#" class="pinterest-btn">
-        <i class="fab fa-pinterest"></i>
-        </a>
-
-        <a href="#" class="linkedin-btn">
-        <i class="fab fa-linkedin"></i>
-        </a>
-
-        <a href="#" class="whatsapp-btn">
-        <i class="fab fa-whatsapp"></i>
-        </a>
+                    <div class="btn-share">
+                        <p>Compartilhar:</p>
+                        <a class="btn btn-primary" data-rede="twitter" href="https://twitter.com/share?url=https://gpets2provisorio1.websiteseguro.com/Trab_prog/MVC/View/VizualizarPostagem.php?id=<?= $animal->getId();?>&text=Há um animal perdido!" target="_blank" title="Twittar postagem">
+                            <i class="fab fa-twitter"></i> Twitter
+                        </a>
+                        <a class="btn btn-primary" data-rede="facebook" href="https://www.facebook.com/sharer/sharer.php?u=https://gpets2provisorio1.websiteseguro.com/Trab_prog/MVC/View/VizualizarPostagem.php?id=<?= $animal->getId();?>" target="_blank">
+                            <i class="fab fa-facebook-f"></i> Facebook
+                        </a>
+                        <a class="btn btn-success" data-rede="whats" href="https://api.whatsapp.com/send?text=Há um animal perdido! Veja em https://gpets2provisorio1.websiteseguro.com/Trab_prog/MVC/View/VizualizarPostagem.php?id=<?= $animal->getId();?>&" target="_blank">
+                            <i class="fab fa-whatsapp"></i> WhatsApp
+                        </a>
+                        <a class="btn btn-primary" data-rede="telegram" href="https://telegram.me/share/url?url=https://gpets2provisorio1.websiteseguro.com/Trab_prog/MVC/View/VizualizarPostagem.php?id=<?= $animal->getId();?>&&text=Há um animal perdido!" target="_blank">
+                            <i class="fab fa-telegram-plane"></i> Telegram
+                        </a>
+                        <a class="btn btn-dark btn-shared mx-2 share" data-rede="email" href="mailto:?subject=Preciso de sua ajuda!&body=Há um animal perdido! em https://gpets2provisorio1.websiteseguro.com/Trab_prog/MVC/View/VizualizarPostagem.php?id=<?= $animal->getId();?>&">
+                            <i class="fas fa-envelope"></i> E-Mail
+                        </a>
+                    </div>
+                </div>
+            </div>
+        <?php } ?>
     </div>
-    </div>
-    <?php } }?>
+</div>
 </body>
 </html>
