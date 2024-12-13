@@ -109,7 +109,7 @@ $comentarios = Comentario::getComentarios($_REQUEST['id']);
             
         <div class="card" style="width: 18rem;">
         <div class="card-body">
-        <h5 class="card-title"><?= $comentario->getUsuario()->getNome();?></h5>
+        <h5 class="card-title"><a href="TelaUsuario.php?id=<?= $comentario->getUsuario()->getId()?>"><?php echo $comentario->getUsuario()->getNome(); ?></a></h5>
         <p class="card-text"><?= $comentario->getComentario();?></p>
             <?php 
             if ($comentario->getUsuario()->getId() == $_SESSION['id']){

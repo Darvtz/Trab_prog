@@ -218,27 +218,27 @@ class Animal{
     /// Atualiza
 
     public function update () {
-
-        $pdo = conexao();
-        
-        try{
-
+    $pdo = conexao();
+    
+    try {
+        // Prepara a consulta
         $stmt = $pdo->prepare('UPDATE postagem_animal SET nome = :nome,  
-                                                    especie = :especie,
-                                                    raca = :raca, 
-                                                    genero = :genero, 
-                                                    cor = :cor,  
-                                                    estado = :estado, 
-                                                    cidade = :cidade, 
-                                                    rua = :rua, 
-                                                    numero = :numero, 
-                                                    contato = :contato,
-                                                    descricao = :descricao, 
-                                                    imagem = :imagem  
-                                                    WHERE id = :id');
+                                                  especie = :especie,
+                                                  raca = :raca, 
+                                                  genero = :genero, 
+                                                  cor = :cor,  
+                                                  estado = :estado, 
+                                                  cidade = :cidade, 
+                                                  rua = :rua, 
+                                                  numero = :numero,            
+                                                  contato = :contato,
+                                                  descricao = :descricao, 
+                                                  imagem = :imagem  
+                                                  WHERE id = :id');
 
-        $stmt->execute([':id' => $this->id,
-
+        // Executa a consulta com os parâmetros
+        $stmt->execute([
+            ':id' => $this->id,
             ':nome' => $this->nome, 
             ':especie' => $this->especie, 
             ':raca' => $this->raca, 
@@ -250,18 +250,16 @@ class Animal{
             ':numero' => $this->numero,            
             ':contato' => $this->contato,
             ':descricao' => $this->descricao,
-            ':imagem' => $this->imagem]);
+            ':imagem' => $this->imagem  // Aqui você está passando o conteúdo binário
+        ]);
 
         return true;
-
-        } catch(Exception $e) {
-            echo '<pre>';
-            var_dump($e);
-            return false;
-        }
-
+    } catch(Exception $e) {
+        echo '<pre>';
+        var_dump($e); // Exibe o erro para depuração
+        return false;
     }
-
+}
 
     /// getAll
 

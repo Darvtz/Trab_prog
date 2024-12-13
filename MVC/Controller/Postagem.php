@@ -44,7 +44,7 @@ function enviarArquivo($nomeInputFile, $size = 2097152) {
 }
 
 
-if($acao == 'postar') {
+if ($acao == 'postar') {
     $animal = new Animal();
     $animal->setNome($_POST['nome']);
     $animal->setEspecie($_POST['especie']);
@@ -80,7 +80,7 @@ if($acao == 'postar') {
     $animal->deletar();
     header('Location: ../View/TelaInicial.php');
 
-}else if($acao == 'editar'){  // Corrigido o operador de comparação aqui
+}else if ($acao == 'editar') {
     // Obtém o animal com base no ID
     $animal = Animal::getOne($_REQUEST['id']);
 
@@ -98,9 +98,9 @@ if($acao == 'postar') {
     $animal->setDescricao($_POST['descricao']);
     
     // Verifica se há um arquivo de imagem sendo enviado e se não houve erro
-    if(isset($_FILES['arquivo']) && !$_FILES['arquivo']['error']){
+    if (isset($_FILES['arquivo']) && !$_FILES['arquivo']['error']) {
         $imagem = enviarArquivo('arquivo'); // Função para salvar o arquivo
-        if($imagem){
+        if ($imagem) {
             $animal->setImagem($imagem);  // Atualiza a imagem
         }
     }
@@ -109,10 +109,10 @@ if($acao == 'postar') {
     $animal->setIdUsuario($_SESSION['id']);
 
     // Tenta salvar as alterações no banco de dados
-    if($animal->update() == true){
+    if ($animal->update() == true) {
         // Se a atualização for bem-sucedida, redireciona para a tela inicial
         header('Location: ../View/TelaInicial.php');
-    }else{
+    } else {
         // Se ocorrer um erro, redireciona de volta para a página de postagem com um erro
         header('Location: ../View/Postagem.php?error=1');
     }

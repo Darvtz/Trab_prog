@@ -9,7 +9,7 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
         <link rel="stylesheet" href="style.css">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
-        <script src="../JS/MascaraCPF.js"></script>
+        <script src="JS/MascaraCPF.js"></script>
     </head>
 
 <body>
@@ -17,25 +17,25 @@
   <h1>
     Cadastro de Usuário
   </h1>
-  </div>
-    <form action="../Controller/Usuario.php?acao=cadastrar" method = "POST">
-        <div class="mb-3">
-            <label for="exampleInputCpf" class="dorm-label">
-                CPF
-                <input type="text" class="form-control" id="exampleImputCpf" name = "cpf" placeholder="###.###.###-##" onkeyup="mascara('###.###.###-##',this,event,true)" maxlength="14">
-            </label>
-        </div>
-        <div class="mb-3">
-            <label for="exampleInputName" class="dorm-label">
-                Nome completo
-                <input type="name" class="form-control" id="exampleImputName" name = "nome">
-            </label>
-        </div>
+  </div><form action="../Controller/Usuario.php?acao=cadastrar" method="POST" enctype="multipart/form-data">
+      <div class="mb-3">
+        <label for="exampleInputCpf" class="form-label">
+          CPF
+          <input type="text" class="form-control" id="exampleInputCpf" name="cpf" placeholder="###.###.###-##" onkeyup="mascara('###.###.###-##', this, event, true)" maxlength="14">
+        </label>
+      </div>
+
+      <div class="mb-3">
+        <label for="exampleInputName" class="form-label">
+          Nome completo
+          <input type="text" class="form-control" id="exampleInputName" name="nome">
+        </label>
+      </div>
         <div>
           <label for="exampleInputEmail" class="form-label">
             Endereço de e-mail
-            <input type="email" class="form-control" id="exampleInputEmail" aria-describedby="emailHelp" name="email">
-        </label>
+            <input type="email" class="form-control" id="exampleInputEmail" aria-describedby="emailHelp" name="email" autocomplete="email">
+          </label>
         </div>
         <div class="mb-3">
           <label for="exampleInputPassword" class="form-label">
@@ -65,21 +65,6 @@
         </div>
       </form>
     
-    <script>
-        $(document).ready(function () {
-        $('input[type=radio]').change(function() {
-        $('input[type=radio]:checked').not(this).prop('checked', false);
-        });
-        });
-
-        let vetor = new Array();
-        vetor[1] = "dsfds";
-        vetor['dsds'] = 'sas' //non existe
-        console.log(vetor[1]);
-        let mapa = {}; // let mapa = new Object();
-
-        mapa['ooo'] = "fdsf"; // mapa.ooo
-    </script>
 </body>
 
 </html>

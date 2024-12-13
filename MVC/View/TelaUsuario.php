@@ -116,53 +116,59 @@ $animais = Animal::getAll();
     </div>
 
     <div class="card-container">
-        <?php foreach($animais as $animal){ ?>
+    <?php foreach ($animais as $animal){ ?>
+        <?php if ($animal->getIdUsuario() == $_REQUEST['id']){ ?>
             <div class="card">
-                <img class="card-img-top" src="fotos/<?= $animal->getImagem();?>" alt="Card image cap">
+                <img class="card-img-top" src="fotos/<?= $animal->getImagem(); ?>" alt="Card image cap">
                 <div class="card-body">
-                    <h4><a href="TelaUsuario.php?id=<?= $animal->getIdUsuario()?>"><?php echo $animal->getUsuario()->getNome(); ?></a></h4>
-                    <h5 class="card-title"><?= $animal->getNome();?></h5>
-                    <p class="card-text">Ultimo endereço visto: </br> <?= $animal->getRua();?>, <?= $animal->getNumero();?>, <?= $animal->getCidade();?>, <?= $animal->getEstado();?></p>
-                    <p class="card-text"><?= $animal->getDescricao();?></p>
+                    <h4><a href="TelaUsuario.php?id=<?= $animal->getIdUsuario() ?>"><?php echo $animal->getUsuario()->getNome(); ?></a></h4>
+                    <h5 class="card-title"><?= $animal->getNome(); ?></h5>
+                    <p class="card-text">Último endereço visto: </br> <?= $animal->getRua(); ?>, <?= $animal->getNumero(); ?>, <?= $animal->getCidade(); ?>, <?= $animal->getEstado(); ?></p>
+                    <p class="card-text"><?= $animal->getDescricao(); ?></p>
                     <p class="card-text">Contato com o dono: <?php echo $animal->getContato(); ?></p>
 
-                    <a href="../View/VizualizarPostagem.php?id=<?= $animal->getId();?>" class="btn btn-primary">Ver Postagem</a></br></br>
-                    <?php if ($animal->getIdUsuario() == $_SESSION['id']){ ?> 
-                        <a href="../View/EditarPostagem.php?acao=editar&id=<?= $animal->getId();?>" class="btn btn-primary">Editar Postagem</a></br></br>
-                        <a href="../Controller/Postagem.php?acao=deletar&id=<?= $animal->getId();?>" class="btn btn-primary">Deletar Postagem</a></br></br>
-                    <?php } ?> 
+                    <a href="../View/VizualizarPostagem.php?id=<?= $animal->getId(); ?>" class="btn btn-primary">Ver Postagem</a></br></br>
+                    
+                    <!-- Verifica se o usuário logado é o proprietário da postagem -->
+                    <?php if ($animal->getIdUsuario() == $_SESSION['id']): ?> 
+                        <a href="../View/EditarPostagem.php?acao=editar&id=<?= $animal->getId(); ?>" class="btn btn-primary">Editar Postagem</a></br></br>
+                        <a href="../Controller/Postagem.php?acao=deletar&id=<?= $animal->getId(); ?>" class="btn btn-primary">Deletar Postagem</a></br></br>
+                    <?php endif; ?> 
 
-                    <?php if(isset($_SESSION['ADMIN'])){?>
-                        <?php if($animal->getOculto()==false){ ?>
-                            <a href = "../Controller/Adm.php?acao=ocultar&id=<?= $animal->getId();?>" class="btn btn-primary">Ocultar Postagem</a>
-                        <?php } ?>
-                        <?php if($animal->getOculto()==true){ ?>
-                            <a href = "../Controller/Adm.php?acao=mostrar&id=<?= $animal->getId();?>" class="btn btn-primary">Mostrar Postagem</a>
-                        <?php } ?>
-                    <?php } ?>
+                    <!-- Verifica se o usuário tem permissão de administrador -->
+                    <?php if (isset($_SESSION['ADMIN'])): ?>
+                        <?php if ($animal->getOculto() == false): ?>
+                            <a href="../Controller/Adm.php?acao=ocultar&id=<?= $animal->getId(); ?>" class="btn btn-primary">Ocultar Postagem</a>
+                        <?php endif; ?>
+                        <?php if ($animal->getOculto() == true): ?>
+                            <a href="../Controller/Adm.php?acao=mostrar&id=<?= $animal->getId(); ?>" class="btn btn-primary">Mostrar Postagem</a>
+                        <?php endif; ?>
+                    <?php endif; ?>
 
+                    <!-- Botões de compartilhamento -->
                     <div class="btn-share">
                         <p>Compartilhar:</p>
-                        <a class="btn btn-primary" data-rede="twitter" href="https://twitter.com/share?url=https://gpets2provisorio1.websiteseguro.com/Trab_prog/MVC/View/VizualizarPostagem.php?id=<?= $animal->getId();?>&text=Há um animal perdido!" target="_blank" title="Twittar postagem">
+                        <a class="btn btn-primary" data-rede="twitter" href="https://twitter.com/share?url=https://gpets2provisorio1.websiteseguro.com/Trab_prog/MVC/View/VizualizarPostagem.php?id=<?= $animal->getId(); ?>&text=Há um animal perdido!" target="_blank" title="Twittar postagem">
                             <i class="fab fa-twitter"></i> Twitter
                         </a>
-                        <a class="btn btn-primary" data-rede="facebook" href="https://www.facebook.com/sharer/sharer.php?u=https://gpets2provisorio1.websiteseguro.com/Trab_prog/MVC/View/VizualizarPostagem.php?id=<?= $animal->getId();?>" target="_blank">
+                        <a class="btn btn-primary" data-rede="facebook" href="https://www.facebook.com/sharer/sharer.php?u=https://gpets2provisorio1.websiteseguro.com/Trab_prog/MVC/View/VizualizarPostagem.php?id=<?= $animal->getId(); ?>" target="_blank">
                             <i class="fab fa-facebook-f"></i> Facebook
                         </a>
-                        <a class="btn btn-success" data-rede="whats" href="https://api.whatsapp.com/send?text=Há um animal perdido! Veja em https://gpets2provisorio1.websiteseguro.com/Trab_prog/MVC/View/VizualizarPostagem.php?id=<?= $animal->getId();?>&" target="_blank">
+                        <a class="btn btn-success" data-rede="whats" href="https://api.whatsapp.com/send?text=Há um animal perdido! Veja em https://gpets2provisorio1.websiteseguro.com/Trab_prog/MVC/View/VizualizarPostagem.php?id=<?= $animal->getId(); ?>&" target="_blank">
                             <i class="fab fa-whatsapp"></i> WhatsApp
                         </a>
-                        <a class="btn btn-primary" data-rede="telegram" href="https://telegram.me/share/url?url=https://gpets2provisorio1.websiteseguro.com/Trab_prog/MVC/View/VizualizarPostagem.php?id=<?= $animal->getId();?>&&text=Há um animal perdido!" target="_blank">
+                        <a class="btn btn-primary" data-rede="telegram" href="https://telegram.me/share/url?url=https://gpets2provisorio1.websiteseguro.com/Trab_prog/MVC/View/VizualizarPostagem.php?id=<?= $animal->getId(); ?>&&text=Há um animal perdido!" target="_blank">
                             <i class="fab fa-telegram-plane"></i> Telegram
                         </a>
-                        <a class="btn btn-dark btn-shared mx-2 share" data-rede="email" href="mailto:?subject=Preciso de sua ajuda!&body=Há um animal perdido! em https://gpets2provisorio1.websiteseguro.com/Trab_prog/MVC/View/VizualizarPostagem.php?id=<?= $animal->getId();?>&">
+                        <a class="btn btn-dark btn-shared mx-2 share" data-rede="email" href="mailto:?subject=Preciso de sua ajuda!&body=Há um animal perdido! em https://gpets2provisorio1.websiteseguro.com/Trab_prog/MVC/View/VizualizarPostagem.php?id=<?= $animal->getId(); ?>&">
                             <i class="fas fa-envelope"></i> E-Mail
                         </a>
                     </div>
                 </div>
             </div>
-        <?php } ?>
-    </div>
+        <?php  } ?>
+    <?php  } ?>
 </div>
+
 </body>
 </html>
